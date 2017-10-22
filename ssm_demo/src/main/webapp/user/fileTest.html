@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/background.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/layout.css" />
+<!--bootstrap-->
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/common/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="../js/common/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="../js/common/jquery.form.js"></script>
+</head>
+<style>
+</style>
+<script type="text/javascript">
+$(function(){
+	
+	//$(".wait-loading").show();
+	
+	$("#inport").click(function(){
+		$("#importArc").modal('show');
+	})
+	
+	 $("#files").change(function(){
+	    	var n=$(this).val().indexOf("fakepath");
+	        var file=$(this).val();
+	    	
+	    	if(n>-1)
+	    		{
+	    		  $("#big1").val(file.substring(12,file.length));
+	    		}
+	    	else
+	    		{
+	    		$("#big1").val(file);
+	    		}
+	    })
+	    
+	    $("#reset").click(function(){
+	    	$("#big1").val("");
+	    	$("#files").val("");
+	    })
+	    
+	    $(".close").click(function(){
+	    	$("#big1").val("");
+	    	$("#files").val("");
+	    })
+})
+
+function importHisArchiveFile(){
+	ajaxModal("/ssm3/test/uploadDemo.do","aa")
+}
+/**
+ *文件的ajax的请求
+ */
+function ajaxModal(url,str){
+	//打开遮罩层和进度条
+	//$(".wait-loading").show();
+	$("progress").show();
+	//上传开始
+	$("#uploadForm").ajaxSubmit(
+			{
+		url:url,
+		type:'post',
+		uploadProgress : function(event, position, total, percent){
+			renderProgress(position, total, percent);
+		},
+		success:function(data) {
+			
+			
+				//清空进度条
+				/* $("#uploadForm").resetForm();
+				$("progress").removeAttr("max").removeAttr("value").hide();
+				$("#progress").empty(); */
+			
+		},
+		contentType: false, //必须false才会自动加上正确的Content-Type
+		processData: false,//必须false才会避开jQuery对 formdata 的默认处理
+		complete : function() 
+		{
+			//关闭遮罩层
+			//$(".wait-loading").hide();
+		}
+	});
+	//上传结束
+	
+	//上传进度回调函数： 
+	function renderProgress(position, total, percent) {
+		$('progress').attr({value : position, max : total}); //更新数据到进度条  
+	    $('#progress').html(bytesToSize(position) + "/" + bytesToSize(total)+". " + percent + "%");
+	}
+
+	function bytesToSize(bytes) {  
+	    if (bytes === 0) return '0 B';  
+
+	     var k = 1024;  
+
+	     sizes = ['B','KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];  
+
+	     i = Math.floor(Math.log(bytes) / Math.log(k));  
+
+	     return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];                                                                                                                   //return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];  
+	}
+
+	function progressHandlingFunction(e) {  
+	    if (e.lengthComputable) {  
+	        $('progress').attr({value : e.loaded, max : e.total}); //更新数据到进度条  
+	        var percent = e.loaded/e.total*100;  
+	        $('#progress').html(e.loaded + "/" + e.total+" bytes. " + percent.toFixed(2) + "%");  
+	    }  
+	}
+}
+</script>
+<script type="text/javascript">
+function teDemo(){
+	
+	$.ajax({
+		type:"get",
+		url:"/ssm3/user/testDemo.do",
+		success:function(){
+			alert(11)
+		},
+		error:function(){
+			alert(22222)
+		}
+		
+	})
+}
+</script>
+<body>
+
+<!-- <a href="javascript:void(0);" onclick="teDemo();">测试ajax是否走error</a> -->
+
+	<form id="uploadForm" class="drfile" enctype='multipart/form-data'
+		name="uploadForm">
+		<span class="Crekey-sp01">上传文件：</span>
+		<div class="file-box ml10">
+			<input type='text' name='big' id='big1' class='txt mr5' value="" />
+			<input type="button" class="watch-btn" value="选择文件" /> <input
+				type="file" id="files" name="uploadFile" class="file" />
+		</div>
+		<a class="bUbuttons-03" id="drfile" onclick="importHisArchiveFile()"><i
+			class="fa fa-sign-in mr5"></i>导入</a>
+	</form>
+
+	<div class="wait-loading" style="display: none;"></div> <!-- 加载的状态 -->
+	<progress  class="progress" style="display: none;"></progress>  <!-- 进度条 -->
+	<p id="progress"></p><!-- 显示的文件大小，进度百分之几 -->
+
+
+</body>
+</html>

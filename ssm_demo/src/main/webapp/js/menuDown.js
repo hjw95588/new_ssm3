@@ -1,0 +1,9 @@
+//右上角超级管理员
+$(function(){
+    $('a[data-toggle="dropdown"]').click(function(){
+        $("ul.dropdown-menu").toggle();
+    });
+    $('li.dropdown-li').click(function(){
+        $("ul.dropdown-menu").hide();
+    })
+});

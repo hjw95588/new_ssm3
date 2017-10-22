@@ -1,0 +1,13 @@
+.tb_search input[type='radio']{width:auto;}
+.right-nav{float: left;position: relative;top: 1px;}
+.right-nav li,.right-btn li{float: left;line-height:30px;}
+.right-nav li{background: #f8f8f8;border: 1px solid #ccc;margin-right:5px;height: 30px;border-radius: 2px;padding:0 10px;}
+.right-nav li:hover{cursor: pointer;}
+.right-nav .focus{position: relative;z-index: 10;border-top:2px solid #0070D2;border-bottom:2px solid #fff;font-weight: 900;background: #fff;color:#0070D2;}
+.num{font-family: 'titilliumregular', "微软雅黑"}
+.table-group{width:100%;height: auto;position:relative;border:1px solid #ccc;border-top:0px;}
+.text-green{color:green !important;}
+.modal-body{border-top:0px;margin-top:0px}
+#table-test table td:nth-child(odd){text-align: right;background: #f8f8f8;padding-right:8px}
+#table-test table td:nth-child(even){text-align: left;padding-left:8px}
+.modal{position: fixed;overflow: hidden}

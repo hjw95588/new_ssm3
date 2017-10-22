@@ -1,0 +1,355 @@
+
+
+li {
+	list-style-type: none;
+}
+p {
+	margin: 0;
+}
+.clearfix:after {
+	content: "";
+	display: block;
+	clear: both;
+	visibility: hidden;
+}
+.pull-left {
+	float: left;
+}
+.pull-right {
+	float: right;
+}
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+.mt30 {
+	margin-top: 30px !important;
+}
+.mt50 {
+	margin-top: 50px !important;
+}
+.mt100 {
+	margin-top: 100px !important;
+}
+.mt150 {
+	margin-top: 150px !important;
+}
+
+#print h2, #print h3, #print h4 {
+	font-family: "黑体" !important;
+}
+#print div, #print ul, #print li, #print span, #print p, #print label, #print a {
+	font-family: "宋体" !important;
+	color: #000;
+}
+#print {
+	width: 760px;
+	margin: 0 auto;
+	margin-top: 80px;
+}
+.bold-underline {
+	width: 100%;
+	margin-top: 15px;
+	border-bottom: 2px solid #000;
+}
+.underline {
+	width: 100%;
+	margin: 10px 0 0 0;
+	border-bottom: 1px solid #000;
+}
+.tarea-underline1, .tarea-underline2, .tarea-underline3, .tarea-underline4, .tarea-underline5 {
+	width: 100%;
+	border-bottom: 1px dashed #000;
+	position: absolute;
+}
+.tarea-underline1 {
+	top: 30px;
+}
+.tarea-underline2 {
+	top: 60px;
+}
+.tarea-underline3 {
+	top: 90px;
+}
+.tarea-underline4 {
+	top: 120px;
+}
+.tarea-underline5 {
+	top: 150px;
+}
+.left-240 {
+	left: 240px;
+}
+.left-220 {
+	left: 220px;
+}
+.left-100 {
+	left: 100px;
+}
+
+.print-h2 {
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	margin: 30px 0;
+}
+.pr-ul {
+	width: 620px;
+	margin: 0 auto;
+	margin-left: 25px;
+}
+.pr-li {
+	width: 100%;
+	margin-top: 10px;
+	float: left;
+	position: relative;
+	font-size: 20px;
+}
+.pr-title {
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+}
+.tarea-title {
+	float: left;
+	margin-top: 4px;
+	position: absolute;
+}
+.pr-content, .tarea-text, .p-text {
+	min-height: 28px;
+	line-height: 28px;
+	text-indent: 10px;
+	display: inline-block;
+	font-size: 18px;
+	
+}
+.p-text {
+	text-indent: 0;
+	text-align: center;
+	border-bottom: 1px dashed #000;
+}
+.pr-content {
+	border-bottom: 1px dashed #000;
+	position: absolute;
+	top: -4px;
+}
+.tarea-text {
+	margin-top: 5px;
+	line-height: 30px;
+}
+.txt240 {
+	text-indent: 240px;
+}
+.txt220 {
+	text-indent: 220px;
+}
+.txt100 {
+	text-indent: 100px;
+}
+.txt40 {
+	text-indent: 40px;
+}
+.rowspan5 {
+	min-height: 140px;
+}
+.rowspan3 {
+	min-height: 90px;
+}
+.line-h-36 {
+	line-height: 36px;
+}
+.line-h-42 {
+	line-height: 42px;
+}
+.right-li {
+	width: 240px !important;
+	margin-left: 380px;
+}
+.y-m-d {
+	margin-top: 10px;
+}
+
+.w560 {
+	width: 560px;
+}
+.w540 {
+	width: 540px;
+}
+.w520 {
+	width: 520px;
+}
+.w500 {
+	width: 500px;
+}
+.w490 {
+	width: 490px;
+}
+.w480 {
+	width: 480px;
+}
+.w460 {
+	width: 460px;
+}
+.w435 {
+	width: 435px;
+}
+.w420 {
+	width: 420px;
+}
+.w400 {
+	width: 400px;
+}
+.w380 {
+	width: 380px;
+}
+
+.w350 {
+	width: 350px;
+}
+
+.w310 {
+		width: 310px;
+}
+.w300 {
+		width: 300px;
+}
+.w290{
+	width: 290px;
+}
+.w280{
+	width: 280px;
+}
+.w270{
+	width: 270px;
+}
+.w250 {
+	width: 250px;
+}
+.w240 {
+	width: 240px;
+}
+
+
+.w210 {
+	width: 210px;
+}
+
+.w200 {
+	width: 200px;
+}
+
+
+.w180 {
+	width: 180px;
+}
+
+.w170 {
+	width: 170px;
+}
+.w160 {
+	width: 160px;
+}
+.w150 {
+	width: 150px;
+}
+
+.w130 {
+	width: 130px;
+}
+.w100 {
+	width: 110px;
+}
+.w95 {
+	width: 95px;
+}
+.w80 {
+	width: 80px;
+}
+.w45 {
+	width: 45px;
+}
+.w42 {
+	width: 42px;
+}
+.pr-input {
+    padding: 3px 0;
+    width: 100%;
+    border: 0;
+}
+
+/*春秋两检报告*/
+.print-box{
+    margin: 0 auto ;
+	width: 90% ;
+	padding-bottom: 10px ;	
+}
+
+.print-table-form {
+    font-size: 14px;
+	width: 100% ;
+	color: #000 ;
+	border: 0px ;
+	margin-top: 15px ;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000 ;
+}
+.print-table-form thead tr th,
+.print-table-form tbody tr td{
+    padding: 10px ;	
+	text-align: center ;
+	font-family: "宋体" ;
+	font-size: 18px ;
+}
+
+	
+.print-table-bordered th,td {
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000 ;
+    vertical-align: middle;
+	}
+
+.print-title{ 
+    font-size: 34px ;
+	letter-spacing: 15px;
+	font-weight: bold ;
+}
+
+.pt10{ 
+    padding-top: 10px ;
+}
+
+.pr50{
+    padding-right: 50px ;	
+}
+
+.font-bold{
+    font-weight: bold ;	
+}
+
+.font16 {
+	font-size: 16px !important;
+	font-weight: 600;
+}
+
+.font18 {
+	font-size: 18px !important;
+}
+
+.font20 {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.font22 {
+	font-size: 22px;
+}
+.pr-hide {
+	display: none;
+}

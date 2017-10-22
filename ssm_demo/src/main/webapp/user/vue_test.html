@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="../js/vue.js"></script>
+<body>
+<!-- 单纯测试 -->
+<div id="app">
+{{message}}
+</div>
+
+<!-- 绑定事件 -->
+<div id="app2">
+  <span v-bind:title="message">
+     鼠标悬停几秒钟查看此处动态绑定的提示信息！
+  </span>
+</div>
+
+<!-- 条件与循环 -->
+<div id="app3">
+  <div v-if="seen">老铁没毛病！！！！！你到底可以见到我们吗？？？？？？</div>
+  {{seen}}
+</div>
+
+<!-- 数组 -->
+<div id="app4">
+  <ul>
+    <li v-for="it in its">
+      {{it.text}}
+    </li>
+  </ul>
+</div>
+
+<!-- 关于绑定事件监听 -->
+<div id="app5">
+  <div>{{message}}</div>
+  <button v-on:click="show">你特么到底想反转吗？？？</button>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<!-- model 双向绑定 -->
+<div id="app6">
+   <div>{{message}}</div>
+   <input v-model="message">
+</div>
+
+
+<!-- 现在，我们可以使用 v-bind 指令将待办项传到每一个重复的组件中： -->
+<div id="app7">
+   <ol>
+     <myshow v-for="it in list" v-bind:my="it"></myshow>
+   </ol>
+</div>
+
+<script type="text/javascript">
+		
+		Vue.component('myshow',
+				{
+			      props:['my'],
+			      template:"<li>{{my.text}}</li>"
+			     }
+		  )
+		var app7=new Vue({
+			el:"#app7",
+			data:{
+				list:[{text:"111"},{text:"222"},{text:"333"},{text:"111"},{text:"222"},{text:"333"}]
+			}
+		})
+		
+		
+		var app=new Vue({
+			el:"#app",
+			data:{message:"你好请问王企鹅群无，Vue!!!!!!!!!!"}
+		})
+	
+		var  app2=new Vue({
+			el:"#app2",
+			data:{message:"页面加载"+new Date()}
+		})
+		
+		var  app3=new Vue({
+			el:"#app3",
+			data:{seen:true}
+		})
+		
+		var  app4=new Vue({
+			el:"#app4",
+			data:{
+				
+				its:[{text:'111'},{text:'222'},{text:'333'}]
+				
+			}
+		})
+	
+		var app5=new Vue({
+			el:"#app5",
+			data:{message:"何建文,   你好  Hello, JS,      ggdfg"},
+			methods:{
+				show:function(){
+					 this.message = this.message.split('').reverse().join('')
+				}
+			}
+		})
+		
+		var app6=new Vue({
+			el:"#app6",
+			data:{message:"何建文"}
+		})
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/background.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/my/layout.css" />
+<!--bootstrap-->
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/common/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="../js/common/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="../js/common/jquery.form.js"></script>
+<script type="text/javascript" src="../js/user/user_inport.js"></script>
+</head>
+<style>
+.myshow{
+z-index:1500;
+left:60%;
+margin-top: 74px;
+}
+</style>
+<body>
+<a id="inport" style="font-size: 20px;">导入文件</a>
+<!-- 弹出导入的窗口 S-->
+	<div class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true" id="importArc">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">批量导入</h4>
+				</div>
+				<div class="modal-body">
+			
+		           <div id="subType" class="Crekey-div01">
+                   </div>
+
+					<div class="Crekey-div01">
+						<form id="uploadForm" class="drfile" enctype='multipart/form-data'
+							name="uploadForm">
+							<span class="Crekey-sp01">上传文件：</span>
+							<div class="file-box ml10">
+								<input type='text' name='big' id='big1' class='txt mr5' value="" />
+								<input type="button" class="watch-btn" value="选择文件" /> <input
+									type="file" id="files" name="uploadFile" class="file"
+									 />
+							</div>
+							<a class="bUbuttons-03" id="drfile"
+								onclick="importHisArchiveFile()"><i class="fa fa-sign-in mr5"></i>导入</a>
+						</form>
+					</div>
+					<progress style="display:none" class="progress"></progress>  <!-- 进度条 -->
+					<p id="progress"></p><!-- 显示的文件大小，进度百分之几 -->
+				</div>
+			</div>
+			<div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="reset" data-dismiss="modal">取消</button>
+         </div>
+			<div id="importErrorMessage" class="table-scroll"></div>
+		</div>
+	</div>
+	<!-- 弹出导入的窗口 E -->
+	<div class="wait-loading" style="display: none;"></div> <!-- 加载的状态 -->
+	
+	<!-- S 编辑更新-->
+<div class="modal fade" style="width:400px;" id="ztcht-jgsc-custom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               	提示
+            </h4>
+         </div>
+         <div class="modal-body" style="text-align: center;font-size: 16px;">
+           <p>请选择一条记录</p>
+         </div>
+         <div class="modal-footer" >
+             <button type="button" id="bu" class="btn btn-primary"  data-dismiss="modal">
+               	 取消
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- E 编辑更新 -->
+
+<!-- S 提示是否下载-->
+<div class="modal fade" style="width:400px;" id="ztcht-jgsc-upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               	提示
+            </h4>
+         </div>
+         <div class="modal-body" style="text-align: center;font-size: 16px;">
+           <p>请选择一条记录</p>
+         </div>
+         <div class="modal-footer" >
+             <button type="button" id="up" class="btn btn-primary" onclick="back()" data-dismiss="modal">
+               	 取消
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- E 编辑更新 -->
+</body>
+</html>

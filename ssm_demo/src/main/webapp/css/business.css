@@ -1,0 +1,579 @@
+
+
+
+
+.tab-p-margin{
+    margin-bottom: 10px;
+}
+.table-td td{
+    width: 100px;
+    text-align: right;
+}
+.text-left td {
+    text-align: left;
+}
+.table-bottom{
+    margin-bottom: 50px;
+}
+.crumbs,#nav{
+    min-width: 140px;
+}
+.grainSelect{
+    height: 40px;
+    border:1px solid #f2f2f2 ;
+    background-color: #fbfbfb;
+    color: #333333;
+    margin: 15px 0;
+}
+.grainSelect-p{
+    margin-top:10px ;
+    margin-left: 10px;
+}
+.grainSelect-p span{
+    color: #333333;
+    cursor: pointer;
+}
+.grainSelect-p .grainSelect-span-color{
+    color: #ffffff;
+    background-color: #2284c5;
+}
+
+.grainSelect-more{
+    float: right;
+    margin-right:10px ;
+    color: #2284c5;
+}
+.ser_ul li .ser-span{
+    margin-left: 5px;
+    width: auto;
+}
+.sser-ul li{
+    width: auto;
+    margin-right:15px;
+}
+.Echar {
+    width: 100%;
+    padding: 15px;
+    background-color: #fbfbfb;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+.echarts {
+    margin-bottom: 15px;
+}
+.echarts li {
+    float: left;
+    margin-left: -2px;
+}
+#Echar-content1, #Echar-content2, #Echar-content3, #Echar-content4, #Echar-content5{
+    width: 100%;
+    height: 350px;
+    background: #fff;
+}
+.btn-active {
+    background-color: #ec971f;
+    border-color: #d58512;
+}
+.tab-content{
+    border-left:1px solid #ccc ;
+    border-right:1px solid #ccc ;
+    border-bottom: 1px solid #ccc;
+}
+
+.table-bottom{
+    margin-bottom: 15px;
+}
+.tab-ul{
+    margin-top: 15px;
+}
+.sser-ul .mt0{
+    margin-top: 0;
+}
+/*.tree-nav {
+    border: 1px solid #ddd;
+    overflow: hidden;
+    position: relative;
+    padding-top: 30px;
+}
+.inquiry-title {
+    width: 100%;
+    background: #f9f9f9;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.search-div {
+    position: relative;
+    padding: 0 10px;
+}
+.search-icon {
+    position: absolute;
+    top: 10px;
+    left: 18px;
+}
+.search-div input {
+    width: 100%;
+}*/
+@media (min-width: 1024px) and (max-width: 1200px) {
+    .grainSelect-p span {
+        padding: 4px 5px;
+        margin-left: -2px;
+    }
+}
+@media (min-width: 1201px)and (max-width: 1300px){
+    .grainSelect-p span{
+        padding: 4px 5px;
+        margin-left: 5px;
+    }
+}
+
+@media (min-width: 1301px){
+    .grainSelect-p span{
+        padding: 4px 5px;
+        margin-left: 10px;
+    }
+
+}
+/*¾«È·ÒµÎñ·¿ÎÝÐÅÏ¢Â¼Èë*/
+/* .form-group select{
+    border: 1px solid #dcdcdc;
+}
+@media (min-width: 1024px) and (max-width:1100px){
+    .form-group select{
+        width: 200px;
+    }
+    .min-w-input{
+        width: 500px;
+    }
+
+} */
+/*@media (min-width: 1101px) and (max-width:1200px){
+    .form-group select{
+        width: 230px;
+    }
+    .min-w-input{
+        width: 600px;
+    }
+
+}
+@media (min-width: 1201px) and (max-width:1366px){
+    .form-group select{
+        width: 270px;
+    }
+    .min-w-input{
+        width: 700px;
+    }
+
+}*/
+/*·¿ÎÝÊÕ·ÑÏêÇé*/
+.right-form .pr10{
+    padding-right: 10px;
+}
+.right-form .mt5{
+    margin-top: 5px;;
+}
+.line-title{
+    z-index: 10;
+    width: auto;
+    padding: 0 6px;
+    position: absolute;
+    top:-4px;
+    left: 10px;
+    color: #0070d2;
+    line-height: 25px;
+    display: block;
+    height: 25px;
+    background-color: #fff;
+}
+.w100{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.month{
+    width: 100%;
+    background-color: #f8f8f8;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+div.w84{
+    width: 80% !important;
+}
+.bg-gray{
+    padding:0  10px;
+
+    height: 36px;
+    line-height: 36px;
+    background-color: #f2f2f2;
+    color:#0070d2;
+
+    /*font-size: 16px;*/
+    /*color:#0070d2;*/
+    /*padding: 0 10px;*/
+
+}
+/*/!*±í¸ñ¹«¹²ÑùÊ½*!/*/
+/*.right-form{*/
+    /*width: 100% ;*/
+/*}*/
+
+/*.right-form li{*/
+    /*float: left ;*/
+    /*position: relative ;*/
+    /*width: 50% ;*/
+    /*height: auto ;*/
+    /*margin-top: 15px ;*/
+/*}*/
+
+/*.right-form li.w-per{*/
+    /*width: 100% ;*/
+/*}*/
+
+/*.right-form li label.ser-label{*/
+    /*float: left ;*/
+    /*width: 140px ;*/
+    /*line-height: 27px ;*/
+    /*font-weight: normal ;*/
+    /*text-align: right ;*/
+    /*padding-right: 10px ;*/
+/*}*/
+
+/*.right-form li .form-content{*/
+    /*position: absolute ;*/
+    /*left: 140px ;*/
+    /*width: 100% ;*/
+    /*line-height: 30px ;*/
+/*}*/
+/*.form-tips{*/
+    /*float: left ;*/
+    /*width: 55% ;*/
+    /*line-height: 32px ;*/
+/*}*/
+
+/*.right-form li .form-content input.inputText,*/
+/*.right-form li .form-content select.form-control-select,*/
+/*.right-form li .form-content .form-textArea{*/
+    /*float: left ;*/
+    /*width: 45% ;*/
+/*}*/
+/*¸öÈËÊÕÈë±¨±í*/
+table.table-pad4 tr td{
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+}
+table.table-pad4 tr .p8{
+    padding: 8px;
+    background-color: rgb(248,248,248);
+
+}
+.pull-flot {
+    float: none !important;
+}
+/*À­³¤textare*/
+.textarea-w{
+    min-height: 160px !important;
+}
+/*ÊÕÀñµÇ¼Ç±í*/
+.td-p8{
+    padding: 8px !important;
+}
+input.input-both{
+    width: auto !important;
+}
+.table-width10{
+    width: 13%!important;
+}
+.table-max-width25{
+    width: 32% !important;
+}
+/*ÆóÒµµÇ¼Ç±í*/
+.table-special-td{
+    width: 11.2% !important;
+}
+.table-td1{
+    width: 8.1333% !important;
+}
+.table-td3{
+    width: 21.9999% !important;
+}.table-td2{
+    width: 16.6666% !important;
+ }
+/*°²È«ÅàÑµ½ÌÓý±í */
+.textarea-shortH{
+    min-height: 40px!important;
+    overflow-y: auto;
+}
+
+.w60{
+    width: 60%;
+}
+.left40{
+ left: 40px!important;
+}
+div.clearpos{
+    position: inherit!important;
+    left: 0!important;
+}
+.w34{
+    width: 34%;
+}
+.mb0{
+    margin-bottom: 0;
+}
+.box-height{
+    height: auto!important;
+    overflow: hidden;
+}
+/*input*/
+@media (max-width:1366px ) {
+    input.input-wide{
+        width: 16%!important;
+    }
+}
+@media (max-width:1320px ) {
+    input.input-wide{
+        width: 15%!important;
+    }
+
+}@media (max-width:1260px ) {
+    input.input-wide{
+        width: 14%!important;
+    }
+
+}@media (max-width:1200px ) {
+    input.input-wide{
+        width: 13%!important;
+    }
+
+}@media (max-width:1150px ) {
+    input.input-wide{
+        width: 11%!important;
+    }
+
+}@media (max-width:1060px ) {
+    input.input-wide{
+        width: 9%!important;
+    }
+
+}
+
+
+/* 业务情况报表 */
+.nav-list a {
+    text-overflow: ellipsis;
+}
+
+
+/* 数据汇总及其高级查询 */
+.senior-search {
+    margin-left: 10px;
+    color: #2284c5;
+    cursor: pointer;
+}
+.mt0 {
+    margin-top: 0;
+}
+.custom-width .form-control-select {
+    width: 180px;
+}
+
+.layui-layer-btn a {
+    background: #3276b1;
+    border: 1px solid #2c699d;
+}
+.area-list-left, .area-list-right {
+    width: 200px;
+    height: 300px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+.area-list-left dt, .area-list-right dt {
+    background: #2284c5;
+    color: #fff;
+    padding: 5px 10px;
+}
+.area-list-left dd, .area-list-right dd {
+    padding: 3px 10px;
+    cursor: pointer;
+}
+.area-list-left dd.active, .area-list-right dd.active {
+    background: #2284c5;
+    color: #fff;
+}
+.senior-form-group {
+    width: 215px;
+    margin: 0 auto;
+    float: none;
+}
+.area-div {
+    width: 480px;
+    margin: 0 auto;
+}
+.btn-group {
+    width: 32px;
+    height: 300px;
+    margin: 0 15px;
+    display: table;
+}
+.btn-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+.go-right, .go-left {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.go-left {
+    margin-top: 15px;
+}
+.go-right:hover, .go-left:hover {
+    background: #ebebeb;
+    border: 1px solid #ababab;
+}
+.table-font12 tr th, .table-font12 tr td {
+    font-size: 12px !important;
+    padding: 4px !important;
+}
+
+/* 粮食行政监督-清仓查库 */
+.note > p:not(:first-child), .note span {
+    padding-left: 24px;
+}
+.note-p-p p {
+    padding-left: 36px;
+}
+#table2, #table3 {
+    display: none;
+}
+.td-p {
+    text-indent: 42px;
+}
+.td-w20 {
+    width: 20px;
+}
+.td-w150 {
+    min-width: 150px;
+}
+.td-w100 {
+    min-width: 100px;
+}
+.td-w80 {
+    min-width: 80px;
+}
+.checkout-explain {
+    padding: 30px;
+}
+.checkout-textarea {
+    width: 80%;
+}
+
+/* 粮食行政监督-行政处罚事先告知书 */
+.pr-input {
+    padding: 3px 0;
+    width: 100%;
+    border: 0;
+}
+
+
+/* ====安全事故隐患整改表====== */
+.bg-white {
+    background: #fff;
+}
+
+
+/* 表格表单 */
+
+
+.table-max-w {
+    max-width: 1280px;
+}
+.table-min-w {
+    min-width: 850px;
+}
+.table-noborder tr td {
+    position: relative;
+    border: 0;
+    padding: 8px 0;
+}
+.text-position-rt {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+}
+.table-form-input {
+    max-width: 350px;
+}
+.form-tip {
+    color: red;
+    display: none;
+    white-space: nowrap;
+    margin-left: 3px;
+}
+.form-tip.active {
+    display: block;
+}
+.min-w-md {
+    min-width: 80px;
+}
+.Wdate {
+    height: 32px !important;
+}
+.w80 {
+    width: 80% !important;
+}
+
+.number-box-choose .inputText-no {
+    width: 40px;
+}
+.form-crumbs {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
+/* 表格表单end */
+
+/* 详情显示页面 */
+.show-ifno-div {
+    position: relative;
+}
+.show-info1 {
+    width: 100%;
+    min-width: 1024px;
+    max-width: 1366px;
+    margin: 0 auto;
+}
+.show-info1 > li {
+    float: left;
+    width: 40%;
+    padding: 3px 30px;
+}
+/* .show-info li .ser-label {
+    width: 160px;
+    text-align: right;
+} */
+.img-div {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 160px;
+    height: 200px;
+    border: 1px solid #ccc;
+}
+
+
+
+
+
+

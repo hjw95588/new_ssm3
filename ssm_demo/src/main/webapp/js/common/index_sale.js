@@ -1,0 +1,293 @@
+var agentId="0000001";
+
+window.onload=function(){
+	getNewBookRecommendList();//获取新书推荐
+	getNewBookLibraryList();//加载馆配好书
+	getMonthNewBookList();//加载本月新书
+	getNoticeList();//加载公告列表
+	
+}
+
+var currentId="";
+var obj=null;
+var orderType=null;
+var bookType=null;
+
+function showBookTypeList(bookType){
+	window.sessionStorage.setItem("bookType",bookType);
+	window.sessionStorage.setItem("orderType","1");
+	window.location.href="bookTypeList.html";
+}
+
+/**
+*获取新书推荐。 
+*/
+function getNewBookRecommendList(){
+	var bookChannelManager = {};
+	bookChannelManager.bookTypeName = "1";
+	
+	$.ajax(
+			{
+				type:"POST",		
+				contentType:"application/json; charset=UTF-8",
+				data: JSON.stringify(bookChannelManager),
+				url:"/bookChannels/bookList",
+//				dataType:"application/json",
+				success:function(msg){
+				bookList = msg.bookList;
+//				alert(obj[0].aboutAuthor);
+				var obj=JSON.parse(msg.bookList);
+//				alert(obj[0].aboutAuthor);
+				
+				var div1 =	
+				"<div class='item book-one active'>"+
+                    "<img src='/images/sale/book-1.png' alt='First slide' class='book-img' onclick='showDetail("+obj[0].id+")'>"+
+                    "<div class='carousel-caption column-book-text'>"+
+                    	"<div class='book-text-title'>"+
+                       	"<img src='/images/sale/xinshutuijian.png' />"+
+                       "</div>"+
+                       "<div class='book-text-cont mt10'>"+
+                       	"<ul>"+
+                           	"<li><p>"+obj[0].bookName+"</p></li>"+
+                               "<li class='font12'>作者：<span>"+obj[0].bookAuthor+"</span>  著</li>"+
+                               "<li><img src='/images/sale/Star"+obj[0].aboutAuthor+".png' /></li>"+
+                               "<li class='book-text-li font12'>"+obj[0].description+"</li>"+
+                           "</ul>"+
+                       "</div>"+
+                    "</div>"+
+                 "</div>"+
+                 "<div class='item book-one cursor'>"+
+                 "<img src='/images/sale/book-1.png' alt='First slide' class='book-img' onclick='showDetail("+obj[1].id+")'>"+
+                 "<div class='carousel-caption column-book-text'>"+
+                 	"<div class='book-text-title'>"+
+                    	"<img src='/images/sale/xinshutuijian.png' />"+
+                    "</div>"+
+                    "<div class='book-text-cont mt10'>"+
+                    	"<ul>"+
+                        	"<li><p>"+obj[1].bookName+"</p></li>"+
+                            "<li class='font12'>作者：<span>"+obj[1].bookAuthor+"</span>  著</li>"+
+                            "<li><img src='/images/sale/Star"+obj[1].aboutAuthor+".png' /></li>"+
+                            "<li class='book-text-li font12'>"+obj[1].description+"</li>"+
+                        "</ul>"+
+                    "</div>"+
+                 "</div>"+
+              "</div>"+
+              "<div class='item book-one'>"+
+              "<img src='/images/sale/book-1.png' alt='First slide' class='book-img' onclick='showDetail("+obj[2].id+")'>"+
+              "<div class='carousel-caption column-book-text'>"+
+              	"<div class='book-text-title'>"+
+                 	"<img src='/images/sale/xinshutuijian.png' />"+
+                 "</div>"+
+                 "<div class='book-text-cont mt10'>"+
+                 	"<ul>"+
+                     	"<li><p>"+obj[2].bookName+"</p></li>"+
+                         "<li class='font12'>作者：<span>"+obj[2].bookAuthor+"</span>  著</li>"+
+                         "<li><img src='/images/sale/Star"+obj[2].aboutAuthor+".png' /></li>"+
+                         "<li class='book-text-li font12'>"+obj[2].description+"</li>"+
+                     "</ul>"+
+                 "</div>"+
+              "</div>"+
+           "</div>"
+           $('#div1').append(div1);
+				},
+				error:function(err){
+					alert("获取书籍列表失败");
+				}
+			}		
+		)	
+}
+
+
+/**
+*获取馆配好书。 
+*/
+function getNewBookLibraryList(){
+	var bookChannelManager = {};
+	bookChannelManager.bookTypeName = "2";
+	
+	$.ajax(
+			{
+				type:"POST",		
+				contentType:"application/json; charset=UTF-8",
+				data: JSON.stringify(bookChannelManager),
+				url:"/bookChannels/bookList",
+//				dataType:"application/json",
+				success:function(msg){
+				bookList = msg.bookList;
+//				alert(obj[0].aboutAuthor);
+				var obj=JSON.parse(msg.bookList);
+//				alert(obj[0].aboutAuthor);
+				var div2 =	
+				"<div class='item book-one active'>"+
+                    "<img src='/images/sale/book-1.png' alt='First slide' class='book-img' onclick='showDetail("+obj[0].id+")'>"+
+                    "<div class='carousel-caption column-book-text'>"+
+                    	"<div class='book-text-title'>"+
+                       	"<img src='/images/sale/guanpeihaoshu.png' />"+
+                       "</div>"+
+                       "<div class='book-text-cont mt10'>"+
+                       	"<ul>"+
+                           	"<li><p>"+obj[0].bookName+"</p></li>"+
+                               "<li class='font12'>作者：<span>"+obj[0].bookAuthor+"</span>  著</li>"+
+                               "<li><img src='/images/sale/Star"+obj[0].aboutAuthor+".png' /></li>"+
+                               "<li class='book-text-li font12'>"+obj[0].description+"</li>"+
+                           "</ul>"+
+                       "</div>"+
+                    "</div>"+
+                 "</div>"+
+                 "<div class='item book-one cursor'>"+
+                 "<img src='/images/sale/book-1.png' alt='First slide' class='book-img' onclick='showDetail("+obj[1].id+")'>"+
+                 "<div class='carousel-caption column-book-text'>"+
+                 	"<div class='book-text-title'>"+
+                    	"<img src='/images/sale/guanpeihaoshu.png' />"+
+                    "</div>"+
+                    "<div class='book-text-cont mt10'>"+
+                    	"<ul>"+
+                        	"<li><p>"+obj[1].bookName+"</p></li>"+
+                            "<li class='font12'>作者：<span>"+obj[1].bookAuthor+"</span>  著</li>"+
+                            "<li><img src='/images/sale/Star"+obj[1].aboutAuthor+".png' /></li>"+
+                            "<li class='book-text-li font12'>"+obj[1].description+"</li>"+
+                        "</ul>"+
+                    "</div>"+
+                 "</div>"+
+              "</div>"+
+              "<div class='item book-one'>"+
+              "<img src='/images/sale/book-1.png' alt='First slide' class='book-img' onclick='showDetail("+obj[2].id+")'>"+
+              "<div class='carousel-caption column-book-text'>"+
+              	"<div class='book-text-title'>"+
+                 	"<img src='/images/sale/guanpeihaoshu.png' />"+
+                 "</div>"+
+                 "<div class='book-text-cont mt10'>"+
+                 	"<ul>"+
+                     	"<li><p>"+obj[2].bookName+"</p></li>"+
+                         "<li class='font12'>作者：<span>"+obj[2].bookAuthor+"</span>  著</li>"+
+                         "<li><img src='/images/sale/Star"+obj[2].aboutAuthor+".png' /></li>"+
+                         "<li class='book-text-li font12'>"+obj[2].description+"</li>"+
+                     "</ul>"+
+                 "</div>"+
+              "</div>"+
+           "</div>"
+           $('#div2').append(div2);
+				},
+				error:function(err){
+					alert("获取书籍列表失败");
+				}
+			}		
+		)	
+}
+/**
+*获取本月新书。 
+*/
+function getMonthNewBookList(){
+	var bookChannelManager = {};
+	bookChannelManager.bookTypeName = "3";
+	var book = {};//废弃逻辑待删除
+	book.bookName = null;//废弃逻辑待删除
+	bookChannelManager.book = book;//废弃逻辑待删除
+	$.ajax(
+			{
+				type:"POST",		
+				contentType:"application/json; charset=UTF-8",
+				data: JSON.stringify(bookChannelManager),
+				url:"/bookChannels/newBookMonthList",
+//				dataType:"application/json",
+				success:function(msg){
+				bookList = msg.bookList;
+//				alert(obj[0].aboutAuthor);
+				var obj=JSON.parse(msg.bookList);
+//				alert(obj[0].aboutAuthor);
+//				alert(obj.length);
+				for(var i=0;i<4;i++){
+				var td1 =	
+				 "<td width='24%'>"+
+                 	"<div class='table-td-box' onclick='showDetail("+obj[i].id+")'>"+
+                        "<img src='/images/sale/book-1-01.png' />"+
+                        "<p class='mt10'>"+obj[i].bookName+"</p>"+
+                        "<span class='mt5'>"+obj[i].bookAuthor+"</span>"+
+                        "<span class='mt10'>￥"+obj[i].bookPrice+"</span>"+
+                    "</div>"+
+                 "</td>"
+//						
+		           $('#monthNevBook').append(td1);
+				}
+				for(var i=4;i<8;i++){
+					var td2 =	
+					 "<td width='24%'>"+
+	                 	"<div class='table-td-box' onclick='showDetail("+obj[i].id+")'>"+
+	                        "<img src='/images/sale/book-1-01.png' />"+
+	                        "<p class='mt10'>"+obj[i].bookName+"</p>"+
+	                        "<span class='mt5'>"+obj[i].bookAuthor+"</span>"+
+	                        "<span class='mt10'>￥"+obj[i].bookPrice+"</span>"+
+	                    "</div>"+
+	                 "</td>"
+//							
+			           $('#monthNevBook2').append(td2);
+					}
+				
+//				
+				},
+				error:function(err){
+					alert("获取书籍列表失败");
+				}
+			}		
+		)	
+}
+
+
+
+/**
+*查询公告列表（销售页面）
+*/
+function getNoticeList(){
+	var notice = {};
+	notice.status = "1";//销售页面只展示有效（status==1）的公告
+	$.ajax(
+			{
+				type:"POST",		
+				contentType:"application/json; charset=UTF-8",
+				data: JSON.stringify(notice),
+				url:"/notices/selectNoticeList",
+				success:function(msg){
+					var obj=JSON.parse(msg.noticeList); 
+					$('#noticeList').empty();//初始化页面
+					for(var i=0;i<obj.length;i++){
+						var li = "<li><span>•</span><a href='#' data-toggle='modal' data-target='#ztcht-zjtc' onclick = getNoticeById('"+obj[i].id+"')>"+obj[i].title+"</a></li>"
+						
+			            $("#noticeList").append(li);
+					}
+					
+				},
+				error:function(err){
+					alert("获取公告失败");
+				}
+			}		
+		)	
+}
+
+/**
+*查询公告详情（销售页面）
+*/
+function getNoticeById(id){
+//	var id = getNoticeIdFromUrl();
+	var notice = {};
+	notice.id = id;
+	$.ajax(
+			{
+				type:"POST",		
+				contentType:"application/json; charset=UTF-8",
+				data: JSON.stringify(notice),
+				url:"/notices/selectNoticeById",
+				success:function(msg){
+					$('#content').empty();//初始化页面
+					var obj=JSON.parse(msg.noticeDetail); 
+					$('#content').append(obj.content);
+				},
+				error:function(err){
+					alert("获取公告失败");
+					
+				}
+			}		
+		)	
+}
+
+
+

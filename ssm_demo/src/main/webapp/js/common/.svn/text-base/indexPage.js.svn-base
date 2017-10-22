@@ -1,0 +1,45 @@
+window.onload = function() {
+    window.parent.document.title = document.title;
+}
+
+function getTopWinow(){
+    var p = window;
+    while(p != p.parent){
+        p = p.parent;
+    }
+    return p;
+}
+
+function changeTitle(obj){
+	//window.location.reload();
+    if(obj){
+        document.title = '社馆直通车 -'+ obj.innerHTML;
+    }
+    goToTopWindow();
+}
+
+function goToTopWindow(){
+    //点击左侧按钮时，查看是否超时
+    $.ajax({
+        url: "/sys/checkStatus",
+        type: 'GET',
+        cache:false,
+        async: true,
+        success: function (resultMessage){
+            if(!resultMessage || resultMessage.result == 0){
+                alert("未登录或登录超时,请登录后操作！");
+                //设置跳转到登录页
+               // alert(top)
+                var top = getTopWinow(); 
+                top.location.href = "/";
+            }
+        },
+        error:function(resultMessage){
+            alert("服务器繁忙，请稍后访问"); 
+            //设置跳转到登录页
+            var top = getTopWinow();  
+            top.location.href = "/";
+        }
+     });
+}
+
