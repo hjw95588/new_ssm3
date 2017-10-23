@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/ssm3/user/test.do" enctype="multipart/form-data" method="post">
+<form action="/ssm_demo/user/test.do" enctype="multipart/form-data" method="post">
   <input type="file" name="files" id="files">
   <input type="submit" value="提交">
 </form>

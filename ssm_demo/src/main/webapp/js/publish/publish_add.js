@@ -30,7 +30,7 @@ function preview(file){
 function uploadImage(){
 	
 	$("#fileForm").ajaxSubmit({
-		url:'/ssm3/user/upload.do',
+		url:'/ssm_demo/user/upload.do',
 		type:'post',
 		async:false,
 		contentType: false,
@@ -40,7 +40,7 @@ function uploadImage(){
 			console.log(JSON.stringify(result))
 			if(result.status=="1"){
 				$("#photo2").show();
-				$("#photo2").attr("src","/ssm3/uploads/"+result.url);
+				$("#photo2").attr("src","/ssm_demo/uploads/"+result.url);
 				$("#photo").val(result.url);
 			}
 			
@@ -51,7 +51,7 @@ function uploadImage(){
 $(function(){
 	
 	var publish={
-			addUrl:"/ssm3/pub/add.do"
+			addUrl:"/ssm_demo/pub/add.do"
 			
 	}
 	

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/ssm3/login/login.action" method="post">
+<form action="/ssm_demo/login/login.action" method="post">
   <input type="text" name="username"><br>
   <input type="text" name="password"><br>
   <input type="submit" value="提交">

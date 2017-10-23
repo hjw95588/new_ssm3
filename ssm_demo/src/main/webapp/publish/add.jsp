@@ -106,7 +106,7 @@
         wordCount:false, //不显示字数统计,
         initialFrameWidth :200,//设置编辑器宽度
         initialFrameHeight:250,//设置编辑器高度
-        serverUrl: "/ssm3/customImageUrl/uploadFile.do",//请求配置config.json文件 
-        imageUrl : "/ssm3/user/upload.do" //文件上传地址
+        serverUrl: "/ssm_demo/customImageUrl/uploadFile.do",//请求配置config.json文件 
+        imageUrl : "/ssm_demo/user/upload.do" //文件上传地址
     });
 </script>

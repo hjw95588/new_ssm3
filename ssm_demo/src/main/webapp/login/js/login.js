@@ -34,7 +34,7 @@ function myshow(){
 		$("#show2").html("");
 	}
 	
-	 $("#myform").attr("action","/ssm3/login/login.do");
+	 $("#myform").attr("action","/ssm_demo/login/login.do");
 	 $("#myform").submit();
 	 return true;
 }
@@ -71,7 +71,7 @@ function myshow(){
 			$("#show2").html("");
 		}
 		 
-		 $("#myform").attr("action","/ssm3/login/login.do");
+		 $("#myform").attr("action","/ssm_demo/login/login.do");
 		 $("#myform").submit();
 		 return true;
 
@@ -87,7 +87,7 @@ function myshow(){
  * var entity={ account:"a1", password:"111111" }
  * 
  * $.ajax({ async:false, dataType : "JSON", type : "POST", url :
- * "/ssm3/user/text.do", contentType : "application/json; charset=utf-8", data :
+ * "/ssm_demo/user/text.do", contentType : "application/json; charset=utf-8", data :
  * JSON.stringify(entity), success:function(msg){
  *  } });
  *  })
@@ -100,12 +100,12 @@ function myshow(){
 		$.ajax({
 			dataType : "JSON",
 			type : "POST",
-			url : "/ssm3/user/text.do",
+			url : "/ssm_demo/user/text.do",
 			contentType : "application/json; charset=utf-8",
 			data : JSON.stringify(entity),
 			success : function(msg) {
               if(msg.status=="1"){
-            	  window.location.href="/ssm3/index/index.html";
+            	  window.location.href="/ssm_demo/index/index.html";
               }
               else{
             	  layer.msg(msg.message,{icon:1})

@@ -1,6 +1,6 @@
 var url={
-		pageUrl:"/ssm3/pub/pageQuery.do",
-		deleteUrl:"/ssm3/pub/deletePublish.do",
+		pageUrl:"/ssm_demo/pub/pageQuery.do",
+		deleteUrl:"/ssm_demo/pub/deletePublish.do",
 }
 
 $(function(){
@@ -26,7 +26,7 @@ $(function(){
 				console.log(data.length)
 				for(var x=0;x<data.length;x++){
 					str+='<div class="blogs">';
-					str+='<figure><img src="/ssm3/uploads/'+data[x].photo+'"></figure>';
+					str+='<figure><img src="/ssm_demo/uploads/'+data[x].photo+'"></figure>';
 					str+='<ul>';
 					str+='<h3>';
 					str+='<a href="/">'+data[x].title+'</a>';

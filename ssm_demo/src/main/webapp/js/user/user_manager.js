@@ -1,7 +1,7 @@
 var url={
-		pageUrl:"/ssm3/user/pageQuery.do",
-		deleteUrl:"/ssm3/user/deleteUser.do",
-		exportUrl:"/ssm3/user/exportUser.do"
+		pageUrl:"/ssm_demo/user/pageQuery.do",
+		deleteUrl:"/ssm_demo/user/deleteUser.do",
+		exportUrl:"/ssm_demo/user/exportUser.do"
 }
 
 var list = {
