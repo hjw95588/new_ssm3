@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="com.yihe.dao.IPublishDao" >    
+    <resultMap id="BaseResultMap" type="com.yihe.bean.Publish">  
+        <result column="id" property="id" jdbcType="VARCHAR" />  
+        <result column="title" property="title" jdbcType="VARCHAR" /> 
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />  
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />  
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />  
+        
+        <result column="create_id" property="createId" jdbcType="VARCHAR" />  
+        <result column="create_name" property="createName" jdbcType="VARCHAR" />
+        <result column="update_id" property="updateId" jdbcType="VARCHAR" />  
+        <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+        <result column="flag" property="flag" jdbcType="INTEGER" />  
+        
+        <result column="type_id" property="typeId" jdbcType="VARCHAR" /> 
+        <result column="type_name" property="typeName" jdbcType="VARCHAR" />  
+        <result column="photo" property="photo" jdbcType="VARCHAR" />  
+        <result column="read" property="read" jdbcType="INTEGER" />     
+       
+    </resultMap>  
+   
+    
+    <insert id="add" parameterType="com.yihe.bean.Publish">
+      insert into publish
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null and id !='' " >
+        id,
+      </if>
+      <if test="title != null and title !=''" >
+        title,
+      </if>
+      <if test="content != null and content !=''" >
+        content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null " >
+        update_time,
+      </if>
+      <if test="createId != null and createId !=''" >
+        create_id,
+      </if>
+      <if test="createName != null and createName !=''" >
+        create_name,
+      </if>
+       <if test="updateId != null and updateId !=''" >
+        update_id,
+      </if>
+      <if test="updateName != null and updateName !=''" >
+       update_name,
+      </if>
+      <if test="typeId != null and typeId !=''" >
+        type_id,
+      </if>
+       <if test="typeName != null and typeName !=''" >
+        type_name,
+      </if>
+      <if test="photo != null and photo !=''" >
+        photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null and id !=''" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null and title !=''" >
+       #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null and content !=''" >
+       #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+     <if test="updateTime != null " >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null and createId !=''" >
+       #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null and createName !=''" >
+       #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null and updateId !=''" >
+       #{updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateName != null and updateName !=''" >
+      #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null and typeId !=''" >
+       #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null and typeName !=''" >
+      #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null and photo !=''" >
+      #{photo,jdbcType=VARCHAR},
+      </if>
+    </trim> 
+    </insert>
+    
+    <update id="update" parameterType="com.yihe.bean.Publish">
+     update publish 
+     <set>
+      <if test="title != null and title !=''" >
+       title=#{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null and content !=''" >
+       content=#{content,jdbcType=VARCHAR},
+      </if>
+     <if test="updateTime != null " >
+        update_time=#{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null and updateId !=''" >
+        update_id=#{updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateName != null and updateName !=''" >
+       update_name=#{updateName,jdbcType=VARCHAR},
+      </if>
+     <if test="typeId != null and typeId !=''" >
+       type_id=#{typeId,jdbcType=VARCHAR},
+      </if>
+       <if test="typeName != null and typeName !=''" >
+      type_name=#{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null and photo !=''" >
+      photo=#{photo,jdbcType=VARCHAR},
+      </if>
+     </set>
+     
+     <where>
+         id=#{id,jdbcType=VARCHAR}
+     </where>
+    </update>
+    
+     <sql id="Column">
+     a.id,a.title,a.content,a.create_time,a.update_time,
+     a.create_id,a.create_name,a.update_id,a.update_name,a.flag,
+    a.type_id,a.type_name,a.photo,a.read
+    </sql>
+    
+    <!-- 查询记录集合 -->
+    <select id="getList" resultMap="BaseResultMap">
+
+      select 
+        <include refid="Column" /> 
+       from publish a
+      <where> 
+      flag=0
+      <if test="title != null and title !=''" >
+       and instr(a.title, #{title,jdbcType=VARCHAR}) != 0
+      </if>
+      <if test="content != null and content !=''" >
+       and instr(a.content,#{content,jdbcType=LONGVARCHAR}) != 0
+      </if>
+      <if test="typeId != null and typeId !=''" >
+       and a.type_id=#{typeId,jdbcType=VARCHAR}
+      </if>
+      </where>
+      order by a.update_time desc
+      limit #{pageNum,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+    
+     <!-- 查询记录-->
+    <select id="getListNum" resultType="Integer">
+      select count(*) from publish a
+      <where> 
+      flag=0
+      <if test="title != null and title !=''" >
+       and instr(a.title, #{title,jdbcType=VARCHAR}) != 0
+      </if>
+      <if test="content != null and content !=''" >
+       and instr(a.content,#{content,jdbcType=LONGVARCHAR}) != 0
+      </if>
+      <if test="typeId != null and typeId !=''" >
+       and a.type_id=#{typeId,jdbcType=VARCHAR}
+      </if>
+       
+      </where>
+    </select>
+    
+    <!-- 逻辑删除操作 -->
+     <!-- 批量删除 -->
+     <delete id="deletePublish" parameterType="java.util.List">
+        update publish set flag = 1
+        where id in
+        <foreach item="id" collection="list" open="(" close=")" separator=",">
+             #{id}
+         </foreach>
+    </delete>
+    
+    <select id="query" resultMap="BaseResultMap">
+      select <include refid="Column" />
+      
+      from publish a
+      <where>
+      id=#{id,jdbcType=VARCHAR}
+      </where>
+    </select>
+    
+   
+    
+    
+ </mapper>
