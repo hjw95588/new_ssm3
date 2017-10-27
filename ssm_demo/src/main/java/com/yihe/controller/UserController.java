@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
 import java.net.URLDecoder;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +24,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -35,6 +36,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -58,9 +60,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.yihe.bean.EbookResponse;
 import com.yihe.bean.PageUser;
 import com.yihe.bean.User;
@@ -208,6 +207,7 @@ public class UserController {
 		
 		Map<String, Object> re=new HashMap<String, Object>();
 		
+		
 		if(!StringUtils.isEmpty(id))
 		{
 			
@@ -225,6 +225,23 @@ public class UserController {
 		re.put("data", "");
 		
 		return re;
+	}
+	
+	public void showIp(HttpServletRequest request){
+		
+		try {
+			System.out.println("本地ip:"+InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			
+			e.printStackTrace();
+		}  
+		
+		String path = request.getContextPath();  
+	     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
+	     
+	     System.out.println(path);
+	     
+	     System.out.println(basePath);
 	}
 	
 	/**
@@ -337,8 +354,9 @@ public class UserController {
 	
 	@RequestMapping(value = "/pageQuery.do",method=RequestMethod.POST)
 	@ResponseBody
-	public PageBean<User> pageQuery(@RequestBody String data){
+	public PageBean<User> pageQuery(@RequestBody String data,HttpServletRequest request){
       
+		System.out.println(22222);
 		PageUser pa=JSON.parseObject(data, PageUser.class); //传递的参数
 		PageBean<User> pageBean=new PageBean<User>();  //返回的结果
 		
@@ -359,6 +377,7 @@ public class UserController {
 			pageBean.setPageNum(pageNum/pageSize+1);
 			pageBean.setPageSize(pageSize);
 			
+			showIp(request);
 	       			
 		}
 		
