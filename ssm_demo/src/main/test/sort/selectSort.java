@@ -4,6 +4,9 @@ package sort;
  * 选择排序
  * 
  * 固定一个角标位置，和剩下的进行排序
+ * 
+ * 
+ * 内循环结束后，最值出现在0角标位置上
  * @author Administrator
  *
  */
