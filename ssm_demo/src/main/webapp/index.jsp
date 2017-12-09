@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-你好，小米！！！
+你好，小米6！！！
 </body>
 </html>
