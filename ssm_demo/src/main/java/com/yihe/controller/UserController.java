@@ -355,16 +355,11 @@ public class UserController {
 	@RequestMapping(value = "/pageQuery.do",method=RequestMethod.POST)
 	@ResponseBody
 	public PageBean<User> pageQuery(@RequestBody String data,HttpServletRequest request){
-      
-		System.out.println(22222);
 		PageUser pa=JSON.parseObject(data, PageUser.class); //传递的参数
 		PageBean<User> pageBean=new PageBean<User>();  //返回的结果
-		
 		if(pa!=null){
-			
 	        Integer pageSize = pa.getPageSize();  //每页的页数
 	        Integer pageNum = (pa.getPageNum()-1)*pageSize;
-	        
 	        pa.setPageNum(pageNum);
 	        pa.setPageSize(pageSize);
 			
@@ -376,9 +371,7 @@ public class UserController {
 			pageBean.setTotalRecords(n);
 			pageBean.setPageNum(pageNum/pageSize+1);
 			pageBean.setPageSize(pageSize);
-			
-			showIp(request);
-	       			
+				
 		}
 		
 		
