@@ -1,0 +1,5920 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20170720" releaseVersion="9.0.0">
+<TableDataMap>
+<TableData name="科目" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT a.account_id,b.*,c.id rid,c.report_name FROM dim_bus_account a,dim_bus_account_project b,report c WHERE a.project_id=b.id AND a.report_id = c.id and c.report_name='筹资执行预算表']]></Query>
+</TableData>
+<TableData name="事实" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[$year]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="org1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($org,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT 
+  view_id,
+  sum(_value) _value,
+  account_id
+FROM
+  fact_czys_zx a
+WHERE a.date_id = ${year} 
+  AND a.org_id in (${org1}) 
+           
+  GROUP BY view_id,account_id]]></Query>
+</TableData>
+<TableData name="场景" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from dim_view]]></Query>
+</TableData>
+<TableData name="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[$year]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="org1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($org,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from (
+SELECT
+	sum(a._value) as _value,
+	a.view_id,
+	a.account_id
+FROM
+	`fact_czys_tz` a
+WHERE
+	a.date_id = ${year}
+AND a.org_id in (${org1})
+and a.view_id="view_35"
+GROUP BY a.view_id,a.account_id
+UNION ALL
+SELECT
+	sum(a._value) as _value ,
+	a.view_id,
+	a.account_id
+FROM
+	`fact_czys` a
+WHERE
+	a.date_id = ${year}
+AND a.org_id in (${org1})
+and a.view_id="view_4"
+GROUP BY a.view_id,a.account_id
+) as k
+where k._value is NOT NULL
+	]]></Query>
+</TableData>
+<TableData name="资金负债执行预算表：短期借款" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[$year]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="org1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($org,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT
+	a.view_id,a._value
+FROM
+	fact_zcfzys_zx a
+WHERE
+	a.date_id = '${year}'
+AND a.org_id in (${org1}) 
+AND a.account_id="acc_668"
+and a.view_id in ('view_31','view_50')]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebPageContent>
+<ToolBars/>
+<WebPage isPage="true" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+</WebPageContent>
+<WebWriteContent>
+<Listener event="afterwrite">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[if (fr_submitinfo.success){
+	FR.Msg.toast('操作成功');
+	_g().parameterCommit();
+}else {
+	FR.Msg.toast('操作失败');
+}]]></Content>
+</JavaScript>
+</Listener>
+<ToolBars/>
+<SelectedColor/>
+<WebWrite SheetPosition="1"/>
+<RptLocation isShowAtLeft="false"/>
+<UnloadCheck check="false"/>
+<ShowWidgets/>
+<OtherAttr isAutoStash="false"/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[723900,1866900,723900,723900,1371600,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,2171700,1638300,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[11772900,2743200,3848100,3848100,2743200,3848100,4000500,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="1" cs="7" s="1">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="rid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="rid" viName="report_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="0" r="2" cs="7" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="年度：" + LEFT($year,4)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="3" s="3">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="编制单位：" + $org_name]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="3">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="3" s="4">
+<O>
+<![CDATA[金额单位：元]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="4" s="5">
+<O>
+<![CDATA[项    目]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="4" s="5">
+<O>
+<![CDATA[行次]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[预算数]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="3" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行增加数]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="4" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行减少数]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="5" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行预算数]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="6" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[增减率(%)]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="0" r="5" s="6">
+<O>
+<![CDATA[栏   次]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="5" s="6">
+<O>
+<![CDATA[-]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="5" s="6">
+<O t="I">
+<![CDATA[1]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="5" s="6">
+<O t="I">
+<![CDATA[2]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="5" s="6">
+<O t="I">
+<![CDATA[3]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="5" s="6">
+<O t="I">
+<![CDATA[4]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="5" s="6">
+<O t="I">
+<![CDATA[5]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="6" s="7">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[对 外 筹 资 合 计]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="6" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SEQ()]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(C8+C14)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(D8+D14)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(E8+E14)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(C7+D7-E7)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C7) = 0 || C7 = 0 || len(F7) = 0, null, format((F7-C7) / C7, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="7" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[短期筹资]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="7" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B7 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="7" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(C9+C12+C13)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="7" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(D9+D12+D13)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="7" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(E9+E12+E13)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="7" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(C8+D8-E8)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="7" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C8) = 0 || C8 = 0 || len(F8) = 0, null, format((F8-C8) / C8, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="8" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[短期筹资-短期借款]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="8" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B8 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="8" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_238]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_2]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="8" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="8"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="8" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="8"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="8" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C9) = 0 && len(D9) = 0 && len(E9)=0, null,SUM(C9+D9-E9))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="8" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C9) = 0 || C9 = 0 || len(F9) = 0, null, format((F9-C9) / C9, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="9" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[短期筹资-短期借款-银行借款]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="9" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B9 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="9" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_239]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_3]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="9" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="9"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="9" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="9"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="9" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C10) = 0 && len(D10) =0 && len(E10)=0, null,SUM(C10+D10-E10))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="9" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C10) = 0 || C10 = 0 || len(F10) = 0, null, format((F10-C10) / C10, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="10" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[短期筹资-短期借款-非银行金融结构借款]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="10" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B10 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="10" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_240]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_4]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="10" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="10"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="10" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="10"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="10" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C11) = 0 && len(D11) = 0 && len(E11)=0, null,SUM(C11+D11-E11))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="10" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C11) = 0 || C11 = 0 || len(F11) = 0, null, format((F11-C117) / C11, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="11" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[短期筹资-短期企业债券]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="11" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B11 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="11" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_241]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_5]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="11" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="11"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="11" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="11"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="11" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C12) = 0 && len(D12) = 0 && len(E12)=0, null,SUM(C12+D12-E12))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="11" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C12) = 0 || C12 = 0 || len(F12) = 0, null, format((F12-C12) / C12, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="12" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[短期筹资-其他短期筹资]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="12" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B12 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="12" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_242]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_6]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="12" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="12"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="12" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="12"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="12" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C13) = 0 && len(D13) = 0 && len(E13)=0, null,SUM(C13+D13-E13))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="12" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C13) = 0 || C13 = 0 || len(F13) = 0, null, format((F13-C13) / C13, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="13" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="13" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B13 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="13" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(C15+C18+C20+C21+C22)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="13" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(D15+D18+D20+D21+D22)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="13" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(E15+E18+E20+E21+E22)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="13" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C14) = 0 && len(D14) = 0 && len(E14)=0, null,SUM(C14+D14-E14))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="13" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C14) = 0 || C14 = 0 || len(F14) = 0, null, format((F14-C14) / C14, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="14" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-长期借款]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="14" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B14 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="14" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_244]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_8]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="14" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="14"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="14" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="14"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="14" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C15) = 0 && len(D15) = 0 && len(E15)=0, null,SUM(C15+D15-E15))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="14" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C15) = 0 || C15 = 0 || len(F15) = 0, null, format((F15-C15) / C15, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="15" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-长期借款-银行借款]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="15" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B15 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="15" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_245]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_9]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="15" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="15"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="15" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="15"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="15" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C16) = 0 && len(D16) = 0 && len(E16)=0, null,SUM(C16+D16-E16))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="15" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C16) = 0 || C16 = 0 || len(F16) = 0, null, format((F16-C16) / C16, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="16" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-长期借款-非银行金融结构借款]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="16" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B16 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="16" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_246]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_10]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="16" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="16"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="16" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="16"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="16" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C17) = 0 && len(D17) = 0 && len(E17)=0, null,SUM(C17+D17-E17))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="16" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C17) = 0 || C17 = 0 || len(F17) = 0, null, format((F17-C17) / C17, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="17" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-股权筹资]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="17" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B17 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="17" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_247]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_11]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="17" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="17"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="17" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="17"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="17" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C18) = 0 && len(D18) = 0 && len(E18)=0, null,SUM(C18+D18-E18))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="17" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C18) = 0 || C18 = 0 || len(F18) = 0, null, format((F18-C18) / C18, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="18" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-股权筹资-股票筹资]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="18" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B18 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="18" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_248]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_12]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="18" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="18"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="18" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="18"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="18" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C19) = 0 && len(D19) = 0 && len(E19)=0, null,SUM(C19+D19-E19))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="18" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C19) = 0 || C19 = 0 || len(F19) = 0, null, format((F19-C19) / C19, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="19" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-债券筹资]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="19" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B19 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="19" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_249]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_13]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="19" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="19"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="19" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="19"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="19" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C20) = 0 && len(D20) = 0 && len(E20)=0, null,SUM(C20+D20-E20))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="19" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C20) = 0 || C20 = 0 || len(F20) = 0, null, format((F20-C20) / C20, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="20" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-融资租凭]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="20" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B20 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="20" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_250]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_14]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="20" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="20"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="20" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="20"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="20" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C21) = 0 && len(D21) = 0 && len(E21)=0, null,SUM(C21+D21-E21))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="20" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C21) = 0 || C21 = 0 || len(F21) = 0, null, format((F21-C21) / C21, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="21" s="9">
+<O t="DSColumn">
+<Attributes dsName="科目" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[长期筹资-其他长期筹资]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr adjustmode="2"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="account_id" viName="dispaly_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[科目]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="21" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=B21 + 1]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="2" r="21" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数（从调整预算数取  如果无数据则从 从本年预算数取）" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_251]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[acc_15]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="21" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="3" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="21"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="21" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="4" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="21"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="21" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if( len(C22) = 0 && len(D22) = 0 && len(E22)=0, null,SUM(C22+D22-E22))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="21" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(C22) = 0 || C22 = 0 || len(F22) = 0, null, format((F22-C22) / C22, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings pageOrder="1" isHorizontalCenterOnPage="true" headerHeight="0" footerHeight="0">
+<PaperSetting orientation="1">
+<PaperSize width="23040000" height="42768000"/>
+<Margin top="986400" left="2743200" bottom="986400" right="2743200"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C7]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C8]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="7"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C9]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="8"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C10]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="9"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C11]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="10"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C12]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="11"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C13]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="12"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C14]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="13"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C15]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="14"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C16]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="15"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C17]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="16"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C18]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="17"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C19]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="18"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C20]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="19"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C21]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="20"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[C22]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="21"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D7]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D8]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="7"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D9]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="8"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D10]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="9"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D11]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="10"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D12]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="11"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D13]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="12"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D14]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="13"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D15]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="14"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D16]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="15"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D17]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="16"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D18]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="17"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D19]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="18"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D20]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="19"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D21]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="20"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[D22]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="21"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E7]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E8]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="7"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E9]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="8"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E10]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="9"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E11]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="10"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E12]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="11"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E13]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="12"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E14]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="13"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E15]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="14"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E16]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="15"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E17]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="16"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E18]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="17"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E19]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="18"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E20]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="19"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E21]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="20"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[E22]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="21"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F7]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F8]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="7"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F9]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="8"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F10]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="9"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F11]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="10"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F12]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="11"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F13]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="12"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F14]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="13"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F15]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="14"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F16]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="15"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F17]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="16"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F18]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="17"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F19]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="18"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F20]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="19"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F21]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="20"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[F22]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="21"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G7]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G8]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="7"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G9]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="8"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G10]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="9"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G11]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="10"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G12]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="11"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G13]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="12"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G14]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="13"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G15]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="14"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G16]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="15"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G17]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="16"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G18]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="17"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G19]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="18"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G20]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="19"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G21]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="20"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[G22]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_czys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="21"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<TopVerifier class="com.fr.report.write.ValueVerifier">
+<name>
+<![CDATA[筹资执行预算-短期借款校验]]></name>
+<VerifyItem class="com.fr.data.VerifyItem">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN(C9)=0,0.00,C9)==sql("青海粮食","select sum(val)  from (select ifnull(sum(CAST(a._value as DECIMAL(12,2))),0) as val from fact_zcfzys_zx a where a.date_id='"+$year+"' and a.org_id in ('"+$org+"') and a.account_id IN ('acc_668') and a.view_id = 'view_31' union all select 0 ) aa ",1,1)
+ && 
+IF(LEN(F9)=0,0.00,F9)==sql("青海粮食","select sum(val)  from (select ifnull(sum(CAST(a._value as DECIMAL(12,2))),0) as val from fact_zcfzys_zx a where a.date_id='"+$year+"' and a.org_id in ('"+$org+"') and a.account_id IN ('acc_668') and a.view_id = 'view_50' union all select 0 ) aa ",1,1)]]></Attributes>
+</O>
+<message>
+<![CDATA[="短期借款=资金负债执行预算表：短期借款"]]></message>
+</VerifyItem>
+</TopVerifier>
+</ReportWriteAttr>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0" useParamsTemplate="false"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="80"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="144"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="Arial" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="JAA"/>
+<PreviewType PreviewType="1"/>
+<TemplateID/>
+<TemplateIdAttMark class="com.fr.base.iofileattr.TemplateIdAttrMark">
+<TemplateIdAttMark TemplateId="438a1a6d-1bd1-4bb2-b463-2d2f2afe4dc5"/>
+</TemplateIdAttMark>
+</WorkBook>

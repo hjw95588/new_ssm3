@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/groups.css">
     <link rel="stylesheet" href="../css/navTree.css">
+    <link rel="stylesheet" type="text/css" href="../css/swiper-3.4.2.min.css" />
     <link rel="stylesheet" href="../js/layui/css/layui.css"  media="all">
 <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/common/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -32,6 +33,7 @@
     <!--更多查询条件-->
     <script src="../js/search-more.js"></script>
     <script src="../js/jquery.nav-tree.js"></script>
+    <script type="text/javascript" src="../js/swipe/swiper-3.4.2.min.js"></script>
     <script type="text/javascript" src="../js/layer/layer.js"></script>
     <!--日期插件-->
     <script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>

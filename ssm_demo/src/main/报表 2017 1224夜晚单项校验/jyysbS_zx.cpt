@@ -1,0 +1,3020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20170720" releaseVersion="9.0.0">
+<TableDataMap>
+<TableData name="场景" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from dim_view]]></Query>
+</TableData>
+<TableData name="科目" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="org1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($org,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="year1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($year,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT a.account_id,b.id as projectId,b.name as projectName,c.id reportId,c.report_name
+FROM 
+dim_bus_account a,
+dim_bus_account_project b,
+report c
+WHERE 
+a.project_id=b.id and
+a.report_id=c.id and 
+b.org_id in (${org1}) and
+b.date_id in (${year1}) and
+c.report_name='经营执行预算表'
+order by b.order_id asc]]></Query>
+</TableData>
+<TableData name="事实" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[$year]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="org1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($org,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT 
+  view_id,
+  _value,
+  account_id,
+  remarks
+FROM
+  fact_jyys_zx
+WHERE 
+	 date_id = ${year} 
+  AND org_id in (${org1}) 
+  GROUP BY view_id,account_id
+]]></Query>
+</TableData>
+<TableData name="报表" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from report where report_name = '经营执行预算表']]></Query>
+</TableData>
+<TableData name="年初预算的主业项目 等信息" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="org1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($org,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="year1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($year,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT a.account_id,b.id as projectId,b.name as projectName,c.id reportId,c.report_name
+FROM 
+dim_bus_account a,
+dim_bus_account_project b,
+report c
+WHERE 
+a.project_id=b.id and
+a.report_id=c.id and 
+b.org_id in (${org1}) and
+b.date_id in (${year1}) and
+c.report_name='经营年初预算表'
+order by b.order_id asc]]></Query>
+</TableData>
+<TableData name="预算数   如果调整预算表的调整预算数有数据，则取，没有则取年初预算表的本年预算数" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[$year]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="org1"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="'"+ REPLACE($org,",","','") +"'"]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[青海粮食]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from (
+SELECT 
+  tz.view_id,
+  tz._value,
+  tz.account_id,
+  tz.remarks,
+  dbap.`name`
+FROM
+  fact_jyys_tz tz
+INNER JOIN dim_bus_account dba on dba.account_id=tz.account_id
+INNER JOIN dim_bus_account_project dbap on dbap.id=dba.project_id
+WHERE 
+	 tz.date_id = ${year}
+  AND tz.org_id in (${org1}) 
+and dbap.`name` !="合计"
+UNION ALL
+SELECT 
+  a.view_id,
+  a._value,
+  a.account_id,
+  a.remarks,
+  dbap.`name`
+FROM
+  fact_jyys a
+INNER JOIN dim_bus_account dba on dba.account_id=a.account_id
+INNER JOIN dim_bus_account_project dbap on dbap.id=dba.project_id
+WHERE 
+	 a.date_id = ${year}
+  AND a.org_id in (${org1}) 
+and dbap.`name` !="合计"
+) as k
+]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebPageContent>
+<Listener event="afterload">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[$("#content-container col[col='1']A").attr("style","width:0px;");]]></Content>
+</JavaScript>
+</Listener>
+<ToolBars/>
+<WebPage isPage="true" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+</WebPageContent>
+<WebWriteContent>
+<Listener event="afterwrite">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[if (fr_submitinfo.success){
+	FR.Msg.toast('操作成功');
+	_g().parameterCommit();
+}else {
+	FR.Msg.toast('操作失败');
+}]]></Content>
+</JavaScript>
+</Listener>
+<ToolBars/>
+<SelectedColor/>
+<WebWrite SheetPosition="3"/>
+<RptLocation isShowAtLeft="false"/>
+<UnloadCheck check="false"/>
+<ShowWidgets/>
+<OtherAttr isAutoStash="false"/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[1866240,723900,723900,723900,1143000,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[0,0,9067680,3600000,3600000,3600000,3600000,3600000,3600000,3600000,3600000,3600000,3600000,3600000,3600000,5040000,0,0,7810500,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="0">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="1" r="0">
+<PrivilegeControl/>
+<CellGUIAttr previewContent="false" printBackground="false" printContent="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="2" r="0" cs="17" s="1">
+<O t="DSColumn">
+<Attributes dsName="报表" columnName="id"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="id" viName="report_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[报表]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="0" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="1" r="1">
+<PrivilegeControl/>
+<CellGUIAttr previewContent="false" printBackground="false" printContent="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="2" r="1" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="单位: " + $org_name]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="4" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="5" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="6" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="7" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="8" r="1" cs="3" s="3">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="年度: " + LEFT($year, 4)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="11" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="12" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="13" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="14" r="1">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="15" r="1" cs="4" s="4">
+<O>
+<![CDATA[单位：元、吨]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="0" r="2" rs="3">
+<O>
+<![CDATA[id]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="1" r="2" rs="3" s="5">
+<PrivilegeControl/>
+<CellGUIAttr previewContent="false" printBackground="false" printContent="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.CheckBox">
+<Listener event="statechange">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var $span = $('div[widgetname="SELECTONE"]A span');  
+var selectAll = $('div[widgetname="SELECTALL"]A span').hasClass('fr-checkbox-checkon');
+var _cls = selectAll?'fr-checkbox-checkon':'fr-checkbox-checkoff';
+//alert(_cls);
+$span.removeClass('fr-checkbox-checkon');
+$span.removeClass('fr-checkbox-checkoff');
+$span.addClass(_cls);
+$span.parent().parent().attr("cv",""+selectAll);]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="SELECTALL"/>
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[]]></Text>
+</Widget>
+<Expand/>
+</C>
+<C c="2" r="2" rs="3" s="6">
+<O>
+<![CDATA[主业项目]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="3" r="2" cs="5" s="6">
+<O>
+<![CDATA[主营业务收入]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="8" r="2" cs="5" s="6">
+<O>
+<![CDATA[主营业务成本]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="13" r="2" cs="3" s="6">
+<O>
+<![CDATA[毛利]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="16" r="2" rs="3" s="5">
+<O>
+<![CDATA[新生成科目id]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="17" r="2" rs="3" s="5">
+<O>
+<![CDATA[序号]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="18" r="2" rs="3" s="6">
+<O>
+<![CDATA[备注]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="3" r="3" cs="2" s="6">
+<O>
+<![CDATA[预算数]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="5" r="3" cs="2" s="6">
+<O>
+<![CDATA[本年执行数]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="7" r="3" rs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务收入_增减率(%)]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="8" r="3" cs="2" s="6">
+<O>
+<![CDATA[预算数]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="10" r="3" cs="2" s="6">
+<O>
+<![CDATA[本年执行数]]></O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="12" r="3" rs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务成本_增减率(%)]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="13" r="3" rs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后毛利_预算数]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="14" r="3" rs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后毛利_本年执行数]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="15" r="3" rs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后毛利_增减率(%)]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="3" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务收入_预算数_数量]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="4" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务收入_预算数_金额]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="5" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务收入_本年执行数_数量]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="6" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务收入_本年执行数_金额]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="8" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务成本_预算数_数量]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="9" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务成本_预算数_金额]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="10" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务成本_本年执行数_数量]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="11" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="场景" columnName="view_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_name]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[执行后主营业务成本_本年执行数_金额]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="view_id" viName="display_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[场景]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand/>
+</C>
+<C c="0" r="5" s="5">
+<O t="DSColumn">
+<Attributes dsName="年初预算的主业项目 等信息" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[projectName]]></CNAME>
+<Compare op="1">
+<O>
+<![CDATA[合计]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$) = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ValueHighlightAction">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="abus" + REPLACE(UUID(), "-", "")]]></Attributes>
+</O>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[default]]></InsertPolicy>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="abus" + REPLACE(UUID(), "-", "")]]></Attributes>
+</O>
+</CellInsertPolicy>
+<Expand dir="0"/>
+</C>
+<C c="1" r="5" s="5">
+<PrivilegeControl/>
+<CellGUIAttr previewContent="false" printBackground="false" printContent="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.CheckBox">
+<Listener event="afterinit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[if (!window.lineboxes) {
+    window.lineboxes = []A;
+}
+lineboxes[lineboxes.length]A = this;]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="SELECTONE"/>
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[]]></Text>
+</Widget>
+<Expand leftParentDefault="false" left="C6"/>
+</C>
+<C c="2" r="5" s="7">
+<O t="DSColumn">
+<Attributes dsName="年初预算的主业项目 等信息" columnName="projectName"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数   如果调整预算表的调整预算数有数据，则取，没有则取年初预算表的本年预算数" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_9]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_41]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="4" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数   如果调整预算表的调整预算数有数据，则取，没有则取年初预算表的本年预算数" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_10]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_42]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="5" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="5" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2" allowNegative="false">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="5" s="9">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="6" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2" allowNegative="false">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="5" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(E6) = 0 || E6 = 0 || len(G6) = 0, "", format((G6 - E6) / E6, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand/>
+</C>
+<C c="8" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数   如果调整预算表的调整预算数有数据，则取，没有则取年初预算表的本年预算数" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_13]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_45]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="9" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数   如果调整预算表的调整预算数有数据，则取，没有则取年初预算表的本年预算数" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_14]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_46]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="10" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="10" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2" allowNegative="false">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="11" r="5" s="9">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="11" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2" allowNegative="false">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="12" r="5" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(J6) = 0 || J6 = 0 || len(L6) = 0, "", format((L6 - J6) / J6, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand/>
+</C>
+<C c="13" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="预算数   如果调整预算表的调整预算数有数据，则取，没有则取年初预算表的本年预算数" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_16]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_48]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<SelectCount type="3"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="14" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="_value"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="14" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<NumberAttr maxDecimalLength="2" allowNegative="false">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="15" r="5" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(N6) = 0 || N6 = 0 || len(O6) = 0, "", format((O6 - N6) / N6, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[copy]]></InsertPolicy>
+</CellInsertPolicy>
+<Expand/>
+</C>
+<C c="16" r="5" s="11">
+<O t="DSColumn">
+<Attributes dsName="年初预算的主业项目 等信息" columnName="projectId"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[nvl($$$,"abus"+REPLACE(UUID(),"-",""))]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellGUIAttr previewContent="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$) = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ValueHighlightAction">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="abus" + REPLACE(UUID(), "-", "")]]></Attributes>
+</O>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[default]]></InsertPolicy>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="abus" + REPLACE(UUID(), "-", "")]]></Attributes>
+</O>
+</CellInsertPolicy>
+<Expand/>
+</C>
+<C c="17" r="5" s="11">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SEQ()]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ValueHighlightAction">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=row() - 6]]></Attributes>
+</O>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+<C c="18" r="5" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="remarks"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="15" row="4"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="5"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="6">
+<O t="DSColumn">
+<Attributes dsName="年初预算的主业项目 等信息" columnName="account_id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[projectName]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[合计]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$) = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ValueHighlightAction">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="abus" + REPLACE(UUID(), "-", "")]]></Attributes>
+</O>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="6" s="7">
+<PrivilegeControl/>
+<CellGUIAttr previewContent="false" printBackground="false" printContent="false"/>
+<CellPageAttr breakOnPaginate="false"/>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[default]]></InsertPolicy>
+<O>
+<![CDATA[]]></O>
+</CellInsertPolicy>
+<Expand/>
+</C>
+<C c="2" r="6" s="11">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$) = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ValueHighlightAction">
+<O>
+<![CDATA[合计]]></O>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="3" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(D6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="4" r="6" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(E6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="5" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(F6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="6" r="6" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(G6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="7" r="6" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(E7) = 0 || E7 = 0 || len(G7) = 0, "", format((G7 - E7) / E7, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="8" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(I6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="9" r="6" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(J6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="10" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(K6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="11" r="6" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(L6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="12" r="6" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(J7) = 0 || J7 = 0 || len(L7) = 0, "", format((L7 - J7) / J7, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="13" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(N6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="14" r="6" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(O6)]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="15" r="6" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(N7) = 0 || N7 = 0 || len(O7) = 0, "", format((O7 - N7) / N7, "0.00%"))]]></Attributes>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="16" r="6" s="12">
+<O t="DSColumn">
+<Attributes dsName="年初预算的主业项目 等信息" columnName="projectId"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="6"/>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[nvl($$$,"abus"+REPLACE(UUID(),"-",""))]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$) = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ValueHighlightAction">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="abus" + REPLACE(UUID(), "-", "")]]></Attributes>
+</O>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy>
+<InsertPolicy>
+<![CDATA[default]]></InsertPolicy>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="abus" + REPLACE(UUID(), "-", "")]]></Attributes>
+</O>
+</CellInsertPolicy>
+<Expand/>
+</C>
+<C c="17" r="6" s="11">
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Expand/>
+</C>
+<C c="18" r="6" s="8">
+<O t="DSColumn">
+<Attributes dsName="事实" columnName="remarks"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[account_id]]></CNAME>
+<Compare op="0">
+<ColumnRow column="0" row="6"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[view_id]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[view_65]]></O>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<CellPageAttr breakOnPaginate="false"/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings pageOrder="1" isHorizontalCenterOnPage="true" headerHeight="0" footerHeight="0">
+<PaperSetting>
+<PaperSize width="77328000" height="21600000"/>
+<Margin top="986400" left="2743200" bottom="986400" right="2743200"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[新生成科目对象]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="dim_bus_account_project"/>
+<ColumnConfig name="id" isKey="true" skipUnmodified="false">
+<ColumnRow column="16" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="name" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="sort" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=sql("青海粮食", "SELECT IFNULL(MAX(sort)+1,1) FROM dim_bus_account_project", 1, 1)]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="date_id" isKey="false" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="false" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="parent_id" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="order_id" isKey="false" skipUnmodified="false">
+<ColumnRow column="17" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[新生成科目对象-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="dim_bus_account_project"/>
+<ColumnConfig name="id" isKey="true" skipUnmodified="false">
+<ColumnRow column="16" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="name" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="sort" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=sql("青海粮食", "SELECT IFNULL(MAX(sort)+1,1) FROM dim_bus_account_project", 1, 1)]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="date_id" isKey="false" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="false" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="parent_id" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[新生成科目中间表对象]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="dim_bus_account"/>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="report_id" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[report_4]]></O>
+</ColumnConfig>
+<ColumnConfig name="project_id" isKey="false" skipUnmodified="false">
+<ColumnRow column="16" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[新生成科目中间表对象-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="dim_bus_account"/>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="report_id" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[report_4]]></O>
+</ColumnConfig>
+<ColumnConfig name="project_id" isKey="false" skipUnmodified="false">
+<ColumnRow column="16" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入上年实际数量]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入上年实际数量-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入上年实际数金额]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入上年实际数金额-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入本年预算数数量]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入本年预算数数量-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入本年预算数金额]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入本年预算数金额-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本上年实际数数量]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="8" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="8" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本上年实际数数量-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="8" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="8" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本上年实际数金额]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="9" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="9" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本上年实际数金额-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="9" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="9" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本本年预算数数量]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="10" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本本年预算数数量-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="10" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本本年预算数金额]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="11" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="11" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本本年预算数金额-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="11" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="11" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[毛利上年实际数]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="13" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="13" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[毛利上年实际数-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="13" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="13" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[毛利本年预算]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="14" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="14" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[毛利本年预算-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="14" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="14" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入增减率(%)]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="7" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="7" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务收入增减率(%)-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="7" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="7" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本增减率(%)]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="12" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[主营业务成本增减率(%)-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="12" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[毛利增减率(%)]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="15" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="15" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="remarks" isKey="false" skipUnmodified="false">
+<ColumnRow column="18" row="5"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[毛利增减率(%)-合计]]></Name>
+<Attributes dsName="青海粮食"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="fact_jyys_zx"/>
+<ColumnConfig name="date_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[2016]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="org_id" isKey="true" skipUnmodified="false">
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ColumnConfig>
+<ColumnConfig name="account_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="view_id" isKey="true" skipUnmodified="false">
+<ColumnRow column="15" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="_value" isKey="false" skipUnmodified="false">
+<ColumnRow column="15" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="remarks" isKey="false" skipUnmodified="false">
+<ColumnRow column="18" row="6"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+</ReportWriteAttr>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0" useParamsTemplate="false"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<Parameter>
+<Attributes name="year"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="org"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style imageLayout="1">
+<FRFont name="Arial" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="96"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="1" size="80"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#.####]]></Format>
+<FRFont name="Arial" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#.##]]></Format>
+<FRFont name="Arial" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="Arial" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="JAA"/>
+<PreviewType PreviewType="0"/>
+<TemplateID/>
+<TemplateIdAttMark class="com.fr.base.iofileattr.TemplateIdAttrMark">
+<TemplateIdAttMark TemplateId="eede23e1-1fee-49a7-9a8e-5654029e42b7"/>
+</TemplateIdAttMark>
+</WorkBook>
