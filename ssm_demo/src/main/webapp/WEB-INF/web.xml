@@ -9,14 +9,31 @@
         <welcome-file>/index.jsp</welcome-file>  
     </welcome-file-list>  
       
-    <!-- 加载spring bean -->  
+
+       <!-- spring获取工程 -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>ssm.root</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+	</listener>
+	
+	<!-- 加载spring bean -->  
     <context-param>  
          <param-name>contextConfigLocation</param-name>  
-        <param-value>classpath:applicationContext.xml,classpath:spring-mvc.xml</param-value>  
+        <param-value>classpath:applicationContext.xml</param-value>  
     </context-param>  
-    <listener>  
+    
+	
+	<listener>  
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
     </listener>  
+      
+     <!--  <listener>  
+       <listener-class>com.yihe.util.WebContextListener</listener-class>  
+    </listener>   -->
+      
       
     <!-- 编码过滤器 -->  
     <filter>  
