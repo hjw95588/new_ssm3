@@ -271,7 +271,14 @@ public class UserController {
 							String fileName = UUID.randomUUID().toString().replaceAll("\\-", "")+"."+item.getName().split("\\.")[1]; //文件名
 					        
 							// 获取真实路径，对应${项目目录}/uploads，当然，这个目录必须存在
-							String realPath=request.getServletContext().getRealPath("/uploads");
+							//String realPath=request.getServletContext().getRealPath("/uploads"); //这种写法，目录必须存在
+							//String a=request.getServletContext().getRealPath("/uploads");
+							//System.out.println("1111"+a);
+							String realPath=System.getProperty("ssm.root")+"/uploads";//这种写法，如果目录不存在可以进行创建
+							File file_=new File(realPath);
+					         if(!file_.exists() && !file_.isDirectory()){
+					        	 file_.mkdir();
+					         }
 							
 							File file=new File(realPath, fileName);
 							
@@ -294,6 +301,8 @@ public class UserController {
 		
 		return map;
 	}
+	
+	
 	
 	/**
 	 * 上传图片

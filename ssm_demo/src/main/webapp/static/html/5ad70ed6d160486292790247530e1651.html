@@ -8,38 +8,38 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- jQuery -->
-    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="../js/date.js"></script>
+    <script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../js/date.js"></script>
     <!-- Basic Styles -->
     <!--公共样式-->
     
     
-     <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" / >
-<link rel="stylesheet" type="text/css" href="../css/my/background.css" />
-<link rel="stylesheet" type="text/css" href="../css/my/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/my/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="../css/my/jquery.mCustomScrollbar.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/my/layout.css" /> 
+     <link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.css" / >
+<link rel="stylesheet" type="text/css" href="../../css/my/background.css" />
+<link rel="stylesheet" type="text/css" href="../../css/my/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../../css/my/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="../../css/my/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" type="text/css" href="../../css/my/layout.css" /> 
     
-    <link rel="stylesheet" href="../bootstrap/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/groups.css">
-    <link rel="stylesheet" href="../css/navTree.css">
-    <link rel="stylesheet" href="../js/layui/css/layui.css"  media="all">
-<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/common/jquery.mCustomScrollbar.concat.min.js"></script>
-<script type="text/javascript" src="../js/common/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="../js/common/jquery.form.js"></script> 
+    <link rel="stylesheet" href="../../bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/groups.css">
+    <link rel="stylesheet" href="../../css/navTree.css">
+    <link rel="stylesheet" href="../../js/layui/css/layui.css"  media="all">
+<script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="../../js/common/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="../../js/common/jquery.form.js"></script> 
     <!--更多查询条件-->
-    <script src="../js/search-more.js"></script>
-    <script src="../js/jquery.nav-tree.js"></script>
-    <script type="text/javascript" src="../js/layer/layer.js"></script>
+    <script src="../../js/search-more.js"></script>
+    <script src="../../js/jquery.nav-tree.js"></script>
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
     <!--日期插件-->
-    <script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
    
-   <script type="text/javascript" src="../js/user/user_manager.js"></script>
-   <script type="text/javascript" src="../js/util.js"></script>
-   <script src="../js/layui/layui.js" charset="utf-8"></script>
+   <script type="text/javascript" src="../../js/user/user_manager.js"></script>
+   <script type="text/javascript" src="../../js/util.js"></script>
+   <script src="../../js/layui/layui.js" charset="utf-8"></script>
    <script type="text/javascript"></script>
 </head>
 <body>
@@ -177,7 +177,7 @@ input[type="checkbox"] + label {
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
 }
 [id="checkbox-2"]:checked + label {
-    background: url("../images/checkmark (1).png");
+    background: url("../../images/checkmark (1).png");
 background-repeat: no-repeat;
 background-size:cover;
 }
@@ -196,7 +196,7 @@ background-size:cover;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
 }
 [name="check"]:checked + label {
-background: url("../images/checkmark (1).png");
+background: url("../../images/checkmark (1).png");
 background-repeat: no-repeat;
 background-size:cover;
 }

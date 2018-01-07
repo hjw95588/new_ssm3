@@ -27,7 +27,7 @@ function preview(file){
 function uploadImage(){
 	
 	$("#fileForm").ajaxSubmit({
-		url:'/ssm_demo/user/upload.do',
+		url:'/user/upload.do',
 		type:'post',
 		async:false,
 		contentType: false,
@@ -36,7 +36,7 @@ function uploadImage(){
 			result = data;
 			console.log(JSON.stringify(result))
 			if(result.status=="1"){
-				$("#show").attr("src","/ssm_demo/uploads/"+result.url);
+				$("#show").attr("src","/uploads/"+result.url);
 				$("#photo").val(result.url);
 			}
 			
@@ -47,8 +47,8 @@ function uploadImage(){
 $(function(){
 	
 	var user={
-			updateUrl:"/ssm_demo/user/updateUser.do",
-			queryUrl:"/ssm_demo/user/query.do",
+			updateUrl:"/user/updateUser.do",
+			queryUrl:"/user/query.do",
 	}
 	
 	var id=GetIdUrl();
@@ -72,7 +72,7 @@ $(function(){
                $("#birth").val(timeStamp2String(user.birth));  //出生日期
                
                if(user.photo!=""){
-               $("#show")[0].src="/ssm_demo/uploads/"+user.photo;  //照片
+               $("#show")[0].src="/uploads/"+user.photo;  //照片
                $("#photo").val(user.photo)
                }
                

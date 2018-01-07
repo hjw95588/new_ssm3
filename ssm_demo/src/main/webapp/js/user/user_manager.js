@@ -1,7 +1,7 @@
 var url={
-		pageUrl:"/ssm_demo/user/pageQuery.do",
-		deleteUrl:"/ssm_demo/user/deleteUser.do",
-		exportUrl:"/ssm_demo/user/exportUser.do"
+		pageUrl:"/user/pageQuery.do",
+		deleteUrl:"/user/deleteUser.do",
+		exportUrl:"/user/exportUser.do"
 }
 
 var list = {
@@ -36,15 +36,10 @@ var list = {
 					success : function(msg) {
 						if (msg != null) {
 							var tbody = $("#tbody");
-
-						
-							
 							var alist = msg.list; // 集合
 							var total = msg.totalRecords; // 总记录数
 							var totalPageNum=msg.totalPageNum;  //总页数
 							var pageNum=msg.pageNum;  //当前页码
-							
-							
 							
 							var str = "";
 							if (total > 0) 

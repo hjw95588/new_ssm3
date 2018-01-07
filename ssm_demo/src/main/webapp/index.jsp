@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-你好，小米6！！！${name}
+123123你好
 </body>
 </html>

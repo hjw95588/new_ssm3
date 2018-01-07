@@ -1,6 +1,6 @@
 var url={
-		pageUrl:"/ssm_demo/pub/pageQuery.do",
-		deleteUrl:"/ssm_demo/pub/deletePublish.do",
+		pageUrl:"/pub/pageQuery.do",
+		deleteUrl:"/pub/deletePublish.do",
 }
 
 var list = {

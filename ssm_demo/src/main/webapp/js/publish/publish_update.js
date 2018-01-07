@@ -30,7 +30,7 @@ function preview(file){
 function uploadImage(){
 	
 	$("#fileForm").ajaxSubmit({
-		url:'/ssm_demo/user/upload.do',
+		url:'/user/upload.do',
 		type:'post',
 		async:false,
 		contentType: false,
@@ -40,7 +40,7 @@ function uploadImage(){
 			console.log(JSON.stringify(result))
 			if(result.status=="1"){
 				$("#photo2").show();
-				$("#photo2").attr("src","/ssm_demo/uploads/"+result.url);
+				$("#photo2").attr("src","/uploads/"+result.url);
 				$("#photo").val(result.url);
 			}
 			
@@ -50,8 +50,8 @@ function uploadImage(){
 $(function(){
 	
 	var publish={
-			updateUrl:"/ssm_demo/pub/updatePublish.do",
-			queryUrl:"/ssm_demo/pub/query.do",
+			updateUrl:"/pub/updatePublish.do",
+			queryUrl:"/pub/query.do",
 	}
 	
 	var id=GetIdUrl();
@@ -84,7 +84,7 @@ $(function(){
 				});
               
                if(pub.photo!=""){
-               $("#photo2")[0].src="/ssm_demo/uploads/"+pub.photo;  //照片
+               $("#photo2")[0].src="/uploads/"+pub.photo;  //照片
                $("#photo2").show();
                $("#photo").val(pub.photo)
                }

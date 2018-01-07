@@ -30,66 +30,29 @@ import freemarker.template.Template;
 
 @Controller  
 @RequestMapping("/hejianwen")
-public class freemakerDemo {
+public class freemakerManager {
 
 	@Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
 	 
-	@RequestMapping(value="/queryAll.do",method=RequestMethod.GET)  
-	@ResponseBody
-	public Map<String,Object> queryExitAccount( String account,HttpServletRequest request){
-		
-		Map<String,Object> map=new HashMap<String, Object>();
-		
-		String path=request.getServletContext().getRealPath("/");  //获取根路径；
-		
-		String b=request.getServletContext().getRealPath("/");
-		
-		System.out.println(path);
-		
-		System.out.println(request.getRequestURI());
-		
-		System.out.println(request.getContextPath());
-		System.out.println(request.getServletPath());
-		
-		
-		return map;
-	}
-	
-	
-	@RequestMapping(value="/test.do",method=RequestMethod.GET)  
-	@ResponseBody
-	public Map<String,Object> test( String account,HttpServletRequest request){
-		
-		Map<String,Object> map=new HashMap<String, Object>();
-		
-		
-		System.out.println(System.getProperty("ssm.root"));
-		System.out.println(System.getProperties());
-		
-		Configuration config = freeMarkerConfigurer.getConfiguration();
-		System.out.println(config);
-		
-		
-		return map;
-	}
-	
 	@PostConstruct
 	public void initDemo(){
-		System.out.println("你好22222");
+		System.out.println("开始进行操作-----------");
 		 try {
 		        
 		        Map<String, Object> ma=new HashMap<String, Object>();
 		        
-		        ma.put("name", "雷军");
 				String rootPath=path();
 				 String catalogPath=rootPath + "/static/html/"; //原始路径
 		         File file=new File(catalogPath);
 		         if(!file.exists() && !file.isDirectory()){
 		             file.mkdir();
 		         }
+		         
+		         delFolder(catalogPath);  //清空文件
+		         
 		         String filePath = catalogPath + uuid() + ".html"; //新的文件路径
-		         String templateName="index.ftl"; //模板名称
+		         String templateName="user_manager.ftl"; //模板名称
 		         
 				 processTemplate(templateName, ma, filePath);
 				} catch (Exception e) {
@@ -127,5 +90,44 @@ public class freemakerDemo {
 		        IOUtils.closeQuietly(out);
 		}
 		
+		//清空html文件夹下的文件
+		public  void delFolder(String folderPath) {
+		     try {
+		        delAllFile(folderPath); //删除完里面所有内容
+		     } catch (Exception e) {
+		       e.printStackTrace(); 
+		     }
+		}
+		
+		//删除指定文件夹下所有文件
+		//param path 文件夹完整绝对路径
+		   public  boolean delAllFile(String path) {
+		       boolean flag = false;
+		       File file = new File(path);
+		       if (!file.exists()) {
+		         return flag;
+		       }
+		       if (!file.isDirectory()) {
+		         return flag;
+		       }
+		       String[] tempList = file.list();
+		       File temp = null;
+		       for (int i = 0; i < tempList.length; i++) {
+		          if (path.endsWith(File.separator)) {
+		             temp = new File(path + tempList[i]);
+		          } else {
+		              temp = new File(path + File.separator + tempList[i]);
+		          }
+		          if (temp.isFile()) {
+		             temp.delete();
+		          }
+		          if (temp.isDirectory()) {
+		             delAllFile(path + "/" + tempList[i]);//先删除文件夹里面的文件
+		             delFolder(path + "/" + tempList[i]);//再删除空文件夹
+		             flag = true;
+		          }
+		       }
+		       return flag;
+		     }
 		
 }

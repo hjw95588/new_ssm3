@@ -12,10 +12,10 @@ public class DelFileDemo {
 	public static void delFolder(String folderPath) {
 	     try {
 	        delAllFile(folderPath); //删除完里面所有内容
-	        String filePath = folderPath;
-	        filePath = filePath.toString();
-	        java.io.File myFilePath = new java.io.File(filePath);
-	        myFilePath.delete(); //删除空文件夹
+	        //String filePath = folderPath;
+	        //filePath = filePath.toString();
+	        //java.io.File myFilePath = new java.io.File(filePath);
+	        //myFilePath.delete(); //删除空文件夹
 	     } catch (Exception e) {
 	       e.printStackTrace(); 
 	     }

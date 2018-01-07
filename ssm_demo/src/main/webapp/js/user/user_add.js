@@ -27,7 +27,7 @@ function preview(file){
 function uploadImage(){
 	
 	$("#fileForm").ajaxSubmit({
-		url:'/ssm_demo/user/upload.do',
+		url:'/user/upload.do',
 		type:'post',
 		async:false,
 		contentType: false,
@@ -36,7 +36,7 @@ function uploadImage(){
 			result = data;
 			console.log(JSON.stringify(result))
 			if(result.status=="1"){
-				$("#show").attr("src","/ssm_demo/uploads/"+result.url);
+				$("#show").attr("src","/uploads/"+result.url);
 				$("#photo").val(result.url);
 			}
 			
@@ -47,7 +47,7 @@ function uploadImage(){
 $(function(){
 	
 	var user={
-			addUrl:"/ssm_demo/user/add.do"
+			addUrl:"/user/add.do"
 			
 	}
 	

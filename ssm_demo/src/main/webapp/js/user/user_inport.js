@@ -50,7 +50,7 @@ function importHisArchiveFile() {
 	    } 
 	   
 	    //开始上传
-	    ajaxModal("/ssm_demo/user/batchUpload.do", "aa")
+	    ajaxModal("/user/batchUpload.do", "aa")
 		
 		
 	}
@@ -132,7 +132,7 @@ function importHisArchiveFile() {
 		$("progress").removeAttr("max").removeAttr("value").hide();
 		$("#progress").empty();
 		$("#up").click(function(){
-			window.location.href="/ssm_demo/user/downloadErrorInfo.do?uuid="+data.data+"&type="+data.status;
+			window.location.href="/user/downloadErrorInfo.do?uuid="+data.data+"&type="+data.status;
 		})
 		
 	}
