@@ -319,3 +319,17 @@
 2018-01-07 15:41:34,873 DEBUG [com.yihe.dao.IUserDao.getListNum] - ==> Parameters: 
 2018-01-07 15:41:34,874 DEBUG [com.yihe.dao.IUserDao.getListNum] - <==      Total: 1
 2018-01-07 15:41:34,875 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47288f69]
+2018-01-07 15:45:47,828 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-07 15:45:47,830 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3c99578b] was not registered for synchronization because synchronization is not active
+2018-01-07 15:45:47,833 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-07 15:45:47,833 DEBUG [com.yihe.dao.IUserDao.getList] - ==>  Preparing: select id,account,username,password,salt,sex,mobile,birth,photo,user_type,orgid,create_time,update_time,flag from user WHERE flag=0 order by update_time desc limit ?,? 
+2018-01-07 15:45:47,835 DEBUG [com.yihe.dao.IUserDao.getList] - ==> Parameters: 0(Integer), 5(Integer)
+2018-01-07 15:45:47,841 DEBUG [com.yihe.dao.IUserDao.getList] - <==      Total: 2
+2018-01-07 15:45:47,842 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3c99578b]
+2018-01-07 15:45:47,842 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-07 15:45:47,842 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6aae1b9f] was not registered for synchronization because synchronization is not active
+2018-01-07 15:45:47,845 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-07 15:45:47,846 DEBUG [com.yihe.dao.IUserDao.getListNum] - ==>  Preparing: select count(*) from user WHERE flag=0 
+2018-01-07 15:45:47,847 DEBUG [com.yihe.dao.IUserDao.getListNum] - ==> Parameters: 
+2018-01-07 15:45:47,849 DEBUG [com.yihe.dao.IUserDao.getListNum] - <==      Total: 1
+2018-01-07 15:45:47,849 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6aae1b9f]
