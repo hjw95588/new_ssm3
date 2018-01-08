@@ -153,6 +153,9 @@ public class PublishController {
 		
 		if(pa!=null){
 			
+			/*备注:pageSize 这里是每页的记录数   pageNum是当前页码
+			 * 其实这里我们理解错了，pageSize应该是当前页码，pageNum应该是每页记录数
+			 * */
 	        Integer pageSize = pa.getPageSize();  //每页的页数
 	        Integer pageNum = (pa.getPageNum()-1)*pageSize;
 	        

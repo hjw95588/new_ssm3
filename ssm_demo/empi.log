@@ -2306,3 +2306,971 @@ The name was interpreted by this TemplateLoader: MultiTemplateLoader(loader1 = F
 2018-01-08 17:21:34,003 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
 2018-01-08 17:21:34,004 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
 2018-01-08 17:21:34,005 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3944097b]
+2018-01-08 17:36:56,190 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:36:56,190 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@288199aa] was not registered for synchronization because synchronization is not active
+2018-01-08 17:36:56,193 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:36:56,193 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:36:56,194 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:36:56,196 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 0
+2018-01-08 17:36:56,196 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@288199aa]
+2018-01-08 17:36:56,197 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:36:56,197 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b8a9d1a] was not registered for synchronization because synchronization is not active
+2018-01-08 17:36:56,198 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:36:56,198 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:36:56,198 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:36:56,199 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:36:56,200 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b8a9d1a]
+2018-01-08 17:37:44,061 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:37:44,061 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1190513a] was not registered for synchronization because synchronization is not active
+2018-01-08 17:37:44,076 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:37:44,076 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:37:44,080 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 9d5f92238e8945f79e0c6acd94e64085(String), 用社交软件过度被判15年监禁(String), java.io.StringReader@38c7d8d(StringReader), 2018-01-08 17:37:44.06(Timestamp), 2018-01-08 17:37:44.061(Timestamp), title_1(String), 点击排行(String), c1e9b3f171834ae88e2880d124fded78.JPEG(String)
+2018-01-08 17:37:44,203 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:37:44,204 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1190513a]
+2018-01-08 17:38:06,081 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:38:06,082 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6681103b] was not registered for synchronization because synchronization is not active
+2018-01-08 17:38:06,088 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:38:06,088 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:38:06,089 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:38:06,092 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 1
+2018-01-08 17:38:06,092 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6681103b]
+2018-01-08 17:38:06,093 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:38:06,093 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ef2ae97] was not registered for synchronization because synchronization is not active
+2018-01-08 17:38:06,096 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:38:06,096 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:38:06,097 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:38:06,099 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:38:06,100 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ef2ae97]
+2018-01-08 17:38:12,014 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:38:12,014 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42119426] was not registered for synchronization because synchronization is not active
+2018-01-08 17:38:12,037 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:38:12,038 DEBUG [com.yihe.dao.IPublishDao.query] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE id=? 
+2018-01-08 17:38:12,038 DEBUG [com.yihe.dao.IPublishDao.query] - ==> Parameters: 9d5f92238e8945f79e0c6acd94e64085(String)
+2018-01-08 17:38:12,040 DEBUG [com.yihe.dao.IPublishDao.query] - <==      Total: 1
+2018-01-08 17:38:12,040 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42119426]
+2018-01-08 17:38:19,756 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:38:19,756 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37120d6c] was not registered for synchronization because synchronization is not active
+2018-01-08 17:38:19,757 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:38:19,757 DEBUG [com.yihe.dao.IPublishDao.query] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE id=? 
+2018-01-08 17:38:19,758 DEBUG [com.yihe.dao.IPublishDao.query] - ==> Parameters: 9d5f92238e8945f79e0c6acd94e64085(String)
+2018-01-08 17:38:19,759 DEBUG [com.yihe.dao.IPublishDao.query] - <==      Total: 1
+2018-01-08 17:38:19,759 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37120d6c]
+2018-01-08 17:38:27,657 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:38:27,657 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d80fd42] was not registered for synchronization because synchronization is not active
+2018-01-08 17:38:27,659 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:38:27,659 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:38:27,660 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:38:27,664 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 1
+2018-01-08 17:38:27,665 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d80fd42]
+2018-01-08 17:38:27,665 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:38:27,665 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ee1fab1] was not registered for synchronization because synchronization is not active
+2018-01-08 17:38:27,668 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:38:27,668 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:38:27,669 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:38:27,671 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:38:27,671 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ee1fab1]
+2018-01-08 17:39:41,504 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:39:41,505 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2eb0dd35] was not registered for synchronization because synchronization is not active
+2018-01-08 17:39:41,508 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:39:41,508 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:39:41,514 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 8e6e23fe7c3346e8aa339ecd4daff7d9(String), 互联网娶妻指南(String), java.io.StringReader@26299149(StringReader), 2018-01-08 17:39:41.504(Timestamp), 2018-01-08 17:39:41.504(Timestamp), title_1(String), 点击排行(String), c8ecab19bcd74853a568baae34e6cb89.JPG(String)
+2018-01-08 17:39:41,626 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:39:41,626 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2eb0dd35]
+2018-01-08 17:40:46,476 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:40:46,477 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c927776] was not registered for synchronization because synchronization is not active
+2018-01-08 17:40:46,479 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:40:46,479 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:40:46,483 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 43c9ca8026ad4a44b3185b3afabbef0f(String), 刚获国家最高科技奖的王泽山、侯云德有多牛？(String), java.io.StringReader@419ac93(StringReader), 2018-01-08 17:40:46.476(Timestamp), 2018-01-08 17:40:46.476(Timestamp), title_1(String), 点击排行(String), 253a0b9e8a4d4ad9850a0d63ee7c9a30.JPEG(String)
+2018-01-08 17:40:46,575 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:40:46,576 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c927776]
+2018-01-08 17:41:36,994 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:41:36,994 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27b5aa6d] was not registered for synchronization because synchronization is not active
+2018-01-08 17:41:36,996 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:41:36,997 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:41:36,999 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 8581b8f064c44adc97bf8d17c3433df2(String), 一家美国公司重启了马航 MH370 搜索任务，报酬是 7000 万美元(String), java.io.StringReader@53e5da0f(StringReader), 2018-01-08 17:41:36.993(Timestamp), 2018-01-08 17:41:36.994(Timestamp), title_1(String), 点击排行(String), 9d673c2143c64621810a3ab88e89315b.JPEG(String)
+2018-01-08 17:41:37,076 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:41:37,076 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27b5aa6d]
+2018-01-08 17:42:11,302 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:42:11,302 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@68a90b5] was not registered for synchronization because synchronization is not active
+2018-01-08 17:42:11,304 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:42:11,304 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:42:11,305 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:42:11,309 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 4
+2018-01-08 17:42:11,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@68a90b5]
+2018-01-08 17:42:11,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:42:11,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d4c9b16] was not registered for synchronization because synchronization is not active
+2018-01-08 17:42:11,310 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:42:11,311 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:42:11,311 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:42:11,312 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:42:11,312 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d4c9b16]
+2018-01-08 17:42:55,935 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:42:55,936 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@80bb70d] was not registered for synchronization because synchronization is not active
+2018-01-08 17:42:55,943 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:42:55,943 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:42:55,948 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 4fd871eb85d8406ca9ceb10c73d2d74c(String), 央妈坐庄：微信、支付宝、银联良性竞争分市场(String), java.io.StringReader@abc4dc(StringReader), 2018-01-08 17:42:55.935(Timestamp), 2018-01-08 17:42:55.935(Timestamp), title_1(String), 点击排行(String), 9e17b3566c79414193537f60327f772a.JPEG(String)
+2018-01-08 17:42:56,060 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:42:56,061 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@80bb70d]
+2018-01-08 17:46:57,706 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:46:57,708 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6db0211] was not registered for synchronization because synchronization is not active
+2018-01-08 17:46:57,726 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:46:57,726 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:46:57,728 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 5bc1eaa029e940459ec6042ee1a49670(String), CES2018三星即将推出新款智能冰箱，不仅是冰箱还是智能家居平台(String), java.io.StringReader@52d4fda5(StringReader), 2018-01-08 17:46:57.706(Timestamp), 2018-01-08 17:46:57.706(Timestamp), title_1(String), 点击排行(String), 0e60e7570b0c42db8f3ae67e388bbd7c.JPEG(String)
+2018-01-08 17:46:57,868 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:46:57,868 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6db0211]
+2018-01-08 17:47:01,343 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:01,343 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@523ea311] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:01,344 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:01,344 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:01,345 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:01,353 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:01,353 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@523ea311]
+2018-01-08 17:47:01,353 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:01,353 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31270910] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:01,355 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:01,355 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:01,356 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:47:01,359 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:01,360 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31270910]
+2018-01-08 17:47:09,388 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:09,390 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@33cd7211] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:09,391 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:09,391 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:09,392 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:09,476 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:09,476 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@33cd7211]
+2018-01-08 17:47:09,476 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:09,477 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@679218e6] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:09,479 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:09,479 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:09,479 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:47:09,481 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:09,482 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@679218e6]
+2018-01-08 17:47:15,487 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:15,487 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3628c8d9] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:15,488 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:15,488 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:15,489 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:15,494 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:15,494 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3628c8d9]
+2018-01-08 17:47:15,494 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:15,494 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d03b091] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:15,496 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:15,496 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:15,497 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:47:15,498 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:15,498 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d03b091]
+2018-01-08 17:47:21,274 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:21,274 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4517200e] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:21,275 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:21,275 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:21,276 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:21,280 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:21,280 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4517200e]
+2018-01-08 17:47:21,280 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:21,281 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6abc7a0] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:21,282 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:21,282 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:21,282 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:47:21,284 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:21,284 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6abc7a0]
+2018-01-08 17:47:23,870 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:23,870 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29ad3078] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:23,872 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:23,872 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:23,873 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 5(Integer), 5(Integer)
+2018-01-08 17:47:23,878 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 1
+2018-01-08 17:47:23,878 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29ad3078]
+2018-01-08 17:47:23,878 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:23,878 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63b14126] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:23,880 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:23,881 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:23,881 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:47:23,884 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:23,884 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63b14126]
+2018-01-08 17:47:25,524 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:25,524 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31082d73] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:25,525 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:25,526 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:25,528 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:25,534 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:25,534 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31082d73]
+2018-01-08 17:47:25,534 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:25,534 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34b5542c] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:25,536 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:25,536 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:25,536 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:47:25,537 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:25,538 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34b5542c]
+2018-01-08 17:47:29,593 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:29,594 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@688cf6fb] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:29,596 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:29,596 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:29,596 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:29,601 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:29,602 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@688cf6fb]
+2018-01-08 17:47:29,602 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:29,602 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36c54fd9] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:29,603 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:29,603 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:29,603 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:47:29,604 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:29,604 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36c54fd9]
+2018-01-08 17:47:34,256 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:34,256 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d5d8ce6] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:34,259 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:34,260 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - ==>  Preparing: update publish set flag = 1 where id in ( ? , ? ) 
+2018-01-08 17:47:34,261 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - ==> Parameters: d094f73e6663491284588d2330c345e7(String), 52d12b46d72d4583b5bde910c28af5df(String)
+2018-01-08 17:47:34,295 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - <==    Updates: 2
+2018-01-08 17:47:34,296 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d5d8ce6]
+2018-01-08 17:47:34,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:34,310 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4f0dec08] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:34,312 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:34,312 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:34,312 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:34,317 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:34,317 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4f0dec08]
+2018-01-08 17:47:34,317 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:34,317 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca7f5f4] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:34,318 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:34,320 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:34,320 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:47:34,321 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:34,321 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca7f5f4]
+2018-01-08 17:47:37,406 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:37,407 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c268b00] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:37,408 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:37,408 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:37,410 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 5(Integer), 5(Integer)
+2018-01-08 17:47:37,481 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 3
+2018-01-08 17:47:37,481 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c268b00]
+2018-01-08 17:47:37,482 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:37,482 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4bbc6b38] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:37,484 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:37,485 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:37,485 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:47:37,487 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:37,487 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4bbc6b38]
+2018-01-08 17:47:38,665 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:38,665 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b40f9e4] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:38,668 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:38,668 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:38,669 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:38,676 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:38,677 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b40f9e4]
+2018-01-08 17:47:38,677 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:38,677 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38ad5813] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:38,679 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:38,679 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:38,680 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:47:38,681 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:38,682 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38ad5813]
+2018-01-08 17:47:44,020 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:44,020 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@593b34ee] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:44,025 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:44,025 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:44,026 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:44,039 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:44,039 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@593b34ee]
+2018-01-08 17:47:44,040 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:44,040 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@71fe9bba] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:44,043 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:44,044 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:44,044 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:47:44,046 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:44,046 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@71fe9bba]
+2018-01-08 17:47:47,885 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:47,885 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20de49ad] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:47,887 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:47,887 DEBUG [com.yihe.dao.IPublishDao.query] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE id=? 
+2018-01-08 17:47:47,887 DEBUG [com.yihe.dao.IPublishDao.query] - ==> Parameters: ca5b1e103f31478f88534db427d7db07(String)
+2018-01-08 17:47:47,889 DEBUG [com.yihe.dao.IPublishDao.query] - <==      Total: 1
+2018-01-08 17:47:47,890 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20de49ad]
+2018-01-08 17:47:55,906 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:55,907 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@11b51557] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:55,908 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:55,908 DEBUG [com.yihe.dao.IPublishDao.query] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE id=? 
+2018-01-08 17:47:55,908 DEBUG [com.yihe.dao.IPublishDao.query] - ==> Parameters: ca5b1e103f31478f88534db427d7db07(String)
+2018-01-08 17:47:55,910 DEBUG [com.yihe.dao.IPublishDao.query] - <==      Total: 1
+2018-01-08 17:47:55,910 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@11b51557]
+2018-01-08 17:47:59,604 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:59,604 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b7582c4] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:59,607 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:59,607 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:47:59,608 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 17:47:59,613 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:47:59,614 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b7582c4]
+2018-01-08 17:47:59,614 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:47:59,614 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1870152a] was not registered for synchronization because synchronization is not active
+2018-01-08 17:47:59,615 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:47:59,616 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:47:59,616 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:47:59,618 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:47:59,618 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1870152a]
+2018-01-08 17:48:03,308 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:03,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79bdaca3] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:03,311 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:03,311 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:03,312 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 5(Integer), 5(Integer)
+2018-01-08 17:48:03,321 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:48:03,321 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79bdaca3]
+2018-01-08 17:48:03,322 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:03,322 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@21ab969f] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:03,324 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:03,324 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:03,325 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:48:03,327 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:03,327 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@21ab969f]
+2018-01-08 17:48:06,223 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:06,224 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14708368] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:06,225 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:06,226 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:06,227 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 17:48:06,234 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:48:06,235 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14708368]
+2018-01-08 17:48:06,235 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:06,235 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d2f0d4d] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:06,237 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:06,237 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:06,238 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:48:06,239 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:06,240 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d2f0d4d]
+2018-01-08 17:48:12,829 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:12,829 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9e864a] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:12,831 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:12,831 DEBUG [com.yihe.dao.IPublishDao.query] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE id=? 
+2018-01-08 17:48:12,831 DEBUG [com.yihe.dao.IPublishDao.query] - ==> Parameters: ca5b1e103f31478f88534db427d7db07(String)
+2018-01-08 17:48:12,833 DEBUG [com.yihe.dao.IPublishDao.query] - <==      Total: 1
+2018-01-08 17:48:12,833 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9e864a]
+2018-01-08 17:48:24,826 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:24,826 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@798782d6] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:24,828 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:24,829 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:24,830 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 17:48:24,839 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:48:24,840 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@798782d6]
+2018-01-08 17:48:24,840 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:24,840 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27599cd4] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:24,841 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:24,841 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:24,841 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:48:24,842 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:24,842 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27599cd4]
+2018-01-08 17:48:28,692 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:28,692 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@72a8e3a7] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:28,694 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:28,695 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:28,695 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 5(Integer), 5(Integer)
+2018-01-08 17:48:28,701 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:48:28,703 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@72a8e3a7]
+2018-01-08 17:48:28,704 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:28,704 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14a28c09] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:28,706 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:28,706 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:28,706 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:48:28,708 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:28,708 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14a28c09]
+2018-01-08 17:48:29,473 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:29,473 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ca94e95] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:29,477 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:29,477 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:29,478 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 17:48:29,489 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:48:29,489 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ca94e95]
+2018-01-08 17:48:29,490 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:29,490 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@376c2cd4] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:29,497 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:29,497 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:29,497 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:48:29,501 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:29,501 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@376c2cd4]
+2018-01-08 17:48:33,070 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:33,070 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d42442a] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:33,074 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:33,074 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:33,075 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 25(Integer)
+2018-01-08 17:48:33,120 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 12
+2018-01-08 17:48:33,120 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d42442a]
+2018-01-08 17:48:33,120 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:33,120 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55669c51] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:33,126 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:33,126 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:33,126 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:48:33,132 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:33,132 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55669c51]
+2018-01-08 17:48:36,662 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:36,662 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6e959900] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:36,664 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:36,664 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - ==>  Preparing: update publish set flag = 1 where id in ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ) 
+2018-01-08 17:48:36,664 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - ==> Parameters: ca5b1e103f31478f88534db427d7db07(String), 8f75bbd1bec54078bd06d4559e03171e(String), c65555649e804143b7095aac1686a9a9(String), 3d2562043aa94201a9e5bcc3d1288903(String), bd80bb266d0d49039a0b6d32c9e361d5(String), d4920d0a68884b47b43330e1e8f2d650(String), d872a1d5dc564f3ca9adc105f6c53d28(String), 1a6d2606175c4a028ee23d669f734366(String), 6b18af3287bf47458dca660e9e04d323(String), 7e39292d625c4d20a7c25b83744730bc(String), eb5e34789ed54331bffd8330be8485d9(String), 2cd19c6a3c234f9288063f62de701332(String)
+2018-01-08 17:48:36,800 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - <==    Updates: 12
+2018-01-08 17:48:36,800 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6e959900]
+2018-01-08 17:48:36,825 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:36,826 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@407a0f99] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:36,829 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:36,829 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:36,830 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 25(Integer)
+2018-01-08 17:48:36,832 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 0
+2018-01-08 17:48:36,832 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@407a0f99]
+2018-01-08 17:48:36,832 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:36,832 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10d6709f] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:36,834 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:36,834 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:36,835 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 17:48:36,836 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:36,836 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10d6709f]
+2018-01-08 17:48:41,009 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:41,011 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c2b1191] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:41,014 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:41,014 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:41,015 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 25(Integer)
+2018-01-08 17:48:41,022 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 8
+2018-01-08 17:48:41,022 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c2b1191]
+2018-01-08 17:48:41,022 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:41,022 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b652c64] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:41,025 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:41,026 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:41,026 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:48:41,027 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:41,028 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b652c64]
+2018-01-08 17:48:44,337 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:44,338 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f29baa5] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:44,340 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:44,340 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:44,341 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 10(Integer)
+2018-01-08 17:48:44,350 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 8
+2018-01-08 17:48:44,350 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f29baa5]
+2018-01-08 17:48:44,350 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:44,350 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@229f180b] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:44,362 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:44,362 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:44,362 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:48:44,366 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:44,366 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@229f180b]
+2018-01-08 17:48:47,247 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:47,250 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ecdbda6] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:47,259 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:47,259 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:47,260 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 25(Integer)
+2018-01-08 17:48:47,268 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 8
+2018-01-08 17:48:47,268 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ecdbda6]
+2018-01-08 17:48:47,268 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:47,269 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42664b86] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:47,271 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:47,271 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:47,271 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:48:47,274 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:47,274 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42664b86]
+2018-01-08 17:48:49,833 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:49,833 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77be25e] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:49,835 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:49,836 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - ==>  Preparing: update publish set flag = 1 where id in ( ? , ? , ? , ? , ? , ? , ? , ? ) 
+2018-01-08 17:48:49,836 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - ==> Parameters: 08eddc9155b9480ea2af2dc9fafbb01c(String), b380743f78e94e8bbb02785a2a7062a2(String), 7e3349b9617d409f9829701107d3cdf0(String), 055bcc179e5c463ba05842c758ce9ea7(String), 968e37677256467c9def2623b9b906b8(String), a049e8794c7f409f8d5a6ffaa129bfe9(String), 0afe9cf5ca06488fbab35e1e104ac853(String), 8b6da0f730a74a5cbddf18fa329226d4(String)
+2018-01-08 17:48:49,914 DEBUG [com.yihe.dao.IPublishDao.deletePublish] - <==    Updates: 8
+2018-01-08 17:48:49,915 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77be25e]
+2018-01-08 17:48:49,930 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:49,931 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e48c566] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:49,932 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:49,932 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:49,932 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 25(Integer)
+2018-01-08 17:48:49,934 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 0
+2018-01-08 17:48:49,935 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@e48c566]
+2018-01-08 17:48:49,935 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:49,935 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67cfdb3a] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:49,940 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:49,940 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:49,940 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:48:49,942 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:49,942 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67cfdb3a]
+2018-01-08 17:48:55,206 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:55,206 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4f2a2929] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:55,207 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:55,208 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:48:55,208 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 25(Integer)
+2018-01-08 17:48:55,214 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 6
+2018-01-08 17:48:55,214 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4f2a2929]
+2018-01-08 17:48:55,215 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:48:55,215 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a05c420] was not registered for synchronization because synchronization is not active
+2018-01-08 17:48:55,216 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:48:55,216 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:48:55,217 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:48:55,218 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:48:55,218 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a05c420]
+2018-01-08 17:49:01,241 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:49:01,241 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@686ee05b] was not registered for synchronization because synchronization is not active
+2018-01-08 17:49:01,244 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:49:01,244 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:49:01,244 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 25(Integer)
+2018-01-08 17:49:01,246 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 0
+2018-01-08 17:49:01,246 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@686ee05b]
+2018-01-08 17:49:01,246 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:49:01,246 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c61ed3d] was not registered for synchronization because synchronization is not active
+2018-01-08 17:49:01,247 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:49:01,248 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:49:01,248 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:49:01,249 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:49:01,249 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c61ed3d]
+2018-01-08 17:50:22,916 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:50:22,916 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9800a2a] was not registered for synchronization because synchronization is not active
+2018-01-08 17:50:22,922 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:50:22,923 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:50:22,925 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 6b9f554d8d07456ab7d99722db2717f4(String), 中共中央国务院隆重举行国家科学技术奖励大会(String), java.io.StringReader@48477739(StringReader), 2018-01-08 17:50:22.915(Timestamp), 2018-01-08 17:50:22.916(Timestamp), title_2(String), 最新文章(String), 3d00ecead7b24f9d93b38d5b214cc7b2.png(String)
+2018-01-08 17:50:23,017 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:50:23,017 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9800a2a]
+2018-01-08 17:52:33,016 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:52:33,017 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6999a9ac] was not registered for synchronization because synchronization is not active
+2018-01-08 17:52:33,020 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:52:33,020 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:52:33,024 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 0c8c77eccbcc4d2bb2fb712a60565556(String), 法国总统马克龙的中国之行始于古城西安。  8日，马克龙正式开启他上任后的首次访华之旅，这也是他去年当选总统后首次出访亚洲。根据法国总统府爱丽舍宫网站公布的消息，在一天的密集行程中，马克龙总统夫妇计划参观秦始皇兵马俑，随后会前往大明宫国家遗址公园参观，并面向1000位中法企业家、科研人员、学者和大学生代表发表演讲，之后前往北京。  根据爱丽舍宫发布的消息，西安是马克龙此行的第一站。自1983年法国时任总统密特朗到访西安以来，三十多年里的5任总统中，马克龙也是第4位来到西安的法国总统。  三任法国总统的“兵马俑缘”  据西安《华商报》8日报道，法国总统马克龙8日上午抵达西安后，将于下午13时45分在大明宫丹凤门举行总统演讲。  另据《欧洲时报》报道，在出访的前一天，马克龙突然改变了在西安的行程。爱丽舍宫7日消息称，根据最新日程安排，马克龙总统将大大缩短原定在秦始皇兵马俑博物馆的参观访问，大幅延长在西安大雁塔的参观时间。  报道称，爱丽舍宫消息称，马克龙在访华前夕，与法国汉学家探讨后作出了这个更改决定。马克龙此次访华首次出现在媒体面前的地点，也由秦始皇兵马俑博物馆改为大雁塔。  法国媒体猜测称，之前曾来到西安参观访问的三位法国总统密特朗、希拉克和萨科齐到达西安后都选择了秦始皇兵马俑作为主要参观地。马克龙总统的不同选择，很可能也是他要表明自己与此前数位法国总统有所不同。  1983年5月7日，密特朗成为继前总统蓬皮杜（1973年访华，系首位正式访华的法国和西方国家元首）之后，第二位访华的法国总统，也正是他开启了法国总统与西安的缘分，他当时参观了秦始皇兵马俑。  在此之前，1978年，时任巴黎市长的希拉克就来到古都西安参观兵马俑。他当时还震撼地说：“世界上有七大奇迹，秦俑坑的发现堪称第八大奇迹。”正是这一番话被国际媒体广泛报道后，兵马俑进一步蜚声海内外，同时也多了顶“世界第八大奇迹”的桂冠。  1991年，希拉克第二次到访西安，并再次参观兵马俑。四年之后，希拉克于1995年就任法国总统，钟情中国文化的他，在任内实现第三次访问西安。2006年10月28日，希拉克“带着深厚的情感重访中华文明圣地西安”。这次访问，也给当时在场的中国外交官留下了深刻印象。(String), java.io.StringReader@3a9d7437(StringReader), 2018-01-08 17:52:33.016(Timestamp), 2018-01-08 17:52:33.016(Timestamp), title_2(String), 最新文章(String), d51167f2bb7f4854b85586b50c9851ad.jpeg(String)
+2018-01-08 17:52:33,032 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6999a9ac]
+2018-01-08 17:52:50,797 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:52:50,797 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5cebc705] was not registered for synchronization because synchronization is not active
+2018-01-08 17:52:50,799 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:52:50,800 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:52:50,802 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 377fd8bb25634a05bfddc9d28c8ba305(String), 法国总统马克龙的(String), java.io.StringReader@6619464b(StringReader), 2018-01-08 17:52:50.797(Timestamp), 2018-01-08 17:52:50.797(Timestamp), title_2(String), 最新文章(String), d51167f2bb7f4854b85586b50c9851ad.jpeg(String)
+2018-01-08 17:52:50,874 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:52:50,874 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5cebc705]
+2018-01-08 17:52:57,732 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:52:57,733 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@76fe7e7e] was not registered for synchronization because synchronization is not active
+2018-01-08 17:52:57,734 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:52:57,734 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:52:57,734 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 25(Integer)
+2018-01-08 17:52:57,737 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 2
+2018-01-08 17:52:57,737 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@76fe7e7e]
+2018-01-08 17:52:57,737 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:52:57,738 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d9c1ca4] was not registered for synchronization because synchronization is not active
+2018-01-08 17:52:57,738 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:52:57,739 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:52:57,739 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:52:57,740 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:52:57,740 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d9c1ca4]
+2018-01-08 17:55:39,544 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:55:39,544 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@118a196c] was not registered for synchronization because synchronization is not active
+2018-01-08 17:55:39,546 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:55:39,546 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:55:39,548 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 8b1ab0bfa1864dd881173e21b6791e11(String), 中东部雨雪交加迎寒潮 南方多地遭冬季少见暴雨(String), java.io.StringReader@73cc9483(StringReader), 2018-01-08 17:55:39.543(Timestamp), 2018-01-08 17:55:39.544(Timestamp), title_2(String), 最新文章(String), 2a3820c1bb614af5b4fa09ccbfdd87c6.jpg(String)
+2018-01-08 17:55:39,597 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:55:39,597 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@118a196c]
+2018-01-08 17:56:43,138 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:56:43,138 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d8ace34] was not registered for synchronization because synchronization is not active
+2018-01-08 17:56:43,145 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:56:43,145 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 17:56:43,148 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: dbefcb52fc0e48999b8dc724185508a4(String), 关乎民族命运的考试！习近平这样叮嘱“考生(String), java.io.StringReader@415179a7(StringReader), 2018-01-08 17:56:43.137(Timestamp), 2018-01-08 17:56:43.138(Timestamp), title_2(String), 最新文章(String), 34df6b485a4e473898889ce7334380a2.jpg(String)
+2018-01-08 17:56:43,215 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 17:56:43,216 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d8ace34]
+2018-01-08 17:56:49,081 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:56:49,081 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5fa2d9a5] was not registered for synchronization because synchronization is not active
+2018-01-08 17:56:49,082 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:56:49,083 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:56:49,083 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 17:56:49,086 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 17:56:49,086 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5fa2d9a5]
+2018-01-08 17:56:49,086 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:56:49,086 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f953420] was not registered for synchronization because synchronization is not active
+2018-01-08 17:56:49,087 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:56:49,087 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:56:49,087 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 17:56:49,088 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:56:49,088 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f953420]
+2018-01-08 17:56:53,669 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:56:53,670 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b65ad7b] was not registered for synchronization because synchronization is not active
+2018-01-08 17:56:53,671 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:56:53,671 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 17:56:53,671 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 5(Integer)
+2018-01-08 17:56:53,675 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 4
+2018-01-08 17:56:53,675 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b65ad7b]
+2018-01-08 17:56:53,676 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 17:56:53,676 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1aa8839f] was not registered for synchronization because synchronization is not active
+2018-01-08 17:56:53,677 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 17:56:53,678 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 17:56:53,678 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 17:56:53,679 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 17:56:53,679 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1aa8839f]
+2018-01-08 18:03:31,301 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:03:31,301 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b87c416] was not registered for synchronization because synchronization is not active
+2018-01-08 18:03:31,303 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:03:31,303 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:03:31,305 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 39b84d97523e4a25bb6c8fdb272ee602(String), 国民党内民调胜出 饶庆铃可望出征台东县长(String), java.io.StringReader@3c0670e3(StringReader), 2018-01-08 18:03:31.301(Timestamp), 2018-01-08 18:03:31.301(Timestamp), title_2(String), 最新文章(String), 585d22e085564983b8fc3fd4d94855d5.jpg(String)
+2018-01-08 18:03:31,428 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:03:31,429 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b87c416]
+2018-01-08 18:04:12,027 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:04:12,028 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58b8851a] was not registered for synchronization because synchronization is not active
+2018-01-08 18:04:12,029 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:04:12,029 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:04:12,029 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:04:12,032 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:04:12,033 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58b8851a]
+2018-01-08 18:04:12,033 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:04:12,033 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36ae74b0] was not registered for synchronization because synchronization is not active
+2018-01-08 18:04:12,034 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:04:12,034 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:04:12,035 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:04:12,036 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:04:12,036 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36ae74b0]
+2018-01-08 18:04:14,607 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:04:14,608 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@679688e8] was not registered for synchronization because synchronization is not active
+2018-01-08 18:04:14,611 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:04:14,611 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:04:14,612 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 5(Integer)
+2018-01-08 18:04:14,616 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:04:14,616 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@679688e8]
+2018-01-08 18:04:14,616 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:04:14,616 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@797fcf26] was not registered for synchronization because synchronization is not active
+2018-01-08 18:04:14,619 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:04:14,619 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:04:14,619 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 18:04:14,621 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:04:14,621 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@797fcf26]
+2018-01-08 18:06:29,654 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:06:29,655 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ff73173] was not registered for synchronization because synchronization is not active
+2018-01-08 18:06:29,657 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:06:29,657 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:06:29,660 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: d5181965bb654e3c86f12caaa46fb259(String), 国企混改、放管服改革 2017年山东这样解难题(String), java.io.StringReader@7ae6b0aa(StringReader), 2018-01-08 18:06:29.654(Timestamp), 2018-01-08 18:06:29.654(Timestamp), title_2(String), 最新文章(String), e3c3091d4b1945728e8284d1f8e9b50f.jpeg(String)
+2018-01-08 18:06:29,691 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:06:29,691 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ff73173]
+2018-01-08 18:08:08,946 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:08:08,947 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@ba1f31f] was not registered for synchronization because synchronization is not active
+2018-01-08 18:08:08,949 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:08:08,949 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:08:08,953 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 0e50c2fb6638489b9a52b5e314a899f0(String), iPhone换电池约号火爆 降速门或致销量减少1600万(String), java.io.StringReader@5a2d56d4(StringReader), 2018-01-08 18:08:08.946(Timestamp), 2018-01-08 18:08:08.946(Timestamp), title_3(String), 站长推荐(String), b83a939f100248a3bdb9818b16f7c77c.jpg(String)
+2018-01-08 18:08:09,038 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:08:09,038 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@ba1f31f]
+2018-01-08 18:09:13,279 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:09:13,279 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b148a6e] was not registered for synchronization because synchronization is not active
+2018-01-08 18:09:13,284 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:09:13,284 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:09:13,287 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 551e8f83e40b44c7bd9db9d9f4c545c9(String), 百度涉嫌监听用户电话被起诉 用户无奈称已“习惯裸奔”(String), java.io.StringReader@524f5e4f(StringReader), 2018-01-08 18:09:13.279(Timestamp), 2018-01-08 18:09:13.279(Timestamp), title_3(String), 站长推荐(String), 706cc3cd2de8426a9a4e7b87c70522d3.png(String)
+2018-01-08 18:09:13,405 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:09:13,406 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b148a6e]
+2018-01-08 18:11:58,965 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:11:58,965 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bbee055] was not registered for synchronization because synchronization is not active
+2018-01-08 18:11:58,972 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:11:58,972 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:11:58,976 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 73cd9a43061148c4a6b9f77c8ab49003(String), 小米7渲染图曝光 搭载双摄&全面屏&骁龙845(String), java.io.StringReader@26b0a1e0(StringReader), 2018-01-08 18:11:58.965(Timestamp), 2018-01-08 18:11:58.965(Timestamp), title_3(String), 站长推荐(String), aaa1114294d045488193dccdaa42b10e.JPEG(String)
+2018-01-08 18:11:59,068 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:11:59,069 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bbee055]
+2018-01-08 18:12:43,408 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:12:43,408 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57b2d534] was not registered for synchronization because synchronization is not active
+2018-01-08 18:12:43,410 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:12:43,410 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:12:43,410 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:12:43,417 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:12:43,417 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57b2d534]
+2018-01-08 18:12:43,417 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:12:43,417 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56f32224] was not registered for synchronization because synchronization is not active
+2018-01-08 18:12:43,418 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:12:43,418 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:12:43,419 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:12:43,420 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:12:43,420 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56f32224]
+2018-01-08 18:12:46,119 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:12:46,120 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d686ef4] was not registered for synchronization because synchronization is not active
+2018-01-08 18:12:46,121 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:12:46,121 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:12:46,122 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 18:12:46,126 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 3
+2018-01-08 18:12:46,126 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d686ef4]
+2018-01-08 18:12:46,126 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:12:46,126 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4511e724] was not registered for synchronization because synchronization is not active
+2018-01-08 18:12:46,128 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:12:46,128 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:12:46,128 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 18:12:46,130 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:12:46,130 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4511e724]
+2018-01-08 18:13:55,514 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:13:55,515 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3596d11] was not registered for synchronization because synchronization is not active
+2018-01-08 18:13:55,516 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:13:55,516 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:13:55,518 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: d3bf6e0170a14622aa97fbfd094534d9(String), 小米靠“市梦率”估出的 2000 亿美元，可能真的是一场梦(String), java.io.StringReader@28b662a3(StringReader), 2018-01-08 18:13:55.514(Timestamp), 2018-01-08 18:13:55.514(Timestamp), title_3(String), 站长推荐(String), 198d6ba7125445c08b3eb4e7b70cb757.JPEG(String)
+2018-01-08 18:13:55,619 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:13:55,619 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3596d11]
+2018-01-08 18:15:27,173 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:15:27,173 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4ef68ddc] was not registered for synchronization because synchronization is not active
+2018-01-08 18:15:27,174 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:15:27,175 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:15:27,176 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: 5f263c80e9584d63ae23f47eb8972b58(String), 碾压苹果！谷歌Play应用安装量640亿次(String), java.io.StringReader@360dcdbb(StringReader), 2018-01-08 18:15:27.173(Timestamp), 2018-01-08 18:15:27.173(Timestamp), title_3(String), 站长推荐(String), 6d54a7465ee943d6aef2040d62b98f48.JPEG(String)
+2018-01-08 18:15:27,255 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:15:27,256 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4ef68ddc]
+2018-01-08 18:17:19,298 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:17:19,298 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4346249] was not registered for synchronization because synchronization is not active
+2018-01-08 18:17:19,300 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:17:19,300 DEBUG [com.yihe.dao.IPublishDao.add] - ==>  Preparing: insert into publish ( id, title, content, create_time, update_time, type_id, type_name, photo ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-01-08 18:17:19,301 DEBUG [com.yihe.dao.IPublishDao.add] - ==> Parameters: ab98cb47d3bb4350890a8ac10210e336(String), 华为今年要卖2亿台手机？余承东这么说(String), java.io.StringReader@39b8a1bf(StringReader), 2018-01-08 18:17:19.298(Timestamp), 2018-01-08 18:17:19.298(Timestamp), title_3(String), 站长推荐(String), ade6fd56c3114ac1afb1c02696d7d7fc.JPEG(String)
+2018-01-08 18:17:19,351 DEBUG [com.yihe.dao.IPublishDao.add] - <==    Updates: 1
+2018-01-08 18:17:19,351 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4346249]
+2018-01-08 18:17:23,346 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:17:23,346 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@41e6c7a0] was not registered for synchronization because synchronization is not active
+2018-01-08 18:17:23,348 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:17:23,348 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:17:23,348 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:17:23,355 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:17:23,356 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@41e6c7a0]
+2018-01-08 18:17:23,356 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:17:23,356 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a6ce27a] was not registered for synchronization because synchronization is not active
+2018-01-08 18:17:23,357 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:17:23,357 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:17:23,358 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:17:23,363 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:17:23,363 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a6ce27a]
+2018-01-08 18:17:27,548 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:17:27,548 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4ed35cb1] was not registered for synchronization because synchronization is not active
+2018-01-08 18:17:27,549 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:17:27,549 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:17:27,550 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 5(Integer)
+2018-01-08 18:17:27,554 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:17:27,554 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4ed35cb1]
+2018-01-08 18:17:27,554 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:17:27,554 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4259bce] was not registered for synchronization because synchronization is not active
+2018-01-08 18:17:27,555 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:17:27,555 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:17:27,556 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_2(String)
+2018-01-08 18:17:27,556 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:17:27,557 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4259bce]
+2018-01-08 18:17:30,940 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:17:30,941 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@144158cd] was not registered for synchronization because synchronization is not active
+2018-01-08 18:17:30,944 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:17:30,944 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:17:30,945 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 5(Integer)
+2018-01-08 18:17:30,954 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:17:30,954 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@144158cd]
+2018-01-08 18:17:30,954 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:17:30,954 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a062282] was not registered for synchronization because synchronization is not active
+2018-01-08 18:17:30,999 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:17:31,000 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:17:31,000 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_3(String)
+2018-01-08 18:17:31,010 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:17:31,011 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a062282]
+2018-01-08 18:19:17,137 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:17,137 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2fbfa47e] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:17,138 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:17,138 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:19:17,139 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:19:17,143 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:19:17,143 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2fbfa47e]
+2018-01-08 18:19:17,143 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:17,143 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4620acc0] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:17,145 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:17,145 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:19:17,145 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:19:17,147 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:19:17,147 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4620acc0]
+2018-01-08 18:19:20,933 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:20,933 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16a52ec9] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:20,934 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:20,934 DEBUG [com.yihe.dao.IPublishDao.query] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE id=? 
+2018-01-08 18:19:20,934 DEBUG [com.yihe.dao.IPublishDao.query] - ==> Parameters: 5bc1eaa029e940459ec6042ee1a49670(String)
+2018-01-08 18:19:20,936 DEBUG [com.yihe.dao.IPublishDao.query] - <==      Total: 1
+2018-01-08 18:19:20,936 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16a52ec9]
+2018-01-08 18:19:32,971 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:32,972 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6456d362] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:32,973 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:32,973 DEBUG [com.yihe.dao.IPublishDao.query] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE id=? 
+2018-01-08 18:19:32,973 DEBUG [com.yihe.dao.IPublishDao.query] - ==> Parameters: 5bc1eaa029e940459ec6042ee1a49670(String)
+2018-01-08 18:19:32,975 DEBUG [com.yihe.dao.IPublishDao.query] - <==      Total: 1
+2018-01-08 18:19:32,975 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6456d362]
+2018-01-08 18:19:35,076 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:35,076 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@192eb61f] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:35,078 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:35,079 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:19:35,080 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:19:35,084 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:19:35,084 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@192eb61f]
+2018-01-08 18:19:35,084 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:35,084 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13b90b2] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:35,085 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:35,085 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:19:35,086 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:19:35,087 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:19:35,087 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13b90b2]
+2018-01-08 18:19:43,931 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:43,932 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b857d05] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:43,933 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:43,933 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:19:43,933 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:19:43,936 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:19:43,936 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b857d05]
+2018-01-08 18:19:43,936 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:43,936 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@169d1012] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:43,937 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:43,937 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:19:43,938 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:19:43,938 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:19:43,939 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@169d1012]
+2018-01-08 18:19:46,081 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:46,081 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@577ee9b1] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:46,083 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:46,084 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:19:46,084 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 5(Integer), 5(Integer)
+2018-01-08 18:19:46,086 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 1
+2018-01-08 18:19:46,086 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@577ee9b1]
+2018-01-08 18:19:46,086 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:46,086 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@549ebc71] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:46,087 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:46,087 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:19:46,088 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:19:46,088 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:19:46,089 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@549ebc71]
+2018-01-08 18:19:47,321 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:47,321 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d4843e3] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:47,323 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:47,324 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:19:47,324 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:19:47,334 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:19:47,334 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d4843e3]
+2018-01-08 18:19:47,335 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:47,335 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7e781fe] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:47,337 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:47,337 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:19:47,337 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:19:47,339 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:19:47,340 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7e781fe]
+2018-01-08 18:19:50,094 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:50,094 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2104510e] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:50,096 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:50,097 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:19:50,097 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 5(Integer), 5(Integer)
+2018-01-08 18:19:50,101 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 1
+2018-01-08 18:19:50,101 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2104510e]
+2018-01-08 18:19:50,101 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:50,101 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67abfed5] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:50,103 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:50,104 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:19:50,104 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:19:50,108 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:19:50,108 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67abfed5]
+2018-01-08 18:19:53,213 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:53,213 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61491fe6] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:53,216 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:53,217 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:19:53,217 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 5(Integer), 5(Integer)
+2018-01-08 18:19:53,222 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 1
+2018-01-08 18:19:53,224 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61491fe6]
+2018-01-08 18:19:53,224 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:19:53,225 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@129f821c] was not registered for synchronization because synchronization is not active
+2018-01-08 18:19:53,227 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:19:53,227 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:19:53,228 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:19:53,229 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:19:53,229 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@129f821c]
+2018-01-08 18:21:03,607 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:21:03,607 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31e6ec63] was not registered for synchronization because synchronization is not active
+2018-01-08 18:21:03,608 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:21:03,608 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:21:03,609 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:21:03,615 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:21:03,616 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31e6ec63]
+2018-01-08 18:21:03,616 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:21:03,616 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@711dab85] was not registered for synchronization because synchronization is not active
+2018-01-08 18:21:03,617 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:21:03,617 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:21:03,617 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:21:03,618 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:21:03,618 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@711dab85]
+2018-01-08 18:22:10,337 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:22:10,337 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44ec44d8] was not registered for synchronization because synchronization is not active
+2018-01-08 18:22:10,338 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:22:10,338 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:22:10,339 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:22:10,342 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:22:10,342 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44ec44d8]
+2018-01-08 18:22:10,342 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:22:10,342 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1dd1b4ed] was not registered for synchronization because synchronization is not active
+2018-01-08 18:22:10,343 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:22:10,343 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:22:10,344 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:22:10,344 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:22:10,345 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1dd1b4ed]
+2018-01-08 18:30:04,107 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:30:04,107 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61dfbf57] was not registered for synchronization because synchronization is not active
+2018-01-08 18:30:04,109 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:30:04,110 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 18:30:04,110 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 18:30:04,113 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 18:30:04,113 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61dfbf57]
+2018-01-08 18:30:04,114 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:30:04,114 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e2053ae] was not registered for synchronization because synchronization is not active
+2018-01-08 18:30:04,115 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:30:04,115 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 18:30:04,115 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 18:30:04,116 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 18:30:04,117 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e2053ae]
+2018-01-08 18:30:07,132 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:30:07,132 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@419e6176] was not registered for synchronization because synchronization is not active
+2018-01-08 18:30:07,134 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:30:07,134 DEBUG [com.yihe.dao.IUserDao.getList] - ==>  Preparing: select id,account,username,password,salt,sex,mobile,birth,photo,user_type,orgid,create_time,update_time,flag from user WHERE flag=0 order by update_time desc limit ?,? 
+2018-01-08 18:30:07,135 DEBUG [com.yihe.dao.IUserDao.getList] - ==> Parameters: 0(Integer), 5(Integer)
+2018-01-08 18:30:07,137 DEBUG [com.yihe.dao.IUserDao.getList] - <==      Total: 2
+2018-01-08 18:30:07,138 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@419e6176]
+2018-01-08 18:30:07,138 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:30:07,138 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@30df953d] was not registered for synchronization because synchronization is not active
+2018-01-08 18:30:07,139 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:30:07,139 DEBUG [com.yihe.dao.IUserDao.getListNum] - ==>  Preparing: select count(*) from user WHERE flag=0 
+2018-01-08 18:30:07,140 DEBUG [com.yihe.dao.IUserDao.getListNum] - ==> Parameters: 
+2018-01-08 18:30:07,140 DEBUG [com.yihe.dao.IUserDao.getListNum] - <==      Total: 1
+2018-01-08 18:30:07,141 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@30df953d]
+2018-01-08 18:30:28,027 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:30:28,027 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d198eb9] was not registered for synchronization because synchronization is not active
+2018-01-08 18:30:28,030 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:30:28,030 DEBUG [com.yihe.dao.IUserDao.getList] - ==>  Preparing: select id,account,username,password,salt,sex,mobile,birth,photo,user_type,orgid,create_time,update_time,flag from user WHERE flag=0 order by update_time desc limit ?,? 
+2018-01-08 18:30:28,030 DEBUG [com.yihe.dao.IUserDao.getList] - ==> Parameters: 0(Integer), 5(Integer)
+2018-01-08 18:30:28,033 DEBUG [com.yihe.dao.IUserDao.getList] - <==      Total: 2
+2018-01-08 18:30:28,034 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d198eb9]
+2018-01-08 18:30:28,034 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 18:30:28,034 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2454fa82] was not registered for synchronization because synchronization is not active
+2018-01-08 18:30:28,036 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 18:30:28,036 DEBUG [com.yihe.dao.IUserDao.getListNum] - ==>  Preparing: select count(*) from user WHERE flag=0 
+2018-01-08 18:30:28,036 DEBUG [com.yihe.dao.IUserDao.getListNum] - ==> Parameters: 
+2018-01-08 18:30:28,037 DEBUG [com.yihe.dao.IUserDao.getListNum] - <==      Total: 1
+2018-01-08 18:30:28,037 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2454fa82]
+2018-01-08 21:41:20,577 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Identified candidate component class: file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\dao\IPublishDao.class]
+2018-01-08 21:41:20,605 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Identified candidate component class: file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\dao\IUserDao.class]
+2018-01-08 21:41:20,606 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Creating MapperFactoryBean with name 'IPublishDao' and 'com.yihe.dao.IPublishDao' mapperInterface
+2018-01-08 21:41:20,607 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Creating MapperFactoryBean with name 'IUserDao' and 'com.yihe.dao.IUserDao' mapperInterface
+2018-01-08 21:41:20,870 DEBUG [org.apache.ibatis.logging.LogFactory] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2018-01-08 21:41:20,971 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Property 'configLocation' not specified, using default MyBatis Configuration
+2018-01-08 21:41:21,339 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Parsed mapper file: 'file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\mapper\PublishMapper.xml]'
+2018-01-08 21:41:21,466 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Parsed mapper file: 'file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\mapper\UserMapper.xml]'
+2018-01-08 21:41:21,742 DEBUG [org.apache.shiro.spring.web.ShiroFilterFactoryBean] - Creating Shiro Filter instance.
+2018-01-08 21:41:24,778 DEBUG [freemarker.cache] - Couldn't find template in cache for "index.ftl"("utf-8", UTF-8, parsed); will try to load it.
+2018-01-08 21:41:24,780 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("index_utf-8.ftl"): Not found
+2018-01-08 21:41:24,782 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("index.ftl"): Not found
+2018-01-08 21:42:12,963 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 21:42:12,973 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b575dbf] was not registered for synchronization because synchronization is not active
+2018-01-08 21:42:13,538 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 21:42:13,547 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 21:42:13,591 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 21:42:13,764 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 21:42:13,776 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b575dbf]
+2018-01-08 21:42:13,777 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 21:42:13,777 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@68b7d9e7] was not registered for synchronization because synchronization is not active
+2018-01-08 21:42:13,779 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 21:42:13,779 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 21:42:13,779 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 21:42:13,780 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 21:42:13,781 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@68b7d9e7]
+2018-01-08 21:44:44,196 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 21:44:44,197 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fbeac7b] was not registered for synchronization because synchronization is not active
+2018-01-08 21:44:44,211 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 21:44:44,212 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-08 21:44:44,213 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 5(Integer)
+2018-01-08 21:44:44,221 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 5
+2018-01-08 21:44:44,222 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fbeac7b]
+2018-01-08 21:44:44,222 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-08 21:44:44,222 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63f67734] was not registered for synchronization because synchronization is not active
+2018-01-08 21:44:44,223 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-08 21:44:44,223 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==>  Preparing: select count(*) from publish a WHERE flag=0 and a.type_id=? 
+2018-01-08 21:44:44,224 DEBUG [com.yihe.dao.IPublishDao.getListNum] - ==> Parameters: title_1(String)
+2018-01-08 21:44:44,225 DEBUG [com.yihe.dao.IPublishDao.getListNum] - <==      Total: 1
+2018-01-08 21:44:44,226 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63f67734]
+2018-01-08 22:11:07,660 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Identified candidate component class: file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\dao\IPublishDao.class]
+2018-01-08 22:11:07,661 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Identified candidate component class: file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\dao\IUserDao.class]
+2018-01-08 22:11:07,662 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Creating MapperFactoryBean with name 'IPublishDao' and 'com.yihe.dao.IPublishDao' mapperInterface
+2018-01-08 22:11:07,664 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Creating MapperFactoryBean with name 'IUserDao' and 'com.yihe.dao.IUserDao' mapperInterface
+2018-01-08 22:11:07,943 DEBUG [org.apache.ibatis.logging.LogFactory] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2018-01-08 22:11:08,071 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Property 'configLocation' not specified, using default MyBatis Configuration
+2018-01-08 22:11:08,414 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Parsed mapper file: 'file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\mapper\PublishMapper.xml]'
+2018-01-08 22:11:08,520 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Parsed mapper file: 'file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\mapper\UserMapper.xml]'
+2018-01-08 22:11:08,844 DEBUG [org.apache.shiro.spring.web.ShiroFilterFactoryBean] - Creating Shiro Filter instance.
+2018-01-08 22:11:10,765 DEBUG [freemarker.cache] - Couldn't find template in cache for "index.ftl"("utf-8", UTF-8, parsed); will try to load it.
+2018-01-08 22:11:10,768 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("index_utf-8.ftl"): Not found
+2018-01-08 22:11:10,770 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("index.ftl"): Not found
