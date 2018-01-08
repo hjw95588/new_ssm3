@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 
 public class FileUtil {
 
-    private static String  name = "whouNoticeService"; //老的项目
-    private static String  destname = "yunnan-whouNoticeService"; //新的项目
+    private static String  name = "SDGStorageManageService"; //老的项目
+    private static String  destname = "yunnan-SDGStorageManageService"; //新的项目
 
     public static void main(String[] args) {
         // 需要复制的目标文件或目标文件夹

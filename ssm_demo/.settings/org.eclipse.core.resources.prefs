@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/resources/jdbc.properties=UTF-8
 encoding//src/main/webapp/banner/swiper.jsp=UTF-8
+encoding//src/main/webapp/front/front.html=UTF-8
+encoding//src/main/webapp/static/ftl/common/common.ftl=UTF-8

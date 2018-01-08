@@ -154,9 +154,9 @@ public class UserController {
 	  */
 	@RequestMapping(value="/testDemo.do",method=RequestMethod.GET)  
 	@ResponseBody
-	public String testDemo(){
+	public String testDemo(HttpServletRequest request){
 		//@PathVariable(value="account")String account
-		
+		 System.out.println("项目路径:"+request.getContextPath());
 		
 		String str="{\"message\":\"123\",\"status\":1}";
 		

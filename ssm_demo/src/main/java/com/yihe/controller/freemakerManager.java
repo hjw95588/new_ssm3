@@ -51,10 +51,14 @@ public class freemakerManager {
 		         
 		         delFolder(catalogPath);  //清空文件
 		         
-		         String filePath = catalogPath + uuid() + ".html"; //新的文件路径
-		         String templateName="user_manager.ftl"; //模板名称
-		         
+		         String filePath = catalogPath + "index" + ".html"; //新的文件路径
+		         String templateName="index.ftl"; //模板名称
 				 processTemplate(templateName, ma, filePath);
+				 
+				  filePath = catalogPath + "user_manager" + ".html"; //新的文件路径
+		          templateName="user_manager.ftl"; //模板名称
+				 processTemplate(templateName, ma, filePath);
+				 
 				} catch (Exception e) {
 					
 					e.printStackTrace();
