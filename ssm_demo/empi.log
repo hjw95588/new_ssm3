@@ -2338,3 +2338,40 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve resource locati
 2018-01-09 18:08:04,429 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("front_utf-8.ftl"): Not found
 2018-01-09 18:08:04,440 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("front.ftl"): Found
 2018-01-09 18:08:04,441 DEBUG [freemarker.cache] - Loading template for "front.ftl"("utf-8", UTF-8, parsed) from "E:\\eclipse_work_space\\new_ssm3\\ssm_demo\\src\\main\\webapp\\static\\ftl\\front.ftl"
+2018-01-09 18:10:22,733 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Identified candidate component class: file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\dao\IMarkDao.class]
+2018-01-09 18:10:22,734 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Identified candidate component class: file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\dao\IPublishDao.class]
+2018-01-09 18:10:22,735 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Identified candidate component class: file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\dao\IUserDao.class]
+2018-01-09 18:10:22,736 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Creating MapperFactoryBean with name 'IMarkDao' and 'com.yihe.dao.IMarkDao' mapperInterface
+2018-01-09 18:10:22,737 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Creating MapperFactoryBean with name 'IPublishDao' and 'com.yihe.dao.IPublishDao' mapperInterface
+2018-01-09 18:10:22,738 DEBUG [org.mybatis.spring.mapper.ClassPathMapperScanner] - Creating MapperFactoryBean with name 'IUserDao' and 'com.yihe.dao.IUserDao' mapperInterface
+2018-01-09 18:10:23,046 DEBUG [org.apache.ibatis.logging.LogFactory] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2018-01-09 18:10:23,149 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Property 'configLocation' not specified, using default MyBatis Configuration
+2018-01-09 18:10:23,434 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Parsed mapper file: 'file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\mapper\MarkMapper.xml]'
+2018-01-09 18:10:23,472 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Parsed mapper file: 'file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\mapper\PublishMapper.xml]'
+2018-01-09 18:10:23,530 DEBUG [org.mybatis.spring.SqlSessionFactoryBean] - Parsed mapper file: 'file [E:\eclipse_work_space\new_ssm3\ssm_demo\target\classes\com\yihe\mapper\UserMapper.xml]'
+2018-01-09 18:10:23,832 DEBUG [org.apache.shiro.spring.web.ShiroFilterFactoryBean] - Creating Shiro Filter instance.
+2018-01-09 18:10:29,870 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-09 18:10:29,888 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@529e1192] was not registered for synchronization because synchronization is not active
+2018-01-09 18:10:30,532 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-09 18:10:30,543 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-09 18:10:30,616 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_1(String), 0(Integer), 6(Integer)
+2018-01-09 18:10:30,661 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 6
+2018-01-09 18:10:30,666 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@529e1192]
+2018-01-09 18:10:30,667 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-09 18:10:30,667 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b4d78a4] was not registered for synchronization because synchronization is not active
+2018-01-09 18:10:30,669 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-09 18:10:30,669 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-09 18:10:30,670 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_2(String), 0(Integer), 6(Integer)
+2018-01-09 18:10:30,680 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 6
+2018-01-09 18:10:30,681 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b4d78a4]
+2018-01-09 18:10:30,681 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-01-09 18:10:30,681 DEBUG [org.mybatis.spring.SqlSessionUtils] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@685d9816] was not registered for synchronization because synchronization is not active
+2018-01-09 18:10:30,683 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [jdbc:mysql://127.0.0.1:3306/fine, UserName=root@localhost, MySQL Connector Java] will not be managed by Spring
+2018-01-09 18:10:30,683 DEBUG [com.yihe.dao.IPublishDao.getList] - ==>  Preparing: select a.id,a.title,a.content,a.create_time,a.update_time, a.create_id,a.create_name,a.update_id,a.update_name,a.flag, a.type_id,a.type_name,a.photo,a.read from publish a WHERE flag=0 and a.type_id=? order by a.update_time desc limit ?,? 
+2018-01-09 18:10:30,684 DEBUG [com.yihe.dao.IPublishDao.getList] - ==> Parameters: title_3(String), 0(Integer), 6(Integer)
+2018-01-09 18:10:30,702 DEBUG [com.yihe.dao.IPublishDao.getList] - <==      Total: 6
+2018-01-09 18:10:30,703 DEBUG [org.mybatis.spring.SqlSessionUtils] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@685d9816]
+2018-01-09 18:10:30,707 DEBUG [freemarker.cache] - Couldn't find template in cache for "front.ftl"("utf-8", UTF-8, parsed); will try to load it.
+2018-01-09 18:10:30,709 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("front_utf-8.ftl"): Not found
+2018-01-09 18:10:30,711 DEBUG [freemarker.cache] - TemplateLoader.findTemplateSource("front.ftl"): Found
+2018-01-09 18:10:30,712 DEBUG [freemarker.cache] - Loading template for "front.ftl"("utf-8", UTF-8, parsed) from "E:\\eclipse_work_space\\new_ssm3\\ssm_demo\\src\\main\\webapp\\static\\ftl\\front.ftl"
