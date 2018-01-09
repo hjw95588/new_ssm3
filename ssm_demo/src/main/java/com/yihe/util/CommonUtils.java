@@ -6,6 +6,6 @@ package com.yihe.util;
  *
  */
 public class CommonUtils {
-	public final String falseStatus="0";
-	public final String trueStatus="1";
+	public static final String falseStatus="0";
+	public static final String trueStatus="1";
 }

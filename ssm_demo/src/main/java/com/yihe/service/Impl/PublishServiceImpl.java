@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yihe.bean.PagePublish;
 import com.yihe.bean.PageUser;
 import com.yihe.bean.Publish;
 import com.yihe.bean.User;
+import com.yihe.dao.IMarkDao;
 import com.yihe.dao.IPublishDao;
 import com.yihe.dao.IUserDao;
 import com.yihe.service.IPublishService;
@@ -20,6 +22,9 @@ public class PublishServiceImpl implements IPublishService {
 
 	@Resource
 	public IPublishDao publishDao;
+	
+	@Resource
+	public IMarkDao markDao;
 
 	public int add(Publish pub) {
 
@@ -45,7 +50,10 @@ public class PublishServiceImpl implements IPublishService {
 
 	public Publish query(String id) {
 		
-		return publishDao.query(id);
+		
+		Publish p= publishDao.query(id);
+		
+		return p;
 	}
 
 	

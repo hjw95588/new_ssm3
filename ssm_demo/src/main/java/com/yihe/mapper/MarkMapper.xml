@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yihe.dao.IMarkDao">
+  <resultMap id="BaseResultMap" type="com.yihe.bean.Mark">
+   <result column="id" property="id" jdbcType="VARCHAR" />  
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, name, url, sort, create_time, update_time
+  </sql>
+  
+  <insert id="insertSelective" parameterType="com.yihe.bean.Mark">
+    insert into mark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+    delete from mark
+     where id in
+        <foreach item="id" collection="list" open="(" close=")" separator=",">
+             #{id}
+         </foreach>
+  </delete>
+ 
+ 
+  
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.yihe.bean.Mark">
+    update mark
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mark
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 查询记录集合 -->
+    <select id="getList" resultMap="BaseResultMap">
+
+      select 
+        <include refid="Base_Column_List" /> 
+       from mark a
+      <where> 
+      <if test="name != null and name !=''" >
+       and instr(a.name, #{name,jdbcType=VARCHAR}) != 0
+      </if>
+      <if test="url != null and url !=''" >
+       and instr(a.url,#{url,jdbcType=VARCHAR}) != 0
+      </if>
+      
+      </where>
+      order by a.sort desc
+      limit #{pageNum,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+    
+     <!-- 查询记录-->
+    <select id="getListNum" resultType="Integer">
+      select count(*) from label a
+     <where> 
+      <if test="name != null and name !=''" >
+       and instr(a.name, #{name,jdbcType=VARCHAR}) != 0
+      </if>
+      <if test="url != null and url !=''" >
+       and instr(a.url,#{url,jdbcType=VARCHAR}) != 0
+      </if>
+      
+      </where>
+    </select>
+</mapper>

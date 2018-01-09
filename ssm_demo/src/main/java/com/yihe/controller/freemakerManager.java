@@ -6,6 +6,7 @@ import java.io.FilenameFilter;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,6 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import com.yihe.bean.PagePublish;
+import com.yihe.bean.Publish;
+import com.yihe.service.IPublishService;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -34,30 +39,55 @@ public class freemakerManager {
 
 	@Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
-	 
+	
+	@Resource  
+	 private IPublishService publishService;  
+	
 	@PostConstruct
 	public void initDemo(){
-		System.out.println("开始进行操作-----------");
+		System.out.println("开始进行操作11111111111-----------");
+		List<Publish> listTitle1=null;
+		List<Publish> listTitle2=null;
+		List<Publish> listTitle3=null;
+		Map<String, Object> ma=new HashMap<String, Object>();
+		PagePublish pa=new PagePublish();
 		 try {
+		     
+			 Integer pageSize=6;
+				Integer pageNum=1;
+				Integer pageSizeNew = pageSize;  
+		        Integer pageNumNew = (pageNum-1)*pageSize;
+		        pa.setPageNum(pageNumNew);
+		        pa.setPageSize(pageSizeNew);
+		        pa.setTypeId("title_1");
+		        listTitle1=publishService.getList(pa); //点击排行
 		        
-		        Map<String, Object> ma=new HashMap<String, Object>();
+		        pa.setTypeId("title_2");
+		        listTitle2=publishService.getList(pa); //最新文章
+		        
+		        pa.setTypeId("title_3");
+		        listTitle3=publishService.getList(pa); //站长推荐
+			 
+			 
+		        ma.put("list1", listTitle1);
+		        ma.put("list2", listTitle2);
+		        ma.put("list3", listTitle3);
 		        
 				String rootPath=path();
 				 String catalogPath=rootPath + "/static/html/"; //原始路径
 		         File file=new File(catalogPath);
 		         if(!file.exists() && !file.isDirectory()){
 		             file.mkdir();
-		         }
-		         
+		         }     
 		         delFolder(catalogPath);  //清空文件
+		         String filePath = catalogPath + "front" + ".html"; //新的文件路径
+		         String templateName="front.ftl"; //模板名称
 		         
-		         String filePath = catalogPath + "index" + ".html"; //新的文件路径
-		         String templateName="index.ftl"; //模板名称
+		         
+		         
+		         
 				 processTemplate(templateName, ma, filePath);
 				 
-				  filePath = catalogPath + "user_manager" + ".html"; //新的文件路径
-		          templateName="user_manager.ftl"; //模板名称
-				 processTemplate(templateName, ma, filePath);
 				 
 				} catch (Exception e) {
 					

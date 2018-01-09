@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -26,16 +27,19 @@ import org.apache.commons.lang3.StringUtils;
 
 
 
+
+
 import com.yihe.bean.PagePublish;
 import com.yihe.bean.PageUser;
 import com.yihe.bean.Publish;
 import com.yihe.bean.User;
 import com.yihe.service.IPublishService;
+import com.yihe.util.CommonUtils;
 import com.yihe.util.PageBean;
 import com.yihe.util.UUid;
 
 @Controller  
-@RequestMapping("/front2")
+@RequestMapping("/front")
 public class FrontController {
 
 	 @Resource  
@@ -43,29 +47,38 @@ public class FrontController {
 	
 	
 	@RequestMapping(value = "/pageQuery.do",method=RequestMethod.GET)
-	@ResponseBody
-	public JSONObject pageQuery(Integer pageSize,Integer pageNum,String typeId){
+	public ModelAndView pageQuery(ModelAndView mv){
 		PagePublish pa=new PagePublish();
-		List<Publish> list=null;
-		JSONObject j=new JSONObject();
+		List<Publish> listTitle1=null;
+		List<Publish> listTitle2=null;
+		List<Publish> listTitle3=null;
 		try {
+			Integer pageSize=6;
+			Integer pageNum=1;
 			Integer pageSizeNew = pageSize;  
 	        Integer pageNumNew = (pageNum-1)*pageSize;
 	        pa.setPageNum(pageNumNew);
 	        pa.setPageSize(pageSizeNew);
-	        pa.setTypeId(typeId);
+	        pa.setTypeId("title_1");
+	        listTitle1=publishService.getList(pa); //点击排行
 	        
-	        list=publishService.getList(pa); //集合
-	        j.put("status", 1)
+	        pa.setTypeId("title_2");
+	        listTitle2=publishService.getList(pa); //最新文章
+	        
+	        pa.setTypeId("title_3");
+	        listTitle3=publishService.getList(pa); //站长推荐
+	        mv.addObject("status", CommonUtils.trueStatus);
+	        mv.addObject("list1", listTitle1);
+	        mv.addObject("list2", listTitle2);
+	        mv.addObject("list3", listTitle3);
 			
 		} catch (Exception e) {
-			j.put("status", "0");
-			j.put("data", e.getMessage());
-			e.printStackTrace();
+			mv.addObject("status", CommonUtils.falseStatus);
+			mv.addObject("data", e.getMessage());
 		}
 		
-		
-		return j;
+		mv.setViewName("/front/front.jsp");
+		return mv;
 		
 		
 		
