@@ -22,10 +22,7 @@ public class Mark {
      */
     private String url;
 
-    /**
-     * 序号
-     */
-    private Integer sort;
+    
 
     /**
      * 创建时间
@@ -39,12 +36,7 @@ public class Mark {
 
     
 
-	@Override
-	public String toString() {
-		return "Label [id=" + id + ", name=" + name + ", url=" + url
-				+ ", sort=" + sort + ", createTime=" + createTime
-				+ ", updateTime=" + updateTime + "]";
-	}
+	
 
 	public String getId() {
 		return id;
@@ -70,12 +62,13 @@ public class Mark {
 		this.url = url;
 	}
 
-	public Integer getSort() {
-		return sort;
-	}
+	
 
-	public void setSort(Integer sort) {
-		this.sort = sort;
+	@Override
+	public String toString() {
+		return "Mark [id=" + id + ", name=" + name + ", url=" + url
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ "]";
 	}
 
 	public Date getCreateTime() {

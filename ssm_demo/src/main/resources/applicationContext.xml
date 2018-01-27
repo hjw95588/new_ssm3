@@ -21,7 +21,6 @@
     
     <context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-    
         <!-- <context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation"
@@ -40,4 +39,17 @@
     <import resource="spring-tx.xml"/>  
      
       <import resource="spring-freemarker.xml"/>
+      
+      <!-- 定时任务的factorybean,配置其他config -->  
+   <!--  <bean id="customJobFactory" class="com.yihe.util.JobFactory"></bean>  
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+        <property name="jobFactory" ref="customJobFactory"></property>  
+    </bean> -->
+      
+      <!-- <bean id="job" class="com.yihe.controller.QuartzJob"></bean>
+      <bean id="initJobDetail"  
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject" ref="job" />  
+        <property name="targetMethod" value="execute" />  
+    </bean>   -->
 </beans>  

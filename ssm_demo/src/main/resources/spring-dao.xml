@@ -17,6 +17,12 @@
          可指定多个包，包与包之间用逗号或分号分隔-->  
         <property name="basePackage" value="com.yihe.dao" />  
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
-    </bean>                         
-                          
+    </bean>
+
+	<bean id="jobFactory" class="com.yihe.controller.MyJobFactory"></bean>
+	<bean id="MyScheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobFactory" ref="jobFactory"></property>
+	</bean>
+                  
 </beans> 

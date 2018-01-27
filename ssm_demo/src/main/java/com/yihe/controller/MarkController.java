@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 
@@ -27,6 +28,8 @@ import org.apache.commons.lang3.StringUtils;
 
 
 
+import org.apache.commons.logging.Log;
+
 import com.yihe.bean.Mark;
 import com.yihe.bean.PageMark;
 import com.yihe.bean.PagePublish;
@@ -35,6 +38,7 @@ import com.yihe.bean.Publish;
 import com.yihe.bean.User;
 import com.yihe.service.IMarkService;
 import com.yihe.service.IPublishService;
+import com.yihe.util.CommonUtils;
 import com.yihe.util.PageBean;
 import com.yihe.util.UUid;
 
@@ -42,11 +46,13 @@ import com.yihe.util.UUid;
 @RequestMapping("/mark")
 public class MarkController {
 
+	
+	
 	 @Resource  
 	 private IMarkService markService;  
 	
 	 /**
-	  * 增加消息数据
+	  * 增加数据
 	  * @param data
 	  * @return
 	  */
@@ -56,23 +62,32 @@ public class MarkController {
 		
 		Map<String,Object> map=new HashMap<String, Object>();
 		
-		if(StringUtils.isEmpty(data)){
-			map.put("status", "0");
-			map.put("msg","信息为空");
+		try {
+			if(StringUtils.isEmpty(data)){
+				map.put("status", CommonUtils.falseStatus);
+				map.put("msg","信息为空");
+				
+			}
+			else{
+				Mark pub=JSON.parseObject(data, Mark.class);
+				pub.setCreateTime(new Date());
+				String id=UUid.getUuid();
+				pub.setId(id);
+				pub.setUpdateTime(new Date());
+				
+				int n=markService.insertSelective(pub);
+				System.out.println(n);
+				
+				map.put("status", CommonUtils.trueStatus);
+				map.put("msg","信息添加成功");
+				map.put("id", id);
+			}
 			
+		} catch (Exception e) {
+			map.put("status", CommonUtils.falseStatus);
+			map.put("msg", e.getMessage());
 		}
-		else{
-			Mark pub=JSON.parseObject(data, Mark.class);
-			pub.setCreateTime(new Date());
-			pub.setId(UUid.getUuid());
-			pub.setUpdateTime(new Date());
-			
-			int n=markService.insertSelective(pub);
-			System.out.println(n);
-			
-			map.put("status", "1");
-			map.put("msg","信息添加成功");
-		}
+		
 		
 		return map;
 	}
@@ -91,23 +106,30 @@ public class MarkController {
 	public Map<String,Object> updatePublish(@RequestBody String data){
 		
 		Map<String,Object> map=new HashMap<String, Object>();
-		
-		if(StringUtils.isEmpty(data)){
-			map.put("status", "0");
-			map.put("msg","信息为空");
+		try {
+			if(StringUtils.isEmpty(data)){
+				map.put("status", CommonUtils.falseStatus);
+				map.put("msg","信息为空");
+				
+			}
+			else{
+				Mark pub=JSON.parseObject(data, Mark.class);
+			
+				pub.setUpdateTime(new Date());
+				
+				int n=markService.updateByPrimaryKeySelective(pub);
+				System.out.println(n);
+				
+				map.put("status",CommonUtils.trueStatus);
+				map.put("msg","信息修改成功");
+				map.put("id",pub.getId());
+			}
+		} catch (Exception e) {
+			map.put("status",CommonUtils.falseStatus);
+			map.put("msg",e.getMessage());
 			
 		}
-		else{
-			Mark pub=JSON.parseObject(data, Mark.class);
 		
-			pub.setUpdateTime(new Date());
-			
-			int n=markService.updateByPrimaryKeySelective(pub);
-			System.out.println(n);
-			
-			map.put("status", "1");
-			map.put("msg","信息修改成功");
-		}
 		
 		return map;
 	}
@@ -189,7 +211,7 @@ public class MarkController {
 	}
 	
 	/**
-	 * 逻辑删除
+	 * 删除
 	 * @param request
 	 * @param response
 	 * @param ids
@@ -223,12 +245,26 @@ public class MarkController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/webName")
-	@ResponseBody
-	public String webName(HttpServletRequest request, HttpServletResponse response){
-       String webName=request.getContextPath();
+	/**
+	 * 初始化添加页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/initAdd.do")
+	public ModelAndView initAdd(String id,ModelAndView mv){
+	mv.setViewName("/mark/mark_add.jsp");
+	Mark mark=null;
+	try{
+		if(StringUtils.isNotEmpty(id)){
+			mark=markService.selectByPrimaryKey(id);
+	      }
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+	}
+      mv.addObject("mark", mark);
        
-		return webName+"/uploads";
+		return mv;
 	}
 	
 	

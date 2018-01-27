@@ -31,5 +31,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/icepdf-core.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/icepdf-extra.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/icepdf-pro.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/icepdf-pro-intl.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/icepdf-viewer.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

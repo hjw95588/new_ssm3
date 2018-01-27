@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-123123你好
+<script type="text/javascript">
+window.onload=function(){
+	window.location="/static/html/front.html"
+}
+</script>
 </body>
 </html>
