@@ -6,6 +6,8 @@ $(function() {
 
 function myshow() {
 
+	$("#error").hide();
+	
 	var account = $.trim($("#account").val());  //用户名
 	var password = $.trim($("#password").val()); //密码
 	var res = verifyCode.validate($("#text2").val()); //验证码

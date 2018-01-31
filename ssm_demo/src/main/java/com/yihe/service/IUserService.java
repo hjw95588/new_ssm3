@@ -23,7 +23,7 @@ public List<User> getAll(PageUser pa);//查询集合(用于导出数据)
 	
 	public int deleteUser(List<String> ids); // 逻辑删除
 	
-	public User searchAccount(User user); 
+	public User searchAccount(String account); 
 	
 	public User login(User user); //验证登录
 	

@@ -53,6 +53,7 @@ function buildMenu(arr,num,padLeft,initColor){
                 $(this).children("a").addClass("active").css({"background":"#E3F7FC"});
             });
             $(_a).attr("target","smIframe");
+            $(_a).attr("onclick","checkSession();");
         }
         $(_ul).append($(_li));
     }

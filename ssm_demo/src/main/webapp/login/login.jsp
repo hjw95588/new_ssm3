@@ -291,8 +291,8 @@ input[type=submit] {
 
 #account {
 	color: #FFFFFF !important;
-	-webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.2) inset
-		!important;
+	/* -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.2) inset
+		!important; */
 }
 
 #password {

@@ -12,6 +12,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.yihe.util.PasswordMD5;
 
 /**
  * java  demo练习
@@ -28,32 +29,8 @@ import com.alibaba.fastjson.JSON;
  */
 public class MainDemo {
 
-	public static void  main(String args[]){
-		
-		set();
-		
-		String s=null;
-		if(StringUtils.isEmpty(s)){
-			show(s);
-		}
-		
-		
-		
-	}
-	
-	public static void show(Object b){
-		System.out.println(b);
-		
-	}
-	
-	public static void set(){
-		
-		Set<String> s=new HashSet<String>();
-		
-		for(int x=0;x<10;x++){
-			s.add(x+"rr");
-		}
-		
+	public static void main(String[] args) {
+		System.out.println(PasswordMD5.md5ForPassword("111111", "f3df25ea3bbe4e92b9327a885fc5db13"));
 	}
 	
 }

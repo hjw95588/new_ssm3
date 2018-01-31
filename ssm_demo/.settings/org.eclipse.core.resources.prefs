@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/resources/jdbc.properties=UTF-8
 encoding//src/main/webapp/banner/swiper.jsp=UTF-8
+encoding//src/main/webapp/index/index.jsp=UTF-8
+encoding//src/main/webapp/publish/publish_manager.jsp=UTF-8
 encoding//src/main/webapp/static/ftl/common/common.ftl=UTF-8
+encoding//src/main/webapp/user/user_manager.jsp=UTF-8

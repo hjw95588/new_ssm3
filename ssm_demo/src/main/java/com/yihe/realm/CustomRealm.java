@@ -7,8 +7,12 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yihe.bean.User;
+import com.yihe.service.IUserService;
+import com.yihe.service.Impl.UserServiceImpl;
 
 public class CustomRealm extends AuthorizingRealm{
 	// 设置realm的名称
@@ -17,26 +21,40 @@ public class CustomRealm extends AuthorizingRealm{
 			super.setName("customRealm");
 		}
 
-		// 用于认证
+		@Autowired
+		private IUserService userService;
+		
+		//用于认证
 		@Override
 		protected AuthenticationInfo doGetAuthenticationInfo(
 				AuthenticationToken token) throws AuthenticationException {
-			 //token是用户输入的
-			// 第一步从token中取出身份信息
-			String userCode = (String) token.getPrincipal();
-
 			
+			// token是用户输入的用户名和密码 
+			// 第一步从token中取出用户名
+			String account=token.getPrincipal().toString();
 			
-			// 模拟从数据库查询到密码
-			String password = "111111";
-
-			// 如果查询到返回认证信息AuthenticationInfo
-
-			SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
-					userCode, password, this.getName());
-
-			return simpleAuthenticationInfo;
+			//第二步拿着用户名查询是否存在当前用户
+			User user=null;
+			try{
+				user=userService.searchAccount(account);
+			}catch(Exception e){
+				System.out.println(e.getMessage()+"错误信息");
+			}
+			
+			if(user==null){
+				return null;
+			}
+			
+			//得到盐值,密码
+			String salt=user.getSalt();
+			String password=user.getPassword();
+			
+			SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(user, password,
+					ByteSource.Util.bytes(salt), this.getName());
+			
+			return info;
 		}
+		
 
 		// 用于授权
 		@Override
@@ -49,6 +67,10 @@ public class CustomRealm extends AuthorizingRealm{
 			System.out.println(111);
 			return null;
 		}
+
+
+
+		
 
 		
 

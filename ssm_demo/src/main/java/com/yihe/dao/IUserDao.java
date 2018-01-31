@@ -28,7 +28,8 @@ public interface IUserDao {
 	
 	public int deleteUser(List<String> ids);
 	
-	public User searchAccount(User user); 
+	//记住 如果mapper存在 account != null and account !='' 判断，那么传递参数需采用以下用法
+	public User searchAccount(@Param("account") String account); 
 	
 	public User login(User user); //验证登录
 	

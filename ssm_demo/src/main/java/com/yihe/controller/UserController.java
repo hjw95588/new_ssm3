@@ -486,7 +486,7 @@ public class UserController {
 		return s;
 	}
 	
-	@RequestMapping(value="/text.do",method=RequestMethod.POST)
+	/*@RequestMapping(value="/text.do",method=RequestMethod.POST)
 	 @ResponseBody
 	public Map<String,Object> text(HttpServletRequest request,@RequestBody User user){
 		 Map<String, Object> map=new HashMap<String, Object>();
@@ -527,7 +527,7 @@ public class UserController {
 		 map.put("message", "请求错误");
 		 
 		 return map;
-	 }
+	 }*/
 	
 	@RequestMapping(value = "/ss")
 	public String ss(HttpServletRequest request, HttpServletResponse response,String account,String password){

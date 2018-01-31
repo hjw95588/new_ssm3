@@ -49,9 +49,9 @@ public class UserServiceImpl implements IUserService {
 		return userDao.getAll(pa);
 	}
 
-	public User searchAccount(User user) {
+	public User searchAccount(String account) {
 		// TODO Auto-generated method stub
-		return userDao.searchAccount(user);
+		return userDao.searchAccount(account);
 	}
 
 	public User login(User user) {

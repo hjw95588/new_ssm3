@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en-us">
 <head>
     <meta charset="utf-8">
@@ -15,6 +17,7 @@
     <link rel="stylesheet" href="../css/appmenu.css"><!--应用菜单样式-->
     <link rel="stylesheet" href="../css/business.css"><!--应用菜单样式-->
     <script type="text/javascript" src="../js/jquery-2.0.2.min.js"></script><!--jquery版本-->
+    <script type="text/javascript" src="../js/iam-util.js"></script><!--判断是否超时-->
     <script type="text/javascript" src="../js/sideBar.js"></script><!--左侧APP快捷入口-->
     <script src="../js/left-menu.js"></script><!--应用菜单-->
     <script src="../js/resize.js"></script><!--页面自适应-->
@@ -25,7 +28,7 @@
 		body{overflow:hidden}
 	</style>
 </head>
-<body>
+<body onload="loadTopWindow();">
 <!--heaer begin-->
 <header class="header dropdown">
     <img src="../images/public/logo.png">
@@ -39,21 +42,21 @@
             <li>
                 <a href="#" class="icon-list"><i class="fa fa-th"></i></a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#" class="icon-ask"><i class="fa fa-question-circle"></i></a>
             </li>
             <li>
                 <a href="#" class="icon-set"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
-            </li>
+            </li> -->
         </ul>
         <!--必须引用<a></a> 和data-toggle="dropdown"属性和class="dropdown-menu"才能调用-->
         <a class="qh-user cursor" id="dropdownMenu1" data-toggle="dropdown">
-            <i class="fa fa-user"></i> <span> 超级管理员 </span>
+            <i class="fa fa-user"></i> <span> ${user.username } </span>
             <i class="fa fa-chevron-down"></i>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li class="dropdown-li" role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"><i class="fa fa-user mr5"></i>个人中心</a></li>
-            <li class="dropdown-li" role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"><i class="fa fa-sign-out mr5"></i>退出</a></li>
+
+            <li class="dropdown-li" role="presentation"><a role="menuitem" tabindex="-1" href="/logout.action"><i class="fa fa-sign-out mr5"></i>退出</a></li>
         </ul>
     </div>
 </header>
@@ -90,7 +93,7 @@
         <div class="main">
             <div class="crumbs">
                 <p>
-                    <i class="fa fa-home ml10"></i> 精确业务  > <span class="active ml5 noBorBot">安全值班巡查</span>
+                    <i class="fa fa-home ml10"></i> 精确业务  > <span class="active ml5 noBorBot">样式按钮</span>
                 </p>
             </div>
             
@@ -113,10 +116,10 @@
         {name:"精确业务 ",src:"",pageId:"",children:[
                                                  
             {name:"样式按钮",src:"../radio/radio.html",pageId:""},
-            {name:"消息发布",src:"../publish/publish_manager.html",pageId:""}
+            {name:"消息发布",src:"/publish/publish_manager.jsp",pageId:""}
         ]},
         {name:"用户基本信息 ",src:"",pageId:"",children:[
-        {name:"用户管理",src:"../user/user_manager.html",pageId:""}
+        {name:"用户管理",src:"/user/user_manager.jsp",pageId:""}
         
         ]},
         {name:"标签基本信息 ",src:"",pageId:"",children:[
