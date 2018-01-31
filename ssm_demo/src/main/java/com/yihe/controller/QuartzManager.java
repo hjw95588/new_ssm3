@@ -38,7 +38,7 @@ public class QuartzManager {
 	
 	
 	//@RequestMapping("/index.do")
-	@PostConstruct
+	//@PostConstruct
 	public void QuartzInit(){
 	
 		// 创建scheduler

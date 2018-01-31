@@ -74,7 +74,7 @@ public class freemakerManager {
 		ma.put("list3", listMap(listTitle3, "title_3"));
 	}
 	
-	/*@PostConstruct*/
+	@PostConstruct
 	public void initDemo() {
 		System.out.println("开始进行操作11111111111-----------");
 		Map<String, Object> ma = new HashMap<String, Object>();

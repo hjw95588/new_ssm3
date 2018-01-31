@@ -28,24 +28,20 @@ public class LoginController {
 	 @RequestMapping("/login.do")
 		public String login(HttpServletRequest request)
 	 {
-		 
-			
 			String error=(String) request.getAttribute("shiroLoginFailure");
-			
 			if(error!=null){
 				if(UnknownAccountException.class.getName().equals(error)){
-					
-					System.out.println("账号不存在");
+					request.setAttribute("error", "账号不存在");
 				}
 				else if(IncorrectCredentialsException.class.getName().equals(error)){
-					System.out.println("账号或者密码错误");
+					request.setAttribute("error", "账号或者密码错误");
 				}else
 				{
-					System.out.println("其他异常");
+					request.setAttribute("error", "其他异常");
 				}
 			}
 			
-			return "/login/login.html";
+			return "/login/login.jsp";
 	}
 	 
 	 /*@RequestMapping(value="/login",method=RequestMethod.POST)
