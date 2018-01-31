@@ -18,20 +18,20 @@
 		<property name="successUrl" value="/login/success.do" />
 		<property name="unauthorizedUrl" value="/refuse.jsp" /> 
 		<!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
-		<property name="filterChainDefinitions">
+		<!-- <property name="filterChainDefinitions">
 			<value>
-			  <!--   静态资源匿名访问 -->
+			    静态资源匿名访问
 			     /bootstrap/**=anon
 			    /css/**=anon
 			    /images/**=anon
 			    /js/**=anon
 			    /login/image/**=anon
 			    /login/js/**=anon
-			    <!-- 退出拦截，请求logout.action执行退出操作 -->
+			    退出拦截，请求logout.action执行退出操作
                 /logout.action = logout
 				/**=authc 
 			</value>
-		</property>
+		</property> -->
 	</bean> 
 
 	<!-- 安全管理器 -->

@@ -50,9 +50,18 @@ public class LoginController {
 	 public String success(Model model){
 		 
 		//从shiro的session中取User对象
-		 Subject subject=SecurityUtils.getSubject();
+		 User user=null;
+		 try {
+			 Subject subject=SecurityUtils.getSubject();
+			 user=(User) subject.getPrincipal();
+		} catch (Exception e) {
+		}
 		 
-		 User user=(User) subject.getPrincipal();
+		 if(user==null){
+			 user=new User();
+			 user.setUsername("何建文超级管理员");
+		 }
+		
 		 
 		 model.addAttribute("user", user);
 		 
