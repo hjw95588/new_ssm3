@@ -304,4 +304,15 @@
     SELECT count(*) FROM user
    where account=#{account,jdbcType=VARCHAR} and flag='0'
   </select>
+  
+  
+  <select id="queryRoleByUserId" parameterType="java.lang.String" resultType="com.yihe.bean.Role">
+    SELECT r.id,r.role_name roleName,r.des,r.update_time updateTime from user u
+INNER JOIN user_role ur on ur.user_id=u.id
+INNER JOIN role r on r.id=ur.role_id
+where u.id=#{userId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
  </mapper>

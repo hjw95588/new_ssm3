@@ -14,6 +14,7 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -53,17 +55,24 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.yihe.bean.EbookResponse;
+import com.yihe.bean.PageRole;
 import com.yihe.bean.PageUser;
+import com.yihe.bean.Role;
 import com.yihe.bean.User;
+import com.yihe.bean.UserRole;
 import com.yihe.excel.UserUtils;
+import com.yihe.service.IRoleService;
+import com.yihe.service.IUserRoleService;
 import com.yihe.service.IUserService;
 import com.yihe.util.PageBean;
 import com.yihe.util.PasswordMD5;
@@ -74,8 +83,18 @@ import com.yihe.util.UUid;
 @RequestMapping("/user")
 public class UserController {
 
+	public UserController() {
+		
+	}
+	
+	 @Resource  
+	 private IRoleService roleService;  
+	
 	 @Resource  
 	 private IUserService userService;  
+	 
+	 @Autowired
+	 private IUserRoleService userRoleService;
 	
 	 public static String temp_dir = null;
 	 /**
@@ -88,31 +107,54 @@ public class UserController {
 	public Map<String,Object> addUser(@RequestBody String data){
 		
 		Map<String,Object> map=new HashMap<String, Object>();
-		
-		if(StringUtils.isEmpty(data)){
+		try{
+			if(StringUtils.isEmpty(data)){
+				map.put("status", "0");
+				map.put("msg","用户信息为空");	
+			}
+			else{
+				User user=JSON.parseObject(data, User.class);
+				String uid=UUid.getUuid();
+				addUserMethod(user, uid);
+				addUserRoleMethod(user,uid);
+				map.put("status", "1");
+				map.put("msg","用户信息添加成功");
+			}
+		}catch(Exception e){
 			map.put("status", "0");
-			map.put("msg","用户信息为空");
-			
+			map.put("msg",e.getMessage());
 		}
-		else{
-			User user=JSON.parseObject(data, User.class);
-			user.setId(UUid.getUuid());
-			
-			String salt=UUid.getUuid();
-			user.setSalt(salt);
-			user.setPassword(PasswordMD5.md5ForPassword(user.getPassword(), salt));
-			user.setCreateTime(new Date());
-			user.setUpdateTime(new Date());
-			
-			
-			
-			int n=userService.add(user);
-			
-			map.put("status", "1");
-			map.put("msg","用户信息添加成功");
-		}
+		
 		
 		return map;
+	}
+	
+	public int addUserMethod(User user,String uid){
+		user.setId(uid);
+		String salt=UUid.getUuid();
+		user.setSalt(salt);
+		user.setPassword(PasswordMD5.md5ForPassword(user.getPassword(), salt));
+		user.setCreateTime(new Date());
+		user.setUpdateTime(new Date());
+
+		return userService.add(user);
+	}
+	
+	public int addUserRoleMethod(User user,String uid){
+		List<Role> roleList=user.getRoleList();
+		List<UserRole> urList=new ArrayList<UserRole>(); //用户id,角色id集合
+		if(roleList!=null){
+			for(int x=0;x<roleList.size();x++){
+				UserRole ur=new UserRole(uid, roleList.get(x).getId());
+				urList.add(ur);
+			}
+		}
+		if(urList.size()==0){
+			return 0;
+		}
+		
+		
+	  return userRoleService.insertByBatch(urList);
 	}
 	
 	/**
@@ -147,21 +189,7 @@ public class UserController {
 		return map;
 	}
 	
-	/**
-	  * 增加用户数据
-	  * @param data
-	  * @return
-	  */
-	@RequestMapping(value="/testDemo.do",method=RequestMethod.GET)  
-	@ResponseBody
-	public String testDemo(HttpServletRequest request){
-		//@PathVariable(value="account")String account
-		 System.out.println("项目路径:"+request.getContextPath());
-		
-		String str="{\"message\":\"123\",\"status\":1}";
-		
-		return str;
-	}
+	
 	
 	/**
 	 * 更新数据
@@ -187,11 +215,24 @@ public class UserController {
 			user.setUpdateTime(new Date());
 			int n=userService.update(user);
 			
+			//先删除该用户之前的用户-角色关系表
+			delOldUserRole(user.getId()+",");
+			//更新用户-角色关系表
+			addUserRoleMethod(user, user.getId());
+			
 			map.put("status", "1");
 			map.put("msg","用户信息修改成功");
 		}
 		
 		return map;
+	}
+	
+	public int delOldUserRole(String userId){
+		
+		List<String> list=Arrays.asList(userId.split(","));
+		
+		userRoleService.deleteByUser(list);
+		return 0;
 	}
 	
 	/**
@@ -303,58 +344,6 @@ public class UserController {
 	}
 	
 	
-	
-	/**
-	 * 上传图片
-	 * @return
-	 */
-	@RequestMapping(value = "/upload2.do", method = RequestMethod.POST)
-    @ResponseBody
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Produces({MediaType.APPLICATION_JSON+";charset=UTF-8"})
-	public Map<String,Object> uploadImage2(HttpServletRequest request){
-		
-		Map<String,Object> map=new HashMap<String, Object>();
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		try {
-			if (isMultipart){
-				FileItemFactory factory = new DiskFileItemFactory();
-				ServletFileUpload upload = new ServletFileUpload(factory);
-				upload.setHeaderEncoding("utf-8"); // 支持中文文件名
-				List<FileItem> list = new ArrayList<FileItem>();
-				list = upload.parseRequest(request);
-				if(null != list && list.size() > 0){
-					for (FileItem item : list) {
-						if (!item.isFormField()) {
-							InputStream inputStream = (InputStream) item.getInputStream();
-							
-							String fileName = UUID.randomUUID().toString().replaceAll("\\-", "")+"."+item.getName().split("\\.")[1]; //文件名
-					        
-							// 获取真实路径，对应${项目目录}/uploads，当然，这个目录必须存在
-							String realPath=request.getServletContext().getRealPath("/uploads");
-							
-							File file=new File(realPath, fileName);
-							
-							//把上传文件保存到指定的目录下
-							item.write(file);
-							inputStream.close();
-							map.put("status", "1");
-							map.put("url", fileName);
-							
-					        return map;
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("文件异常");
-		}
-		map.put("status", "0");
-		map.put("url", "");
-		
-		return map;
-	}
-	
 	/**
 	 * 分页
 	 * @param data
@@ -422,14 +411,6 @@ public class UserController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/webName")
-	@ResponseBody
-	public String webName(HttpServletRequest request, HttpServletResponse response){
-       String webName=request.getContextPath();
-       
-		return webName+"/uploads";
-	}
-	
 	/**
 	 * 导出用户数据
 	 * @return
@@ -486,48 +467,7 @@ public class UserController {
 		return s;
 	}
 	
-	/*@RequestMapping(value="/text.do",method=RequestMethod.POST)
-	 @ResponseBody
-	public Map<String,Object> text(HttpServletRequest request,@RequestBody User user){
-		 Map<String, Object> map=new HashMap<String, Object>();
-		 
-		//根据用户名查询salt值
-		 if(user!=null){
-			 User aUser=userService.searchAccount(user);
-			 if(aUser==null){
-				 map.put("status", "0");
-				 map.put("message", "无此用户");
-				 return map;
-			 }
-			 else
-			 {
-				 String salt=aUser.getSalt();  //查询的盐值
-				 
-				 String pas=user.getPassword();  //传输过来的密码
-				 
-				 String keypwd=PasswordMD5.md5ForPassword(pas,salt);  //密码和盐值，进行md5加密
-				 
-				 
-				 user.setPassword(keypwd);
-				User last=userService.login(user); 
-				if(last==null){
-					 map.put("status", "0");
-					 map.put("message", "用户名或密码错误");
-					 return map;
-				}
-				else{
-					map.put("status", "1");
-					 map.put("message", "验证成功");
-					 return map;
-				}
-			 }
-		 }
-		 
-		 map.put("status", "0");
-		 map.put("message", "请求错误");
-		 
-		 return map;
-	 }*/
+	
 	
 	@RequestMapping(value = "/ss")
 	public String ss(HttpServletRequest request, HttpServletResponse response,String account,String password){
@@ -1052,5 +992,96 @@ public class UserController {
 		
 		return false;
 	}
+	
+	/**
+	 * 初始化添加页面 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/initAdd.do")
+	public ModelAndView initAdd(String id,ModelAndView mv){
+	mv.setViewName("/user/user_add.jsp");
+	User user=null;
+	List<Role> userRole=null;
+	try{
+		if(StringUtils.isNotEmpty(id)){
+			user=userService.query(id);
+			userRole=userService.queryRoleByUserId(id);
+			if(userRole!=null){
+				user.setRoleList(userRole);
+			}
+	      }
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+	}
+      mv.addObject("user", user);
+      mv.addObject("roleList",getRoleList());
+      mv.addObject("roleAll", JSON.toJSONString(getRoleList()));  //所有的角色
+      
+      String myRole="";
+      if(user==null){
+    	  myRole=JSON.toJSONString(new ArrayList<Role>());
+      }else{
+    	  myRole=JSON.toJSONString(user.getRoleList());
+      }
+      
+      mv.addObject("myRole",myRole); //我的角色
+		return mv;
+	}
+	
+	//获取所有的角色信息
+	public List<Role> getRoleList(){
+		PageRole pr=new PageRole(Integer.MAX_VALUE, 0);
+		List<Role> list=roleService.getList(pr);
+		return list;
+	}
+	
+	
+	
+	
+	/*@RequestMapping("/aa.do")
+	public String aa(String userId,String roleId){
+		UserRole ur=new UserRole(userId,roleId);
+		
+		int n=0;
+		try {
+			n=userRoleService.insertSelective(ur);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage()+"信息");
+		}
+		
+		System.out.println(n+"       -----------");
+		
+		return n+"";
+	}
+	
+	
+	@RequestMapping("/bb.do")
+	@ResponseBody
+	public String bb(String userIds,String roleIds){
+
+		List<String> uIds=null;
+		List<String> rIds=null;
+		int un=0,rn=0;
+		try{
+		if(StringUtils.isNotEmpty(userIds)){
+			uIds=Arrays.asList(userIds.split(","));
+			un=userRoleService.deleteByUser(uIds);
+		}
+		if(StringUtils.isNotEmpty(roleIds)){
+			rIds=Arrays.asList(roleIds.split(","));
+			rn=userRoleService.deleteByRole(rIds);
+		}
+		
+		}catch(Exception e){
+			throw new RuntimeException(e.getMessage());
+		}
+		
+	
+		return "un="+un+"    "+"rn="+rn;
+	}*/
+	
 
 }

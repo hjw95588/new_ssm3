@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.yihe.bean.PageUser;
+import com.yihe.bean.Role;
 import com.yihe.bean.User;
 
 public interface IUserService {
@@ -28,5 +29,7 @@ public List<User> getAll(PageUser pa);//查询集合(用于导出数据)
 	public User login(User user); //验证登录
 	
 	public int queryExistAccount(@Param("account")String account); //查询是否存在相同的注册账号
+	
+	public List<Role> queryRoleByUserId(@Param("userId")String userId);  //根据用户id，查询该用户具有的角色
 	
 }

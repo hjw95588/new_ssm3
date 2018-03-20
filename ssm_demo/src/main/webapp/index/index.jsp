@@ -122,6 +122,9 @@
         {name:"用户管理",src:"/user/user_manager.jsp",pageId:""}
         
         ]},
+        {name:"角色基本信息 ",src:"",pageId:"",children:[
+           {name:"角色管理",src:"/role/role_manager.jsp",pageId:""}
+          ]},
         {name:"标签基本信息 ",src:"",pageId:"",children:[
          {name:"标签管理",src:"/mark/mark_manager.jsp",pageId:""}
           ]}

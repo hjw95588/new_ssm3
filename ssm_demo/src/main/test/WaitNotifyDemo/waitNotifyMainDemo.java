@@ -12,7 +12,7 @@ public class waitNotifyMainDemo {
 		
 		
 		
-		Res res=new Res();
+		Res res=new Res(); //共享资源
 		
        Input in=new Input(res);
 		

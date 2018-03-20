@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,9 @@ public class FrontController {
 	
 	@RequestMapping(value = "/pageQuery.do",method=RequestMethod.GET)
 	public ModelAndView pageQuery(ModelAndView mv,@PathVariable String username ){
+		
+		ApplicationContext a=new ClassPathXmlApplicationContext("");
+		
 		PagePublish pa=new PagePublish();
 		List<Publish> listTitle1=null;
 		List<Publish> listTitle2=null;

@@ -47,8 +47,8 @@ function uploadImage(){
 $(function(){
 	
 	var user={
-			addUrl:"/user/add.do"
-			
+			addUrl:"/user/add.do",
+			updateUrl:"/user/updateUser.do"
 	}
 	
 	$("#save").click(function(){
@@ -61,6 +61,17 @@ $(function(){
 		var photo=$("#photo").val();  //照片
 		var usertype="TYPE_READER";  //用户类型
 
+		 var id=$("#id").val();  //id
+		 var ch=$("input[type=checkbox][name=checkBoxRole]:checked"); //选中的角色
+		 
+		 var roleList=[]
+		 ch.each(function(){
+			 var roleId=$(this).attr("id");
+			 var role={};
+			 role.id=roleId;
+			 roleList.push(role);
+		 })
+		 
 		var k=true;
 				
 		if (account == "") {
@@ -109,7 +120,6 @@ $(function(){
 			$("#birth").next().html("");
 		}
 		
-		
 		if(k){
 		
 		var entity={
@@ -120,19 +130,27 @@ $(function(){
 				birth:birth,
 				mobile:mobile,
 				photo:photo,
-				usertype:usertype
+				usertype:usertype,
+				id:id,
+				roleList:roleList
 		}
 		
+		var path="";
+		if(id){
+			path=user.updateUrl;
+		}else{
+			path=user.addUrl;
+		}
 		$.ajax({
 			dataType:"JSON",
 			type:"POST",
-			url:user.addUrl,
+			url:path,
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(entity),
 			success:function(msg){	
 				if(msg.status=="1"){
 						layer.msg('添加成功',{icon:1},function(){
-							window.location.href="user_manager.html";
+							window.location.href="/user/user_manager.jsp";
 						});
 				}
 			}

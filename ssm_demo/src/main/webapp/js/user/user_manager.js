@@ -264,7 +264,8 @@ function pageChange(pc){
  * 新增
  */
 function addUser(){
-	window.location.href="user_add.html";
+	//window.location.href="user_add.jsp";
+	window.location.href="/user/initAdd.do";
 }
 
 /**
@@ -277,7 +278,7 @@ function updateUser(){
 	}else{
 		var id=$("input[type=checkbox][name=check]:checked")[0].value;
 		
-		window.location.href="user_update.html?id="+id;
+		window.location.href="/user/initAdd.do?id="+id;
 	}
 }
 

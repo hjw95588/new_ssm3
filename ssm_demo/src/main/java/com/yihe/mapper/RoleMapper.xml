@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yihe.dao.IRoleDao">
+  <resultMap id="BaseResultMap" type="com.yihe.bean.Role">
+     <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List">
+    id, role_name, des,update_time
+  </sql>
+ 
+ <!-- <insert id="insertSelective" parameterType="com.yihe.bean.Role">
+   insert into role (id,role_name,des,update_time) values(#{id},#{role_name},#{des},now())
+ </insert> -->
+  
+ <insert id="insertSelective" parameterType="com.yihe.bean.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="des != null">
+        des,
+      </if>   
+      update_time    
+    </trim>
+    
+    
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+      now()
+    </trim>
+  </insert>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+    delete from role
+    where id in 
+    <foreach collection="list" open="(" close=")" separator="," item="_id">
+      #{_id}
+    </foreach>
+    
+  </delete>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.yihe.bean.Role">
+    update role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        des = #{des,jdbcType=VARCHAR},
+      </if>
+      update_time=now()
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 查询记录集合 -->
+    <select id="getList" resultMap="BaseResultMap">
+      select 
+        <include refid="Base_Column_List" /> 
+       from role a
+      <where> 
+      <if test="roleName != null and roleName !=''">
+        and instr(a.role_name, #{roleName,jdbcType=VARCHAR}) != 0
+      </if>
+      <if test="des != null and des !=''">
+         and instr(a.des, #{des,jdbcType=VARCHAR}) != 0
+      </if>
+      </where>
+      order by a.update_time DESC
+      limit #{pageNum,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+    
+     <!-- 查询记录-->
+    <select id="getListNum" resultType="Integer">
+      select count(*) from role a
+     <where> 
+        <if test="roleName != null and roleName !=''">
+        and instr(a.role_name, #{roleName,jdbcType=VARCHAR}) != 0
+      </if>
+      <if test="des != null and des !=''">
+         and instr(a.des, #{des,jdbcType=VARCHAR}) != 0
+      </if>
+      </where>
+    </select>
+  
+</mapper>

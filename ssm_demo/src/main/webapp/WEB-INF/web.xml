@@ -71,7 +71,7 @@
     </servlet-mapping>  
       
       <!-- shiro 安全过滤器-->
-    <filter>
+    <!-- <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <async-supported>true</async-supported>
@@ -84,5 +84,28 @@
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+    
+    <filter>
+       <filter-name>DemoFilter</filter-name>
+       <filter-class>com.yihe.util.DemoFilter</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>DemoFilter</filter-name>
+      <url-pattern>/pub/pageQuery.do</url-pattern>
     </filter-mapping>
+    
+    <filter-mapping>
+      <filter-name>DemoFilter</filter-name>
+      <url-pattern>/role/pageQuery.do</url-pattern>
+    </filter-mapping>
+    
+ <listener>
+
+<listener-class>com.yihe.util.DemoListener</listener-class>
+
+</listener>
+ <listener>
+ 	<listener-class>com.yihe.util.DemoListener</listener-class>
+ </listener>
 </web-app> 

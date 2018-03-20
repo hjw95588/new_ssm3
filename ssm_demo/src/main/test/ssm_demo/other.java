@@ -1,42 +1,60 @@
 package ssm_demo;
 
+import java.util.Arrays;
+
 public class other {
-	/*@RequestMapping(value="/queryAll.do",method=RequestMethod.GET)  
-	@ResponseBody
-	public Map<String,Object> queryExitAccount( String account,HttpServletRequest request){
-		
-		Map<String,Object> map=new HashMap<String, Object>();
-		
-		String path=request.getServletContext().getRealPath("/");  //获取根路径；
-		
-		String b=request.getServletContext().getRealPath("/");
-		
-		System.out.println(path);
-		
-		System.out.println(request.getRequestURI());
-		
-		System.out.println(request.getContextPath());
-		System.out.println(request.getServletPath());
-		
-		
-		return map;
-	}*/
+	public static void main(String [] args){
 	
+		
+		//排序
+
+		int []ar={-4,-12,3,5,7,2,4,6,-1,-4,11};
+		
+		//selAort(ar); 
+		
+		maoAort(ar);
+		
+		show(ar);
+		
+		
+	}
 	
-	/*@RequestMapping(value="/test.do",method=RequestMethod.GET)  
-	@ResponseBody
-	public Map<String,Object> test( String account,HttpServletRequest request){
-		
-		Map<String,Object> map=new HashMap<String, Object>();
-		
-		
-		System.out.println(System.getProperty("ssm.root"));
-		System.out.println(System.getProperties());
-		
-		Configuration config = freeMarkerConfigurer.getConfiguration();
-		System.out.println(config);
-		
-		
-		return map;
-	}*/
+	//冒泡排序
+	public static void maoAort(int [] ar){
+		for(int x=0;x<ar.length-1;x++){
+			
+			for(int y=0;y<ar.length-x-1;y++)
+			{
+				if(ar[y]>ar[y+1]){
+					int temp=ar[y];
+					ar[y]=ar[y+1];
+					ar[y+1]=temp;
+				}
+			}
+		}
+	}
+	
+	//选择排序
+	public static void selAort(int [] ar){
+		for(int x=0;x<ar.length-1;x++)
+		{
+			for(int y=x+1;y<ar.length;y++)
+			{
+				//转换
+				if(ar[x]>ar[y]){
+					int temp=ar[x];
+					ar[x]=ar[y];
+					ar[y]=temp;
+				}
+			}
+		}
+	}
+	
+	public static void show(int [] ar){
+		for (int i = 0; i < ar.length; i++) {
+			//最后一个元素
+			if(i==ar.length-1) System.out.println(ar[i]);
+			else System.out.print(ar[i]+"   ");
+		}
+	}
 }

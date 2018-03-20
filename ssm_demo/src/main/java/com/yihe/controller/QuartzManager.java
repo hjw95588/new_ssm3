@@ -38,9 +38,9 @@ public class QuartzManager {
 	
 	
 	//@RequestMapping("/index.do")
-	//@PostConstruct
+	@PostConstruct
 	public void QuartzInit(){
-	
+	System.out.println(111);
 		// 创建scheduler
 				try {
 					Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();

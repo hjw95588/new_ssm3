@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.yihe.bean.PageUser;
+import com.yihe.bean.Role;
 import com.yihe.bean.User;
 import com.yihe.dao.IUserDao;
 import com.yihe.service.IUserService;
@@ -50,12 +51,12 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public User searchAccount(String account) {
-		// TODO Auto-generated method stub
+		
 		return userDao.searchAccount(account);
 	}
 
 	public User login(User user) {
-		// TODO Auto-generated method stub
+		
 		return userDao.login(user);
 	}
 
@@ -63,6 +64,11 @@ public class UserServiceImpl implements IUserService {
 	public int queryExistAccount(String account) {
 		
 		return userDao.queryExistAccount(account);
+	}
+
+	public List<Role> queryRoleByUserId(String userId) {
+		
+		return userDao.queryRoleByUserId(userId);
 	}
 	
 }

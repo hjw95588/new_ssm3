@@ -1,6 +1,7 @@
 package com.yihe.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
@@ -19,6 +20,17 @@ public class User {
 	private Date createTime;  //创建时间
 	private Date updateTime;  //更新时间
 	private Integer flag;  //标记
+	
+	private List<Role> roleList;//角色集合
+	
+
+	
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
 	public String getId() {
 		return id;
 	}
