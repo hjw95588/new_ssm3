@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历年档案编辑</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../../bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/groups.css">
+    <link rel="stylesheet" href="../../css/number_re.css">
+    <link rel="stylesheet" href="../../css/layer/layer.css">
+
+    <script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/util.js"></script>
+    <script type="text/javascript" src="../../js/archiveAdd9815.js"></script>
+    <script type="text/javascript" src="../../js/jquery.validate.js"></script>
+    <script type="text/javascript" src="../../js/validateHisArchive.js"></script>
+    
+    
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../js/layer/layer-common.js"></script>
+    
+    <script type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+<div class="iframe-cot w100">
+    <div class="right_form frm_top_1">
+        <form id="searchForm" >
+            <ul>
+            
+            <li class="frm_li_1">
+                    <label class="ser-label"><em class="text-red mr5">*</em>题名：</label>
+                    <div class="form-content">
+                        <textarea style="height:80px;" maxlength="200" name="fileName" class="choose-box" id="fileName" ></textarea>
+                        <div class="form-tips" style="position: static;">
+                         </div>
+                    </div>
+                </li>
+            
+                
+                <li class="frm_li_2">
+                    <label class="ser-label">文号：</label>
+                    <div class="form-content">
+                        <input  class="elip" maxlength="20" type="text" id="fileNo" >
+                    </div>
+                </li>
+               <li class="frm_li_2">
+                    <label class="ser-label"><em class="text-red mr5">*</em>件号：</label>
+                    <div class="form-content">
+                        <input  class="elip" maxlength="10" type="text" name="partNo" id="partNo" onkeyup="changePartNo(this);">
+                        <div class="form-tips">
+                         </div>
+                    </div>
+                </li>
+                
+                <li class="frm_li_2">
+                    <label class="ser-label"><em class="text-red mr5">*</em>责任者</label>
+                    <div class="form-content">
+                        <input  class="elip" maxlength="50" type="text" name="responsibility" id="responsibility" >
+                        <div class="form-tips">
+                         </div>
+                    </div>
+                </li>
+                
+                <li class="frm_li_2">
+                    <label class="ser-label">全宗号：</label>
+                    <div class="form-content">
+                        <input  class="elip" maxlength="10" readonly="readonly" type="text" id="fondsNumber" >
+                    </div>
+                </li>
+                
+                <li class="frm_li_2">
+                    <label class="ser-label">机构：</label>
+                    <div class="form-content">
+                        <select id="orgId"  onchange="orgChange();">
+                          <option value="">请选择</option>
+                          <option value="f2e029f9-4229-4315-b576-53dd82d4bb87" orgshortname="XYZDC">行业指导处</option>
+                          <option value="665b13ee-2f71-44f2-a42e-994cb190a680" orgshortname="XXZX">信息中心</option>
+                          <option value="082b17b4-2670-42d2-ab34-c229b4dfb5b9" orgshortname="JGDW">机关党委</option>
+                          <option value="05e5fc0a-80ad-474b-8355-ed8062605ad7" orgshortname="JDJCC">监督检查处</option>
+                          <option value="06ae08e0-2642-4d4c-8fac-34c81e2309b7" orgshortname="DYC">调控处</option>
+                          <option value="f8e24cea-0a71-427c-a8d9-8c81a4ae26b7" orgshortname="CWC">财务处</option>
+                          <option value="42bdbdab-0293-406d-ab8a-d4f3bb40b0e1" orgshortname="CBGLC">储备管理处</option>
+                          <option value="b9b6b3f2-b93e-4fde-a31e-2bbc904533bf" orgshortname="BGS">办公室</option>
+                        </select>
+                        
+                    </div>
+                </li>
+                
+                 <li class="frm_li_2">
+                    <label class="ser-label">机构简称：</label>
+                    <div class="form-content">
+                        <input  class="elip" maxlength="20" type="text" id="orgShortName"  readonly="readonly" >
+                    </div>
+                </li>
+                
+               <li class="frm_li_2">
+                    <label class="ser-label"><em class="text-red mr5">*</em>存档期限</label>
+                    <div class="form-content">
+                        <select id="saveYear" name="saveYear" onchange="changeSaveYear();">
+                           <option value="" na="">请选择</option>
+                           <option value="1" na="D10">十年</option>
+                           <option value="3" na="D30">三十年</option>
+                           <option value="0" na="Y">永久</option>
+                        </select>
+                        <div class="form-tips">
+                         </div>
+                    </div>
+                </li>
+                
+                
+                <li class="frm_li_2">
+                    <label class="ser-label"><em class="text-red mr5">*</em>年度</label>
+                    <div class="form-content">
+                        <input  class="elip" name="year" readonly onclick="WdatePicker({dateFmt:'yyyy'})" maxlength="10" type="text" id="year" onfocus="changeYear(this);">
+                        <div class="form-tips">
+                         </div>
+                    </div>
+                </li>
+                
+                 <li class="frm_li_2">
+                    <label class="ser-label">档号：</label>
+                    <div class="form-content">
+                        <input  class="elip" readonly="readonly" maxlength="20" type="text" id="reference" >
+                    </div>
+                </li>
+                
+                <li class="frm_li_2">
+                    <label class="ser-label"><em class="text-red mr5">*</em>页数</label>
+                    <div class="form-content">
+                        <input  class="elip" name="paper" maxlength="10" type="text" id="paper" onkeyup="changePaper(this);">
+                        <div class="form-tips">
+                         </div>
+                    </div>
+                </li>
+                
+                <li class="frm_li_2">
+                    <label class="ser-label"><em class="text-red mr5">*</em>日期</label>
+                    <div class="form-content">
+                         <input id="applicaDate" name="applicaDate" type="text" class="Wdate" placeholder="请选择" onClick="WdatePicker()"/>
+                        <div class="form-tips">
+                         </div>
+                    </div>
+                </li>
+                
+                <li class="frm_li_2">
+                    <label class="ser-label">到期日期</label>
+                    <div class="form-content">
+                         <input id="endDate"  readonly="readonly" type="text" placeholder="请选择" />
+                        <div class="form-tips">
+                         </div>
+                    </div>
+                </li>
+                
+                <li class="frm_li_1">
+                    <label class="ser-label">备注：</label>
+                    <div class="form-content">
+                        <textarea  class="choose-box" maxlength="500" id="remark" ></textarea>
+                    </div>
+                </li>
+                <li class="frm_li_1">
+                    <label class="ser-label" for="attachment"><em class="text-red mr5">*</em>附件：</label>
+                    <div class="form-content" id="attachment"></div>
+                </li>
+                <li class="w-per frm_li_1">
+                    <label class="ser-label"></label>
+                    <div class="form-content clearfix">
+                        <div class="mb10">
+                            <a class="btn btn-orange" onclick="save()">
+                                <i class="fa fa-save mr5"></i>保存</a>
+                            <a class="btn btn-default" onclick="back()">
+                                <i class="fa fa-times mr5"></i>取消</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</body>
+</html>

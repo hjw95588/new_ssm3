@@ -49,7 +49,7 @@ public class QuartzManager {
 							.startNow()// 一旦加入scheduler，立即生效
 							.withSchedule(simpleSchedule() // 使用SimpleTrigger
 									 
-									 .withIntervalInMinutes(1)//每隔一分钟执行一次
+									 .withIntervalInMinutes(100)//每隔一分钟执行一次
 									 
 									.repeatForever()) // 一直执行，奔腾到老不停歇
 							.build();
