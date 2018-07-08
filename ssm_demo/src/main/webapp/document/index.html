@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Hello, World</title>
+  <style>
+    html {
+      height: 100%
+    }
+
+    body {
+      height: 100%;
+      margin: 0px;
+      padding: 0px
+    }
+
+    #container {
+      height: 100%
+    }
+  </style>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KnchWx3iAG2xgo95G5lLTgqE5T3OUcwg"></script>
+</head>
+
+<body>
+  <div id="container"></div>
+</body>
+
+</html>
+<script type="text/javascript">
+  var map = new BMap.Map("container");
+  // 创建地图实例
+  var point = new BMap.Point(101.696484, 36.738694);
+  // 创建点坐标
+  map.centerAndZoom(point, 7);
+  map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+  var option = [{
+      haiximenggu: "97.380898,37.384125"
+    },
+    {
+      haibeizangzu: "100.90743,36.956511"
+    },
+    {
+      xining: "101.769642,36.643773"
+    },
+    {
+      haidong: "102.10886,36.510484"
+    },
+    {
+      hainan: "100.629782,36.279273"
+    },
+    {
+      huangnan: "102.026054,35.519782"
+    },
+    {
+      guoluo: "100.250401,34.477565"
+    },
+    {
+      yushu: "97.020552,33.007306"
+    }
+  ];
+
+  var loc = [{
+      name: "果洛藏族自治州",
+      start: 100,
+      end: 1000,
+      color: "#DC143C"
+    },
+    {
+      name: "西宁市",
+      start: 0,
+      end: 190,
+      color: "#DA70D6"
+    },
+    {
+      name: "海东市",
+      start: 100,
+      end: 200,
+      color: "#EE82EE"
+    },
+    {
+      name: "海北藏族自治州",
+      start: 0,
+      end: 300,
+      color: "#9400D3"
+    },
+    {
+      name: "海西蒙古族藏族自治州",
+      start: 1700,
+      end: 2000,
+      color: "#7B68EE"
+    },
+    {
+      name: "达日县",
+      start: 0,
+      end: 1000,
+      color: "#778899"
+    },
+    {
+      name: "德令哈",
+      start: 0,
+      end: 90,
+      color: "#00BFFF"
+    },
+    {
+      name: "门源回族自治县",
+      start: 0,
+      end: 30,
+      color: "#AFEEEE"
+    },
+    {
+      name: "河南蒙古族自治县",
+      start: 130,
+      end: 200,
+      color: "#00CED1"
+    },
+    {
+      name: "海西蒙古族藏族自治州",
+      start: 0,
+      end: 500,
+      color: "#00FA9A"
+    }
+  ]
+
+
+  //创建点的图标
+  var myIcon = new BMap.Icon("../images/blueMarkerS.png", new BMap.Size(20, 20));
+  var n = 0,
+    len = option.length;
+  for (n; n < len; n++) {
+    for (var key in option[n]) {
+      var pointx = new BMap.Point(option[n][key].split(',')[0], option[n][key].split(',')[1]);
+      var marker = new BMap.Marker(pointx, {
+        icon: myIcon
+      }); // 创建标注
+      map.addOverlay(marker);
+    }
+  }
+
+  var bdary = new BMap.Boundary();
+  var m = 0;
+  bdary.get("青海省", function(rs) {
+    //获取行政区域
+    var count = rs.boundaries.length; //行政区域的点有多少个
+    if (count === 0) {
+      // alert('未能获取当前输入行政区域');
+      return;
+    }
+    var pointArray = [];
+
+    for (m; m < count; m++) {
+      var ply = new BMap.Polyline(rs.boundaries[m], {
+        strokeWeight: 2,
+        strokeColor: "black",
+        strokeOpacity: 0.5
+      }); //建立多边形覆盖物
+      map.addOverlay(ply); //添加覆盖物
+      pointArray = pointArray.concat(ply.getPath());
+    }
+    map.setViewport(pointArray);
+  });
+  var pointArray = [];
+  oneLine('门源回族自治县', 50, 100, '#00FA9A');
+  oneLine('德令哈', 0, 1180, '#00CED1');
+  oneLine('格尔木', 0, 1200, 'red');
+  oneLine('西宁市', 200, 300, '#7B68EE');
+  oneLine('河南蒙古族自治县', 100, 200, '#EE82EE');
+  oneLine('海北藏族自治州', 0, 350, 'green');
+  oneLine('海南藏族自治州', 0, 100, 'green');
+  oneLine('果洛藏族自治州', 400, 480, '#DC143C');
+  oneLine('海北藏族自治州', 100, 200, '#9400D3');
+  oneLine('玉树藏族自治州', 450, 800, '#9400D3');
+  function oneLine(name, start, end, color) {
+    bdary.get(name, function(rs) {
+      if (rs.boundaries.length > 0) {
+        var bs = rs.boundaries[0].split(";").splice(start, end).join(';');
+        var ply = new BMap.Polyline(bs, {
+          strokeWeight: 4,
+          strokeColor: color
+        }); //建立多边形覆盖物
+        map.addOverlay(ply); //添加覆盖物
+        pointArray = pointArray.concat(ply.getPath());
+      }
+    });
+  }
+</script>

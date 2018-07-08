@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>历年档案编辑</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../../bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/groups.css">
+    <link rel="stylesheet" href="../../css/number_re.css">
+    <link rel="stylesheet" href="../../css/layer/layer.css">
+
+    <script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/util.js"></script>
+    <script type="text/javascript" src="../../js/jquery.validate.js"></script>
+
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../js/layer/layer-common.js"></script>
+    
+    <script type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
+    
+    
+     <!--webOffice集成 初始化页面  -->
+    <!-- <script language="javascript" for="WebOffice1" event="NotifyCtrlReady">
+    debugger;
+        var obj = document.getElementById("WebOffice1");
+        obj.CreateNew("Word.Document");
+        obj.ActiveDocument.ActiveWindow.Selection.Font.NameFarEast = "微软雅黑";
+        obj.ActiveDocument.ActiveWindow.Selection.Font.NameAscii = "Times New Roman";
+        obj.ActiveDocument.ActiveWindow.Selection.Font.NameOther = "Times New Roman";
+        obj.ActiveDocument.ActiveWindow.Selection.Font.Size = 33;
+        var _protectType = obj.GetFileProTectType();
+        if (_protectType != -1) {
+            obj.ActiveDocument.UnProtect("12345");
+        }
+
+    </script> -->
+    <script type="text/javascript">
+    $(function(){
+    	loadOffice();
+    	
+    	$("#showLiu").click(fnList.fnShowRevision);
+    	
+    	$("#hideLiu").click(fnList.fnHideRevision);
+    })
+    </script>
+    <script type="text/javascript"  src="../../js/liu.js"></script>
+    
+</head>
+<body>
+<style type="text/css">
+    body{
+        overflow-y:scroll; 
+    }
+</style>
+
+word Office测试
+<a class="mr20 link-blue" href="javascript:void(0)"  id="showLiu" ><i class="fa fa-eye mr5"></i>显示留痕</a>
+            <a class="mr20 link-blue" href="javascript:void(0)" id="hideLiu" ><i class="fa fa-eye mr5"></i>隐藏留痕</a>
+
+
+<div id="seanceInfoText">
+            <div style="width:75%;" class="pull-left">
+                <!-- 装载OFFICE控件 -->
+                <object classid="clsid:00460162-9E5E-11d5-B7C8-B8269041DD57" id="WebOffice1" height=820 width="100%" style="LEFT: 0px; TOP: 0px" codebase="ActiveX/ssiweboffice.CAB#version=1,0,0,0">
+                    <param name="BorderStyle" value="1"/>
+                    <param name="TitlebarColor" value="52479"/>
+                    <param name="TitlebarTextColor" value="0"/>
+                    <param name="Menubar" value="1"/>
+                    <param name="Titlebar" value="0"/>
+                    <param name="Menubar" value="0"/>
+                </object>
+            </div>
+            <div style="width:25%;" class="pull-right" id="attachDiv">
+                <div class=" file-box">
+                 <li id="attachementLayer" class="frm_li_1 w-per">
+                    <label class="ser-label">附件：</label>
+                    <div id="fileUpload" class="form-content clearfix "></div>
+                </li> 
+                </div>
+            </div>
+        </div>
+
+
+</body>
+</html>

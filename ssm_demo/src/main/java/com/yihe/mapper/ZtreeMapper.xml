@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yihe.dao.IZtreeDao">
+ 
+ 
+ 
+ <select id="getList" resultType="com.alibaba.fastjson.JSONObject">
+   select unit_id id,parent_unitid pId,unit_name name,a.open,a.checked from base_unit a;
+ </select>
+  
+</mapper>
