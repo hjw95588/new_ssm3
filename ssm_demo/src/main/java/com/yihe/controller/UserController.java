@@ -64,6 +64,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.yihe.bean.EbookResponse;
 import com.yihe.bean.PageRole;
 import com.yihe.bean.PageUser;
@@ -85,6 +86,30 @@ public class UserController {
 
 	public UserController() {
 		
+	}
+	
+	@RequestMapping(value="/bb.do",method=RequestMethod.POST)  
+	@ResponseBody
+	public String bb(HttpServletRequest request,String array){
+		System.out.println(request.getParameter("array"));
+		
+		return null;
+	}
+	
+	@RequestMapping(value="/aa.do",method=RequestMethod.POST)  
+	@ResponseBody
+	public String aa(HttpServletRequest request){
+		
+		System.out.println(request.getParameter("age"));
+		System.out.println(request.getParameter("name"));
+		
+		System.out.println(request.getParameterMap());
+		
+		
+		
+		System.out.println(request.getParameter("list[0][name]"));
+		
+		return null;
 	}
 	
 	 @Resource  

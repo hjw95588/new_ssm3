@@ -67,7 +67,7 @@ public class ReaderInforUtils {
 		 return m.matches();
 		}
 		
-    //学生信息模板标题行
+    //标题行
 		public static String num="序号"; 
 		public static String username="账号";
 		public static String fullName="姓名";

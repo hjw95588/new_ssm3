@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/js/jquery-1.8.3.min.js">
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#tab_1 tr").children("td:lt(4)").css("background","red");
+				
+				//siblings(":lt(3)").css("background","red");
+				
+				/* var obj=$("table[id^='contactForm_'] > tbody tr td:first");
+				obj.removeAttr("bgcolor").css("background","#f5f5f5").attr("class","testclass");
+				obj.siblings(":lt(3)")removeAttr("bgcolor").css("background","#f5f5f5").attr("class","testclass"); */
+				
+				//$("table[id^='contactForm_'] > tbody tr")
+				
+				//$("table[id^='contactForm_847'] > tbody").children("tr").children("td").lt(4).removeAttr("bgcolor");
+				//$("table[id^='contactForm_'] > tbody tr").children("td:lt(4)").css("background","#f5f5f5");
+				//$("table[id^='contactForm_'] > tbody tr").children("td:lt(4)").attr("class","testclass");
+				
+				//$("#tab_1 tr td:first").siblings(":lt(3)").css("background","red");
+				//$("#tab_1 tr td:first").siblings()
+/* 
+$("#tab_1 tr").find(tr). */
+				/* $("table[id^=tab_] tr td:lt(4)").css("background","red"); */
+				
+				
+				/* $("table[id^=tab_] tr").hide();
+				$("table[id^=tab_]").each(function(){
+					
+					var trs= $(this).find("tr");
+					trs.eq(0).show();
+					
+					$(trs).find("th").eq(0).hide();
+				}); */
+				//$("table[id^='tab_'] tr").hide();
+				//$("table[id^='tab_'] tr").eq(0).show();
+			});
+		</script>
+</head>
+<body>
+				<h1>
+					Welcome to My Web Page
+				</h1>
+				<table id="tab_1" border="1">
+					<tr>
+						<td>
+							Id
+						</td>
+						<td>
+							LastName
+						</td>
+						<td>
+							FirstName
+							<table border="1">
+							 <tr>
+							   <td>111</td>
+							 </tr>
+							</table>
+						</td>
+						<td>
+							Address
+							
+						</td>
+						<td>
+							City
+						</td>
+						<td>
+							City
+						</td>
+						<td>
+							City
+						</td>
+					</tr>
+
+				</table>
+			</body>
+</html>
