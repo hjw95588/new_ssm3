@@ -171,3 +171,44 @@ $(function(){
 		
 })
 
+
+$(function(){
+	
+	debugger;
+	var str=null;
+	loadDemo3();
+
+	str=loadDemo2();
+	console.log("str      "+str)
+	
+	
+})
+
+function loadDemo2(){
+	debugger;
+	$.ajax({
+		dataType:"JSON",
+		type:"GET",
+		url:"/user/demo2.do",
+		async:false,
+		success:function(data){	
+			str=data.msg;
+			//console.log(str+"        demo2---");
+		}
+	})
+	
+	return str;
+}
+
+function loadDemo3(){
+	$.ajax({
+		dataType:"JSON",
+		type:"GET",
+		url:"/user/demo3.do",
+		success:function(data){	
+			//console.log(data.msg+"    demo3")
+		}
+	})
+
+}
+

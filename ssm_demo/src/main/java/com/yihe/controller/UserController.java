@@ -1065,48 +1065,21 @@ public class UserController {
 	
 	
 	
-	/*@RequestMapping("/aa.do")
-	public String aa(String userId,String roleId){
-		UserRole ur=new UserRole(userId,roleId);
-		
-		int n=0;
-		try {
-			n=userRoleService.insertSelective(ur);
-			
-		} catch (Exception e) {
-			System.out.println(e.getMessage()+"信息");
-		}
-		
-		System.out.println(n+"       -----------");
-		
-		return n+"";
+	@RequestMapping("/demo2.do")
+	@ResponseBody
+	public JSONObject demo2(String userId,String roleId){
+		JSONObject obj=new JSONObject();
+		obj.put("msg", 22);
+		return obj;
 	}
 	
-	
-	@RequestMapping("/bb.do")
+	@RequestMapping("/demo3.do")
 	@ResponseBody
-	public String bb(String userIds,String roleIds){
-
-		List<String> uIds=null;
-		List<String> rIds=null;
-		int un=0,rn=0;
-		try{
-		if(StringUtils.isNotEmpty(userIds)){
-			uIds=Arrays.asList(userIds.split(","));
-			un=userRoleService.deleteByUser(uIds);
-		}
-		if(StringUtils.isNotEmpty(roleIds)){
-			rIds=Arrays.asList(roleIds.split(","));
-			rn=userRoleService.deleteByRole(rIds);
-		}
-		
-		}catch(Exception e){
-			throw new RuntimeException(e.getMessage());
-		}
-		
-	
-		return "un="+un+"    "+"rn="+rn;
-	}*/
+	public JSONObject demo3(String userId,String roleId){
+		JSONObject obj=new JSONObject();
+		obj.put("msg", 33);
+		return obj;
+	}
 	
 
 }
